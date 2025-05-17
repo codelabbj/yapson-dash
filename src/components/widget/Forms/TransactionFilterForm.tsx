@@ -18,10 +18,8 @@ import useTransactionForm, {
   transactionsData,
 } from "../../../hooks/forms/useTransactionForm";
 import useTransactionStore from "@/store/useTransaction.store";
-import useSearchStore from "@/store/useSearchStore.store";
 import { TransactionFiterFormData } from "@/interfaces/transaction.interface";
 import Transaction from "@/models/transaction.model";
-import BotTransaction from "@/models/botransaction.model";
 import { DefaultSerializable } from "@/models/paginated_transaction.model";
 
 interface TransactionFilterFormProps<
