@@ -105,7 +105,7 @@
 //   const fetchOperatorsData = async () => {
 //     try {
 //       setLoading(true);
-//       const response = await api.get("https://api.betpayapp.com/betpay/barkapay-operator");
+//       const response = await api.get("https://api.yapson.net/yapson/barkapay-operator");
 //       // Type assertion since we know the expected structure
 //       const typedResponse = response as OperatorsData;
 //       setOperatorsData(typedResponse);
@@ -362,7 +362,7 @@ const OperatorsStatus: React.FC = () => {
   const fetchOperatorsData = async () => {
     try {
       setLoading(true);
-      const response = await api.get("https://api.betpayapp.com/betpay/barkapay-operator");
+      const response = await api.get("https://api.yapson.net/yapson/barkapay-operator");
       // Assertion de type car nous connaissons la structure attendue
       const typedResponse = response as OperatorsData;
       setOperatorsData(typedResponse);

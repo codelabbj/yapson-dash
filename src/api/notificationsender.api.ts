@@ -19,7 +19,7 @@ class NotificationApi {
       const token = localStorage.getItem("access");
       
       const response = await axios.post<NotificationJson>(
-        `https://api.betpayapp.com/betpay/public-notif?type=yapson_user`,
+        `https://api.yapson.net/yapson/public-notif?type=yapson_user`,
         notificationJson,
         {
           headers: {
@@ -53,7 +53,7 @@ class NotificationApi {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.get<PaginatedNotificationsJson>(
-        `https://api.betpayapp.com/betpay${this.route}?search=${searchField ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
+        `https://api.yapson.net/betpay${this.route}?search=${searchField ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ class NotificationApi {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.get<PaginatedNotificationsJson>(
-        `https://api.betpayapp.com/betpay/public-notif?search=${searchField ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
+        `https://api.yapson.net/yapson/public-notif?search=${searchField ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -145,7 +145,7 @@ class NotificationApi {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.get<PaginatedNotificationsJson>(
-        `https://api.betpayapp.com/betpay/public-notif/user/${userId}?page=${page ?? 1}&page_size=${pageSize ?? 20}`,
+        `https://api.yapson.net/yapson/public-notif/user/${userId}?page=${page ?? 1}&page_size=${pageSize ?? 20}`,
         {
           headers: {
             "Content-Type": "application/json",

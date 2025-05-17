@@ -10,7 +10,7 @@ class Api {
   private api: AxiosInstance;
 
   constructor() {
-    const baseUrl = "https://api.yapson.com/yapson";
+    const baseUrl = "https://api.yapson.net/yapson";
 
     this.api = axios.create({
       baseURL: `${baseUrl}`,

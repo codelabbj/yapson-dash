@@ -10,7 +10,7 @@ import axios, {
     private api: AxiosInstance;
   
     constructor() {
-      const baseUrl = "https://api.betpayapp.com/betpay";
+      const baseUrl = "https://api.yapson.net/betpay";
       this.api = axios.create({
         baseURL: `${baseUrl}`,
         timeout: 10000,

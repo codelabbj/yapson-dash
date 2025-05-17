@@ -63,11 +63,11 @@ const menuGroups = [
         label: "Applications",
         route: "/apps",
       },
-      {
-        icon: <PersonStanding />,
-        label: "Faq",
-        route: "/faqs",
-      },
+      // {
+      //   icon: <PersonStanding />,
+      //   label: "Faq",
+      //   route: "/faqs",
+      // },
       // {
       //   icon: <Medal />,
       //   label: "Sports",
@@ -144,16 +144,6 @@ const menuGroups = [
         route: "/notification_sender",
       },
       {
-        icon: <BellDot />,
-        label: "Opérateur",
-        route: "/operator",
-      },
-      {
-        icon: <AccessibilityIcon />,
-        label: "montant du compte",
-        route: "/account_amount",
-      },
-      {
         icon: <Settings />,
         label: "Paramètre",
         route: "/setting",
@@ -184,7 +174,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <Image
               width={150}
               height={30}
-              src={"/images/logo/logo-yapson.svg"}
+              src={"/images/logo/logo-yapson.png"}
               alt="Logo"
               style={{ width: "100%", height: "auto" }}
               priority
@@ -215,7 +205,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
         <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
           {/* <!-- Sidebar Menu --> */}
-          <nav className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
+          <nav className=" px-4 py-4 lg:px-6">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>
                 <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">

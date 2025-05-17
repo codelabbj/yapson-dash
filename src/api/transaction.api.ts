@@ -6,7 +6,6 @@ import PaginatedTransaction, {
 } from "@/models/paginated_transaction.model";
 import { TransactionJson } from "@/interfaces/transaction.interface";
 import { TransactionFiterFormData } from "../interfaces/transaction.interface";
-import BotTransaction from "@/models/botransaction.model";
 
 class TransactionApi {
   private static route: string = "/transaction";
@@ -32,9 +31,7 @@ class TransactionApi {
   ): Promise<PaginatedTransaction<T>> {
     try {
       const response = await api.get<PaginatedTransactionJson<T>>(
-        ctor === BotTransaction
-          ? `https://api.betpayapp.com/bot${this.route}/?search_fields=${searchField ?? ""}&reference=${filter?.reference ?? ""}&status=${filter?.status ?? ""}&phone_number=${filter?.phoneNumber ?? ""}&user_app_id=${filter?.userAppId ?? ""}&mobile_reference=${filter?.mobileReference ?? ""}&withdriwal_code=${filter?.withdriwalCode ?? ""}&user__email=${filter?.userEmail ?? ""}&app=${filter?.app ?? ""}&service=${filter?.service ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`
-          : `${this.route}?search_fields=${searchField ?? ""}&reference=${filter?.reference ?? ""}&status=${filter?.status ?? ""}&phone_number=${filter?.phoneNumber ?? ""}&user_app_id=${filter?.userAppId ?? ""}&mobile_reference=${filter?.mobileReference ?? ""}&withdriwal_code=${filter?.withdriwalCode ?? ""}&user__email=${filter?.userEmail ?? ""}&app=${filter?.app ?? ""}&service=${filter?.service ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
+        `${this.route}?search_fields=${searchField ?? ""}&reference=${filter?.reference ?? ""}&status=${filter?.status ?? ""}&phone_number=${filter?.phoneNumber ?? ""}&user_app_id=${filter?.userAppId ?? ""}&mobile_reference=${filter?.mobileReference ?? ""}&withdriwal_code=${filter?.withdriwalCode ?? ""}&user__email=${filter?.userEmail ?? ""}&app=${filter?.app ?? ""}&service=${filter?.service ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`
       );
 
       return PaginatedTransaction.fromJson<T>(response, ctor);
@@ -62,7 +59,7 @@ class TransactionApi {
   static async findBizaoUnique(reference: string): Promise<any> {
     try {
       const response = await api.get<any>(
-        `https://api.betpayapp.com/betpay/status?reference=${reference}`,
+        `https://api.yapson.net/yapson/status?reference=${reference}`,
       );
       return response;
     } catch (error) {

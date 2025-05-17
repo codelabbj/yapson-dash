@@ -18,7 +18,7 @@ class UserApi {
       const token = localStorage.getItem("access");
 
       const response = await axios.get<PaginatedUsersJson>(
-        `https://api.betpayapp.com/auth/users?search_fields=${searchField ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
+        `https://api.yapson.net/auth/users?search_fields=${searchField ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,7 @@ class UserApi {
     const token = localStorage.getItem("access");
     try {
       await axios.post(
-        "https://api.betpayapp.com/auth/admin/user/delete",
+        "https://api.yapson.net/auth/admin/user/delete",
         { password: adminPassword, user_id: userId },
         {
           headers: {

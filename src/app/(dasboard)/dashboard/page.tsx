@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
   const fetchBizaoAccount = async () => {
     try {
       const response: any = await api.get(
-        "https://api.betpayapp.com/betpay/bizao-account",
+        "https://api.yapson.net/yapson/pall-account",
       );
       setBizaoAccount(`${response[0].balance} ${response[0].currency}`);
     } catch (e) {

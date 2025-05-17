@@ -31,7 +31,7 @@ class AuthAPI {
 
     await axios
       .post(
-        `https://api.betpayapp.com/auth/login`,
+        `https://api.yapson.net/auth/login`,
         {
           email_or_phone: data.email,
           password: data.password,
@@ -58,7 +58,7 @@ class AuthAPI {
 
     try {
       await api.post<AuthPromiseResponse>(
-        `https://api.betpayapp.com/auth/change_password`,
+        `https://api.yapson.net/auth/change_password`,
         data.toJson(),
       );
 

@@ -44,7 +44,7 @@
 //   const fetchBarkapayAccount = async () => {
 //     try {
 //       setLoading(true);
-//       const response = await api.get("https://api.betpayapp.com/betpay/barkapay-account");
+//       const response = await api.get("https://api.yapson.net/yapson/barkapay-account");
 //       setBarkapayData(response);
 //     } catch (error) {
 //       console.error("Error occurs when trying to fetch Barkapay account data:", error);
@@ -200,7 +200,7 @@ const BarkapayAccount: React.FC = () => {
     try {
       setLoading(true);
       // Replace {{base_url}} with the actual base URL for your API
-      const response = await api.get("https://api.betpayapp.com/betpay/barkapay-account");
+      const response = await api.get("https://api.yapson.net/yapson/barkapay-account");
       
       console.log("API Response:", response); // Add logging to see the actual response
       

@@ -3,8 +3,9 @@ const nextConfig = {
   images: {
     domains: [
       "images.unsplash.com",
-      "api.yapson.com",
-      "api.coobet.codelabbenin.com"
+      "api.yapson.net",
+      "api.coobet.codelabbenin.com",
+        "api.betpayapp.com",
     ],
     remotePatterns: [],
   },

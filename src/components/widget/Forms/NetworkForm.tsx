@@ -86,7 +86,7 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
   //     // If this is an update operation (network exists)
   //     if (network?.id) {
   //       const networkId = network.id;
-  //       const endpoint = `https://api.betpayapp.com/betpay/network/${networkId}/`;
+  //       const endpoint = `https://api.yapson.net/yapson/network/${networkId}/`;
         
   //       // Prepare the payload
   //       const payload = {

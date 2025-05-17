@@ -186,7 +186,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           // Send PATCH request to the API
           if (network.id) {
             try {
-              const endpoint = `https://api.betpayapp.com/betpay/network/${network.id}/`;
+              const endpoint = `https://api.yapson.net/yapson/network/${network.id}/`;
               
               // Prepare payload
               const payload = {

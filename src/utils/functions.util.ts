@@ -78,7 +78,7 @@ export const validateLogoUrl = async (url: string): Promise<boolean> => {
     return false;
   }
   */
-  return url.includes("https://api.yapson.com/");
+  return url.includes("https://api.yapson.net/");
 };
 
 export const uploadImage = async (file: File): Promise<string> => {
@@ -172,7 +172,7 @@ export function transactionMobileReference(mobileReference: string): string {
 }
 
 export function ensureBaseUrl(url: string): string {
-  const baseUrl = "https://api.yapson.com/";
+  const baseUrl = "https:";
   if (!url.startsWith(baseUrl)) {
     const normalizedBaseUrl = baseUrl.endsWith("/")
       ? baseUrl.slice(0, -1)
