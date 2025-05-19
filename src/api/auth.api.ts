@@ -31,7 +31,7 @@ class AuthAPI {
 
     await axios
       .post(
-        `https://api.blaffa.net/auth/login`,
+        `https://api.yapson.net/auth/login`,
         {
           email_or_phone: data.email,
           password: data.password,
