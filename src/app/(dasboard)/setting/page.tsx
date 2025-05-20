@@ -46,39 +46,41 @@ const Settings = () => {
   } = useSettingForm(
     "",
     new Setting(
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      [],
-      true,
-      true,
-      0.0,
-      0,
-      0,
-      "",
+      "", // minimumDeposit
+      "", // minimumWithdrawal
+      "", // bonusPercent
+      "", // moovPassword
+      "", // mtnPassword
+      "", // sbinPassword
+      "", // cardPassword
+      "", // mtnUrl
+      "", // moovUrl
+      "", // cardUrl
+      "", // sbinUrl
+      "", // hash
+      "", // cashDeskId
+      "", // cashierPass
+      "", // moovCustomer
+      "", // mtnCustomer
+      "", // cardCustomer
+      "", // sbinCustomer
+      "", // moovDisUrl
+      "", // mtnDisUrl
+      "", // rewardMiniWithdrawal
+      "", // qosicUsername
+      "", // whatsappPhoneIndi
+      "", // whatsappPhone
+      "", // subscriptionPrice
+      "", // id
+      [], // transactionCharges
+      true, // referral_bonus
+      true, // deposit_reward
+      0.0, // deposit_reward_percent
+      0, // min_version
+      0, // last_version
+      "", // dowload_apk_link
+      "", // pal_secret_key
+      "", // pal_public_key
     ),
   );
 
@@ -129,7 +131,8 @@ const Settings = () => {
         min_version: settings[0]?.min_version ?? 0, // New field
         last_version: settings[0]?.last_version ?? 0, // New field
         dowload_apk_link: settings[0]?.dowload_apk_link ?? "", // New field
-    
+        pal_secret_key: settings[0]?.pal_secret_key ?? "",
+        pal_public_key: settings[0]?.pal_public_key ?? "",
       });
     }
   }, [settings, setFormData, loading]);
@@ -727,6 +730,42 @@ const Settings = () => {
                       {formErrors.dowload_apk_link && (
                         <p className="erreur ml-1.5 text-[14px] font-medium text-red">
                           {formErrors.dowload_apk_link}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="PAL Secret Key"
+                        id="pal_secret_key"
+                        name="pal_secret_key"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="PAL Secret Key"
+                        value={formData.pal_secret_key}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.pal_secret_key && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.pal_secret_key}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="PAL Public Key"
+                        id="pal_public_key"
+                        name="pal_public_key"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="PAL Public Key"
+                        value={formData.pal_public_key}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.pal_public_key && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.pal_public_key}
                         </p>
                       )}
                     </div>

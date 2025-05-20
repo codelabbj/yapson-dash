@@ -38,6 +38,8 @@ export interface SettingJson {
   min_version: number | null; // New field
   last_version: number | null; // New field
   dowload_apk_link: string | null; // New field
+  pal_secret_key: string | null;
+  pal_public_key: string | null;
 }
 
 export interface SettingFormData {
@@ -74,6 +76,8 @@ export interface SettingFormData {
   min_version: number | null; // New field
   last_version: number | null; // New field
   dowload_apk_link: string | null; // New field
+  pal_secret_key: string | null;
+  pal_public_key: string | null;
 }
 
 export interface SettingFormErrors {
@@ -109,4 +113,6 @@ export interface SettingFormErrors {
   min_version: number | null; // New field
   last_version: number | null; // New field
   dowload_apk_link: string | null; // New field
+  pal_secret_key: string | null;
+  pal_public_key: string | null;
 }

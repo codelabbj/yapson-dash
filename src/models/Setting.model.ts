@@ -31,10 +31,11 @@ class Setting {
   referral_bonus: boolean | null;
   deposit_reward: boolean | null;
   deposit_reward_percent: number | null;
-  min_version: number | null; // New field
-  last_version: number | null; // New field
-  dowload_apk_link: string | null; // New field
-
+  min_version: number | null;
+  last_version: number | null;
+  dowload_apk_link: string | null;
+  pal_secret_key: string | null;
+  pal_public_key: string | null;
 
   constructor(
     minimumDeposit: string | null,
@@ -63,13 +64,15 @@ class Setting {
     whatsappPhone: string | null,
     subscriptionPrice: string | null,
     id: string | null,
-    transactionCharges: TransactionCharg[] | null, // Changed to TransactionCharg[] | null
+    transactionCharges: TransactionCharg[] | null,
     referral_bonus: boolean | null,
     deposit_reward: boolean | null,
     deposit_reward_percent: number | null,
-    min_version: number | null, // New field
-    last_version: number | null, // New field
-    dowload_apk_link: string | null, // New field
+    min_version: number | null,
+    last_version: number | null,
+    dowload_apk_link: string | null,
+    pal_secret_key: string | null,
+    pal_public_key: string | null,
   ) {
     this.minimumDeposit = minimumDeposit;
     this.minimumWithdrawal = minimumWithdrawal;
@@ -96,15 +99,16 @@ class Setting {
     this.whatsappPhoneIndi = whatsappPhoneIndi;
     this.whatsappPhone = whatsappPhone;
     this.subscriptionPrice = subscriptionPrice;
-    this.transactionCharges = transactionCharges ?? []; // Default to an empty array if null
+    this.transactionCharges = transactionCharges ?? [];
     this.id = id;
     this.referral_bonus = referral_bonus;
     this.deposit_reward = deposit_reward;
     this.deposit_reward_percent = deposit_reward_percent;
-    this.min_version = min_version; // New field
-    this.last_version = last_version; // New field
-    this.dowload_apk_link = dowload_apk_link; // New field
- 
+    this.min_version = min_version;
+    this.last_version = last_version;
+    this.dowload_apk_link = dowload_apk_link;
+    this.pal_secret_key = pal_secret_key;
+    this.pal_public_key = pal_public_key;
   }
 
   static fromJson(json: SettingJson): Setting {
@@ -139,9 +143,11 @@ class Setting {
       json.deposit_reward,
       json.referral_bonus,
       json.deposit_reward_percent,
-      json.min_version, // New field
-      json.last_version, // New field
-      json.dowload_apk_link, // New field
+      json.min_version,
+      json.last_version,
+      json.dowload_apk_link,
+      json.pal_secret_key,
+      json.pal_public_key,
     );
   }
 
@@ -177,9 +183,11 @@ class Setting {
       referral_bonus: this.referral_bonus,
       deposit_reward: this.deposit_reward,
       deposit_reward_percent: this.deposit_reward_percent,
-      min_version: this.min_version, // New field
-      last_version: this.last_version, // New field
-      dowload_apk_link: this.dowload_apk_link, // New field
+      min_version: this.min_version,
+      last_version: this.last_version,
+      dowload_apk_link: this.dowload_apk_link,
+      pal_secret_key: this.pal_secret_key,
+      pal_public_key: this.pal_public_key,
     };
   }
 }

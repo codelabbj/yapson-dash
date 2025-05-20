@@ -46,15 +46,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
           slug: generateUniqueId(),
         };
       }) ?? [],
-      
-
     referral_bonus: initialData?.referral_bonus ?? false,
     deposit_reward: initialData?.deposit_reward ?? false,
     deposit_reward_percent: initialData?.deposit_reward_percent ?? 0,
-    min_version: initialData?.min_version ?? 0, // New field
-    last_version: initialData?.last_version ?? 0, // New field
-    dowload_apk_link: initialData?.dowload_apk_link ?? "", // New field
-  
+    min_version: initialData?.min_version ?? 0,
+    last_version: initialData?.last_version ?? 0,
+    dowload_apk_link: initialData?.dowload_apk_link ?? "",
+    pal_secret_key: initialData?.pal_secret_key ?? "",
+    pal_public_key: initialData?.pal_public_key ?? "",
   });
 
   const [formErrors, setFormErrors] = useState<SettingFormErrors>({
@@ -87,9 +86,11 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     referral_bonus: null,
     deposit_reward: null,
     deposit_reward_percent: null,
-    min_version: null, // New field
-    last_version: null, // New field
-    dowload_apk_link: null, // New field
+    min_version: null,
+    last_version: null,
+    dowload_apk_link: null,
+    pal_secret_key: null,
+    pal_public_key: null,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -123,13 +124,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       whatsappPhone: initialData?.whatsappPhone ?? "",
       subscriptionPrice: initialData?.subscriptionPrice ?? "",
       transactionCharges: initialData?.transactionCharges ?? [],
-
       referral_bonus: initialData?.referral_bonus ?? false,
       deposit_reward: initialData?.deposit_reward ?? false,
       deposit_reward_percent: initialData?.deposit_reward_percent ?? 0,
-      min_version: initialData?.min_version ?? 0, // New field
-      last_version: initialData?.last_version ?? 0, // New field
-      dowload_apk_link: initialData?.dowload_apk_link ?? "", // New field
+      min_version: initialData?.min_version ?? 0,
+      last_version: initialData?.last_version ?? 0,
+      dowload_apk_link: initialData?.dowload_apk_link ?? "",
+      pal_secret_key: initialData?.pal_secret_key ?? "",
+      pal_public_key: initialData?.pal_public_key ?? "",
     });
   };
 
@@ -164,9 +166,11 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       referral_bonus: null,
       deposit_reward: null,
       deposit_reward_percent: null,
-      min_version: null, // New field
-      last_version: null, // New field
-      dowload_apk_link: null, // New field
+      min_version: null,
+      last_version: null,
+      dowload_apk_link: null,
+      pal_secret_key: null,
+      pal_public_key: null,
     });
   };
 
@@ -216,9 +220,11 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       referral_bonus: null,
       deposit_reward: null,
       deposit_reward_percent: null,
-      min_version: null, // New field
-      last_version: null, // New field
-      dowload_apk_link: null, // New field
+      min_version: null,
+      last_version: null,
+      dowload_apk_link: null,
+      pal_secret_key: null,
+      pal_public_key: null,
     };
 
     setFormErrors(errors);
@@ -264,9 +270,11 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
           formData.referral_bonus,
           formData.deposit_reward,
           formData.deposit_reward_percent,
-          formData.min_version, // New field
-          formData.last_version, // New field
-          formData.dowload_apk_link, // New field
+          formData.min_version,
+          formData.last_version,
+          formData.dowload_apk_link,
+          formData.pal_secret_key,
+          formData.pal_public_key
         );
 
         if (setting?.id) {

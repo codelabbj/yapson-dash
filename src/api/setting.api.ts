@@ -46,7 +46,8 @@ class SettingApi {
   static async update(setting: Setting): Promise<Setting> {
     try {
       const settingJson = setting.toJson();
-      const response = await api.patch<SettingJson>(
+      console.log('Sending to backend:', settingJson);
+      const response = await api.put<SettingJson>(
         `${this.route}/${setting.id}/`,
         settingJson,
       );
