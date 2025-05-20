@@ -159,30 +159,6 @@ const Dashboard: React.FC = () => {
               <Snowflake className="fill-primary dark:fill-white" />
             </CardDataStats>
             <CardDataStats
-              title="Total transactions Bot"
-              total={`${dashboardData.allBotTrans ?? 0}`} // rate="0.43%" levelUp
-            >
-              <Snowflake className="fill-primary dark:fill-white" />
-            </CardDataStats>
-            <CardDataStats
-              title="Total Depot Bot"
-              total={`${dashboardData.allBotTransDeposit ?? 0}`} // rate="0.43%" levelUp
-            >
-              <Snowflake className="fill-primary dark:fill-white" />
-            </CardDataStats>
-            <CardDataStats
-              title="Total Retrait Bot"
-              total={`${dashboardData.allBotTransWithrawal ?? 0}`} // rate="0.43%" levelUp
-            >
-              <Snowflake className="fill-primary dark:fill-white" />
-            </CardDataStats>
-            <CardDataStats
-              title="Total Utilisateurs Bot"
-              total={`${dashboardData.allTelegramUsers ?? 0}`} // rate="0.43%" levelUp
-            >
-              <Snowflake className="fill-primary dark:fill-white" />
-            </CardDataStats>
-            <CardDataStats
               title="Total Transactions"
               total={`${dashboardData.allTransactions ?? 0}`} // rate="0.43%" levelUp
             >
