@@ -1,4 +1,3 @@
-
 import { FC, useEffect, useState } from "react";
 import Modal from "../Form/Modal";
 import AppInput from "../Form/Input";
@@ -24,9 +23,8 @@ interface NetworkFormData {
 }
 import AppSelect from "../Form/Select";
 import { ChevronDown } from "lucide-react";
-import CountrySelector from "../Form/country/selector";
-import { getCountryCode } from "../Form/country/utils";
 import { COUNTRIES } from "../Form/country/country";
+import { getCountryCode } from "../Form/country/utils";
 import { SelectMenuOption } from "../Form/country/types";
 import axios from "axios";
 
@@ -58,60 +56,12 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
     resetFormData,
     resetFormErrors,
     onInputDataChange,
-    //onFormSubmit: originalOnFormSubmit,
     onFormSubmit,
     onInputDataSelectChange,
     setFormData,
   } = useNetworkForm(id, network);
   
-  // Initialize deposit_api and withdrawal_api if they don't exist in formData
-  useEffect(() => {
-    if (!formData.deposit_api || !formData.withdrawal_api) {
-      setFormData({
-        ...formData,
-        deposit_api: formData.deposit_api || (network?.deposit_api || 'bpay'),
-        withdrawal_api: formData.withdrawal_api || (network?.withdrawal_api || 'bpay'),
-        otp_required: formData.otp_required ?? (network?.otp_required || false), // Initialize otp_required
-      });
-    }
-  }, []);
-
   const [isOpen, setIsOpen] = useState(false);
-
-  // Enhanced form submit handler to make the API call
-  // const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-    
-  //   try {
-  //     // If this is an update operation (network exists)
-  //     if (network?.id) {
-  //       const networkId = network.id;
-  //       const endpoint = `https://api.yapson.net/yapson/network/${networkId}/`;
-        
-  //       // Prepare the payload
-  //       const payload = {
-  //         name: formData.name,
-  //         image: formData.image,
-  //         placeholder: formData.placeholder,
-  //         public_name: formData.public_name,
-  //         country_code: formData.country_code,
-  //         indication: formData.indication,
-  //         message_init: formData.message_init,
-  //         deposit_api: formData.deposit_api,
-  //         withdrawal_api: formData.withdrawal_api
-  //       };
-        
-  //       // Make the PATCH request
-  //       await axios.patch(endpoint, payload);
-  //     }
-      
-  //     // Call the original form submit handler for other functionality
-  //     originalOnFormSubmit(e);
-  //   } catch (error) {
-  //     console.error("Error updating network:", error);
-  //     // Handle the error appropriately
-  //   }
-  // };
 
   return (
     <Modal
@@ -121,8 +71,38 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
         resetFormErrors();
       }}
     >
-      <div className=" dark:border-strokedark">
+      <div className="dark:border-strokedark">
         <form onSubmit={onFormSubmit}>
+          <div className="mb-4">
+            <AppSelect
+              id="country_code"
+              name="country_code"
+              label="Pays"
+              items={COUNTRIES.map((country) => ({
+                name: country.title,
+                value: country.value.toLowerCase(),
+              }))}
+              icon={<ChevronDown />}
+              value={formData.country_code}
+              onChange={async (e) => {
+                const val = e.target.value;
+                setFormData({
+                  ...formData,
+                  country_code: val,
+                  indication: ((await getCountryCode(val.toUpperCase())) as string).replace(
+                    "+",
+                    "",
+                  ),
+                });
+              }}
+            />
+            {formErrors.country_code && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.country_code}
+              </p>
+            )}
+          </div>
+
           <div className="mb-4">
             <AppSelect
               id="name"
@@ -191,48 +171,6 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
          
 
           <div className="mb-4">
-            <CountrySelector
-              id={"countries"}
-              open={isOpen}
-              onToggle={() => setIsOpen(!isOpen)}
-              onChange={async (val) => {
-                setFormData({
-                  ...formData,
-                  country_code: val.toLowerCase(),
-                  indication: ((await getCountryCode(val)) as string).replace(
-                    "+",
-                    "",
-                  ),
-                });
-                console.log(" formData => ", {
-                  ...formData,
-                  country_code: val.toLowerCase(),
-                  indication: ((await getCountryCode(val)) as string).replace(
-                    "+",
-                    "",
-                  ),
-                });
-                // formData.country_code = val;
-                // formData.indication = ((await getCountryCode(val)) as string).replace("+", "");
-              }}
-              // We use this type assertion because we are always sure this find will return a value but need to let TS know since it could technically return null
-              selectedValue={
-                COUNTRIES.find(
-                  (option) =>
-                    option.value ===
-                    (formData.country_code.toUpperCase().length
-                      ? formData.country_code.toUpperCase()
-                      : "BJ"),
-                ) as SelectMenuOption
-              }
-            />
-            {formErrors.country_code && (
-              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
-                {formErrors.country_code}
-              </p>
-            )}
-          </div>
-          <div className="mb-6">
             <AppInput
               label="Image"
               id="image"

@@ -16,7 +16,7 @@ export const COUNTRIES = [
     value: "TG",
   },
   {
-    title: "Ivory Coast",
+    title: "Côte d'Ivoire",
     value: "CI",
   },
   {
