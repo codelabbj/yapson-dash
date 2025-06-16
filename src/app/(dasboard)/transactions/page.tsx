@@ -58,16 +58,28 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
     fetchServices,
     fetchApps,
     filter,
+    transactionsApps,
     increasePage,
     decreasePage,
     updateTransaction,
   } = usetransactionStoreMemo();
 
   
+  useEffect(() => {
+    fetchApps();
+    fetchServices();
+  }, [fetchApps, fetchServices]);
+
+  useEffect(() => {
+    console.log("filter => ", filter);
+    const fetchData = async () => {
+      await fetchTransactions(searchValue, filter, page);
+    };
+    fetchData();
+  }, [searchValue, filter, page, fetchTransactions]);
 
   const [selectedTransaction, setSelectedTransaction] =
     useState<Transaction | null>();
-
   useEffect(() => {
     fetchTransactions(searchValue);
   }, [fetchTransactions, searchValue]);
@@ -121,6 +133,11 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
         id="transaction-filter-form"
         filter={filter}
         ctor={Transaction}
+        apps={transactionsApps} // Add this prop
+        onSubmit={(formData) => {
+          
+          fetchTransactions(searchValue, formData, 1);
+        }}
       />
 
       <TransactionForm id="transaction-form" transaction={undefined} />

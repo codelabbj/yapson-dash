@@ -186,6 +186,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
     onPhoneNumberChange,
     onInputDataChange,
     onFormSubmit,
+    transactionsApps,
+    transactionsServices,
   };
 };
 

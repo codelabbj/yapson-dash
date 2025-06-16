@@ -27,15 +27,17 @@ export interface TransactionFormErrors {
 export interface TransactionFiterFormData {
   reference: string;
   status: string;
-  type: string;
-  countryCodeCode: string;
-  phoneNumber: string;
-  userAppId: string;
-  mobileReference: string;
-  withdriwalCode: string;
-  userEmail: string;
-  app: string;
-  service: string;
+  type?: string;
+  type_trans?: string;
+  countryCodeCode?: string;
+  phoneNumber?: string;
+  userAppId?: string;
+  mobileReference?: string;
+  network?: string;
+  withdriwalCode?: string;
+  userEmail?: string;
+  app?: string;
+  service?: string;
 }
 
 export interface TransactionFiterFormErrors {
