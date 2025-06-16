@@ -43,9 +43,10 @@ const networksList = [
 ];
 
 const API_CHOICES = [
-  ["bpay", "BPAY"],
-  ["bizao", "Bizao"],
-  ["barkapay", "BarkaPay"],
+  // ["bpay", "BPAY"],
+  // ["bizao", "Bizao"],
+  // ["barkapay", "BarkaPay"],
+    ["pal", "PAL"]
 ];
 
 const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
