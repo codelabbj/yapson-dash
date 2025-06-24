@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import MultipleActionButton from "@/components/widget/Form/EditDeleteButton";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
@@ -33,10 +33,11 @@ import useTransactionFilterForm from "@/hooks/forms/useTransactionFilter.hook";
 import Transaction from "@/models/transaction.model";
 import TransactionApi from "@/api/transaction.api";
 import AppInput from "@/components/widget/Form/Input";
-import AppSelect from "@/components/widget/Form/Select";
 import AppPhoneInput from "@/components/widget/Form/PhoneInput";
 import Modal from "@/components/widget/Form/Modal";
 import createTransactionStore from "@/store/useTransaction.store";
+import api from "@/utils/api.util";
+import useInterfaceStore from "@/store/useInterface.store";
 
 interface TransactionsPageProps {}
 
@@ -107,6 +108,15 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
   useEffect(() => {
     toggleModal("transaction-details");
   }, [bizaotrans]);
+
+  const [statusEditId, setStatusEditId] = useState<string | null>(null);
+  const [statusLoadingId, setStatusLoadingId] = useState<string | null>(null);
+  const statusDropdownRef = useRef<HTMLDivElement>(null);
+  const setActionResultMessage = useInterfaceStore((state) => state.setActionResultMessage);
+  const statusOptions = [
+    { name: "Accepter", value: "accept" },
+    { name: "Refuser", value: "refuse" },
+  ];
 
   return (
     <>
@@ -291,8 +301,9 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
                     }
                     className={` relative overflow-hidden px-5 py-4 font-bold lg:px-7.5 2xl:px-11 ${transaction.status == "accept" ? "text-green-600" : transaction.status == "pending" ? "" : transaction.status == "bizao_validation" ? "text-green-500" : ""} `}
                   >
-                    {selectedTransaction?.id !== transaction.id ? (
-                      <div>
+                    {/* Status display and refresh button */}
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
                         <button
                           onClick={async () => {
                             setSelectedTransaction(transaction);
@@ -300,33 +311,141 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
                               await TransactionApi.findBizaoUnique(
                                 transaction.reference!,
                               );
-                            console.log(
-                              "new_transac => ",
-                              Object.keys(new_transac),
-                            );
                             setBizaoTrans(new_transac);
                             setSelectedTransaction(null);
                           }}
                           className=" flex h-8 w-8 flex-col items-center justify-center rounded-full bg-primary "
                         >
-                          <div>
-                            <RefreshCcwIcon
-                              className={"text-white"}
-                              color={"white"}
-                              size={"1rem"}
-                            />
-                          </div>
+                          <RefreshCcwIcon
+                            className={"text-white"}
+                            color={"white"}
+                            size={"1rem"}
+                          />
                         </button>
-                        {transactionStatus(
-                          transaction.status,
-                          transaction.typeTrans.toLowerCase(),
+                        <span>
+                          {transactionStatus(
+                            transaction.status,
+                            transaction.typeTrans.toLowerCase(),
+                          )}
+                        </span>
+                      </div>
+                      {/* Custom Status Change Modal/Dropdown */}
+                      <div className="mt-2">
+                        {statusLoadingId === transaction.id ? (
+                          <ProcessingLoader />
+                        ) : statusEditId === transaction.id ? (
+                          <div ref={statusDropdownRef} className="relative">
+                            <div className="flex flex-col gap-2">
+                              <div className="flex items-center gap-2">
+                                <select
+                                  id={`status-select-${transaction.id}`}
+                                  name="status"
+                                  value={transaction.status === "accept" || transaction.status === "refuse" || transaction.status === "error" ? (transaction.status === "error" ? "refuse" : transaction.status) : ""}
+                                  onChange={async (e) => {
+                                    let newStatus = e.target.value;
+                                    // If refuse is selected, send 'error' to backend
+                                    if (newStatus === "refuse") newStatus = "error";
+                                    setStatusLoadingId(transaction.id!);
+                                    try {
+                                      // Create a new Transaction object with updated status
+                                      const updatedTransaction = new Transaction(
+                                        transaction.amount,
+                                        transaction.user,
+                                        transaction.reference,
+                                        transaction.typeTrans,
+                                        newStatus,
+                                        transaction.phoneNumber,
+                                        transaction.country,
+                                        transaction.mobileReference,
+                                        transaction.createdAt!,
+                                        transaction.counntryCode,
+                                        transaction.app,
+                                        transaction.userAppId,
+                                        transaction.withdrawalCode,
+                                        transaction.id,
+                                        transaction.error_message,
+                                      );
+                                      const result = await updateTransaction(updatedTransaction);
+                                      if (typeof result === "string") {
+                                        setActionResultMessage(result);
+                                      } else {
+                                        setActionResultMessage("Statut de la transaction mis à jour avec succès.");
+                                        fetchTransactions(searchValue, filter, page);
+                                      }
+                                      toggleModal("action-result-message");
+                                    } catch (err) {
+                                      setActionResultMessage("Erreur lors de la mise à jour du statut.");
+                                      toggleModal("action-result-message");
+                                    } finally {
+                                      setStatusEditId(null);
+                                      setStatusLoadingId(null);
+                                    }
+                                  }}
+                                  className={`w-full rounded-md border border-stroke bg-transparent py-1 pl-2 pr-6 text-[11px] outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input 
+                                    ${transaction.status === 'accept' ? 'text-success font-medium' : 
+                                      transaction.status === 'refuse' || transaction.status === 'error' ? 'text-danger font-medium' : ''}`}
+                                >
+                                  <option value="" disabled>Sélectionner un statut</option>
+                                  {statusOptions.map((option) => (
+                                    <option 
+                                      key={option.value} 
+                                      value={option.value}
+                                      className={`${
+                                        option.value === 'accept' ? 'text-success' : 
+                                        option.value === 'refuse' ? 'text-danger' : ''
+                                      }`}
+                                    >
+                                      {option.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                              <div className="mt-1 flex items-center justify-between text-[10px]">
+                                <button
+                                  type="button"
+                                  onClick={() => setStatusEditId(null)}
+                                  className="text-danger hover:text-danger/80"
+                                >
+                                  Annuler
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                              <span className={`${
+                                transaction.status === 'accept' ? 'text-success font-medium' : 
+                                transaction.status === 'refuse' || transaction.status === 'error' ? 'text-danger font-medium' : ''
+                              }`}>
+                                {transaction.status === 'accept' ? 'Accepté' : 
+                                 transaction.status === 'refuse' || transaction.status === 'error' ? 'Refusé' : 'En attente'}
+                              </span>
+                            </div>
+                            <button
+                              className="mt-1 flex items-center gap-1 text-[10px] font-medium text-primary hover:text-primary/80"
+                              onClick={() => setStatusEditId(transaction.id!)}
+                              type="button"
+                            >
+                              <span>Modifier le statut</span>
+                              <svg 
+                                className="h-3 w-3" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke="currentColor"
+                              >
+                                <path 
+                                  strokeLinecap="round" 
+                                  strokeLinejoin="round" 
+                                  strokeWidth={2} 
+                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" 
+                                />
+                              </svg>
+                            </button>
+                          </div>
                         )}
                       </div>
-                    ) : (
-                      <div>
-                        <ProcessingLoader />
-                      </div>
-                    )}
+                    </div>
                   </div>
 
                   {/* Transaction Observation */}
