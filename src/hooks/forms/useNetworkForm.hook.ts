@@ -31,8 +31,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     indication: initialData?.indication ?? "229",
     image: initialData?.image ?? "",
     message_init: initialData?.messageInit,
-    deposit_api: initialData?.deposit_api ?? "bpay",
-    withdrawal_api: initialData?.withdrawal_api ?? "bpay",
+    deposit_api: initialData?.deposit_api ?? "pal",
+    withdrawal_api: initialData?.withdrawal_api ?? "pal",
     otp_required: initialData?.otp_required ?? false,
   });
 
@@ -59,8 +59,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       indication: initialData?.indication ?? "229",
       image: initialData?.image ?? "",
       message_init: initialData?.messageInit,
-      deposit_api: initialData?.deposit_api ?? "bpay",
-      withdrawal_api: initialData?.withdrawal_api ?? "bpay",
+      deposit_api: initialData?.deposit_api ?? "pal",
+      withdrawal_api: initialData?.withdrawal_api ?? "pal",
       otp_required: initialData?.otp_required ?? false,
     });
   };

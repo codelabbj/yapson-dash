@@ -148,15 +148,15 @@ const createTransactionStore =
     },
 
     fetchServices: async () => {
-      try {
-        const services = await ServiceApi.findMany();
-
-        set({
-          transactionsServices: services.results,
-        });
-      } catch (error) {
-        set({ error: "An unknown error occurred" });
-      }
+      // try {
+      //   const services = await ServiceApi.findMany();
+      //
+      //   set({
+      //     transactionsServices: services.results,
+      //   });
+      // } catch (error) {
+      //   set({ error: "An unknown error occurred" });
+      // }
     },
 
     addTransaction: async (transaction: T) => {
