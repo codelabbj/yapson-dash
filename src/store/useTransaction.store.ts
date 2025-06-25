@@ -58,15 +58,19 @@ const createTransactionStore =
       reference: "",
       status: "",
       type: "",
+      type_trans: "", // Added missing field
       countryCodeCode: "",
       phoneNumber: "",
       userAppId: "",
       mobileReference: "",
+      network: "", // Added missing field
       withdriwalCode: "",
       userEmail: "",
       app: "",
       service: "",
     },
+
+    
 
     pageSize: 10,
     transactionsApps: [],
@@ -116,14 +120,16 @@ const createTransactionStore =
         );
         console.log(paginatedTransactions);
 
-        isUpdate
-          ? set({
-              paginatedTransactions,
-              page: currentPage,
-            })
-          : set({
-              paginatedTransactions,
-            });
+        if (isUpdate) {
+          set({
+            paginatedTransactions,
+            page: currentPage,
+          });
+        } else {
+          set({
+            paginatedTransactions,
+          });
+        }
       } catch (error: unknown) {
         if (error instanceof AxiosError) {
           set({ error: extractAxiosError(error) });
@@ -146,6 +152,8 @@ const createTransactionStore =
         set({ error: "An unknown error occurred" });
       }
     },
+
+    
 
     fetchServices: async () => {
       // try {

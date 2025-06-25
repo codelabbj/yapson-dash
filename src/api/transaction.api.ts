@@ -30,8 +30,37 @@ class TransactionApi {
     pageSize?: number,
   ): Promise<PaginatedTransaction<T>> {
     try {
+      // Build query parameters
+    const params = new URLSearchParams();
+    
+    // Add search field if provided
+    if (searchField) {
+      params.append('search_fields', searchField);
+    }
+
+    // Add filter parameters if provided
+    if (filter) {
+      if (filter.reference) params.append('reference', filter.reference);
+      if (filter.status) params.append('status', filter.status);
+      if (filter.type) params.append('type', filter.type);
+      if (filter.type_trans) params.append('type_trans', filter.type_trans);
+      if (filter.countryCodeCode) params.append('country_code', filter.countryCodeCode);
+      if (filter.phoneNumber) params.append('phone_number', filter.phoneNumber);
+      if (filter.userAppId) params.append('user_app_id', filter.userAppId);
+      if (filter.mobileReference) params.append('mobile_reference', filter.mobileReference);
+      if (filter.network) params.append('network', filter.network);
+      if (filter.withdriwalCode) params.append('withdriwal_code', filter.withdriwalCode);
+      if (filter.userEmail) params.append('user__email', filter.userEmail);
+      if (filter.app) params.append('app', filter.app);
+      if (filter.service) params.append('service', filter.service);
+    }
+
+    // Add pagination
+    params.append('page', (page ?? 1).toString());
+    params.append('page_size', (pageSize ?? 20).toString());
+
       const response = await api.get<PaginatedTransactionJson<T>>(
-        `${this.route}?search_fields=${searchField ?? ""}&reference=${filter?.reference ?? ""}&status=${filter?.status ?? ""}&phone_number=${filter?.phoneNumber ?? ""}&user_app_id=${filter?.userAppId ?? ""}&mobile_reference=${filter?.mobileReference ?? ""}&withdriwal_code=${filter?.withdriwalCode ?? ""}&user__email=${filter?.userEmail ?? ""}&app=${filter?.app ?? ""}&service=${filter?.service ?? ""}&page=${page ?? 1}&page_size=${pageSize ?? 20}`
+        `${this.route}?${params.toString()}`
       );
 
       return PaginatedTransaction.fromJson<T>(response, ctor);
