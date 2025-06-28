@@ -59,19 +59,18 @@ const TicketForm: FC<TicketFormProps> = ({ id, ticket, apps }) => {
               </span>
             </div>
           )}
-          {/*<div className="mb-10">
-          <AppSelect
+          
+          <div className="mb-4">
+            <AppSelect
               id="betapp"
               name="betapp"
-              items={apps.map(e => {
-                let item : SelectItemProps = {
-                  name : e.name,
-                  value : e.name
-                }
-                return item;
-              })}
+              label="Application"
+              items={apps.map(app => ({
+                name: app.name,
+                value: app.name
+              }))}
               icon={<ChevronDown />}
-              value={apps.find((prd) => prd.name == ticket?.betapp)?.name ?? "all"}
+              value={formData.betapp || ""}
               onChange={onInputDataChange}
             />
             {formErrors.betapp && (
@@ -79,7 +78,7 @@ const TicketForm: FC<TicketFormProps> = ({ id, ticket, apps }) => {
                 {formErrors.betapp}
               </p>
             )}
-          </div>*/}
+          </div>
 
           <div className="mb-4">
             <AppInput

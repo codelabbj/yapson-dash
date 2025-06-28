@@ -119,6 +119,14 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
       errors.image = "Veuillez choisir au mois une image";
     }
 
+    if (!formData.betapp || formData.betapp.trim() === "") {
+      errors.betapp = "Veuillez sélectionner une application";
+    }
+
+    if (!formData.code || formData.code.trim() === "") {
+      errors.code = "Veuillez saisir un code";
+    }
+
     setFormErrors(errors);
 
     return Object.values(errors).every((error) => !error);

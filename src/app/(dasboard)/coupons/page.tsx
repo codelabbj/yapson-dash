@@ -53,11 +53,11 @@ const CouponsPage: FC<TicketsPageProps> = () => {
           onClick={() => {
             resetFormErrors();
             resetFormData();
-            toggleModal(`deposit-form-${dateString}`);
+            toggleModal(`ticket-form-${dateString}`);
           }}
         />
       </Breadcrumb>
-      <TicketForm apps={apps} id={`deposit-form-${dateString}`} />
+      <TicketForm apps={apps} id={`ticket-form-${dateString}`} />
       <ActionResult />
 
       <div className="overflow-x-auto' max-w-full">
@@ -76,7 +76,7 @@ const CouponsPage: FC<TicketsPageProps> = () => {
                   onEdit={() => {
                     resetFormData();
                     resetFormErrors();
-                    toggleModal(`deposit-form-${dateString}-${ticket.id}`);
+                    toggleModal(`ticket-form-${dateString}-${ticket.id}`);
                   }}
                   onDelete={() => {
                     toggleModal(`cancel-confirmation-dialog-${ticket.id}`);
@@ -84,8 +84,8 @@ const CouponsPage: FC<TicketsPageProps> = () => {
                 />
 
                 <TicketForm
-                  key={`deposit-form-${dateString}-${ticket.id}`}
-                  id={`deposit-form-${dateString}-${ticket.id}`}
+                  key={`ticket-form-${dateString}-${ticket.id}`}
+                  id={`ticket-form-${dateString}-${ticket.id}`}
                   ticket={ticket}
                   apps={apps}
                 />

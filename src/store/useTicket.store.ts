@@ -76,12 +76,14 @@ const useTicketStore = create<TicketStore>()(
       fetchTickets: async (searchField = "", page, pageSize) => {
         set({ loading: true, error: null });
         try {
-          const paginatedTickets = await TicketApi.findMany(
-            searchField,
-            page ?? get().page,
-            pageSize ?? get().pageSize,
-          );
-          const apps: any[] = [];
+          const [paginatedTickets, apps] = await Promise.all([
+            TicketApi.findMany(
+              searchField,
+              page ?? get().page,
+              pageSize ?? get().pageSize,
+            ),
+            TicketApi.getApps()
+          ]);
 
           set((state) => ({
             paginatedTickets: paginatedTickets,

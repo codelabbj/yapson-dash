@@ -73,7 +73,7 @@ class TicketApi {
 
   static async getApps() : Promise<BetApp[]> {
     try {
-      const response = await api.get<BetAppJson[]>("/yapson/app_name");
+      const response = await api.get<BetAppJson[]>("/app_name");
       return response.map((e) => BetApp.fromJson(e));
     } catch(e) {
       return [];
