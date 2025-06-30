@@ -6,26 +6,29 @@ class Ticket {
   id?: string;
   code?: string;
   betapp: string;
-  images: string[];
+  bet_app?: any;
 
-  constructor(betapp: string, images: string[], id?: string, code?: string) {
+  constructor(betapp: string, code?: string, id?: string) {
     this.code = code;
     this.betapp = betapp;
-    this.images = images;
     this.id = id;
   }
 
   static fromJson(json: TicketJson): Ticket {
-    return new Ticket(json.betapp, json.images, json.id, json.code);
+    const ticket = new Ticket(json.bet_app_id ?? "", json.code, json.id);
+    if (typeof json.bet_app === 'object') {
+      ticket.bet_app = json.bet_app;
+    }
+    return ticket;
   }
 
   toJson(): TicketJson {
     return {
       id: this.id,
       code: this.code,
-      betapp: this.betapp,
-      images: this.images,
-    };
+      bet_app_id: this.betapp,
+    
+    } as any
   }
 }
 

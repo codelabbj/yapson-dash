@@ -85,6 +85,7 @@ const ChampionshipForm: FC<ChampionshipFormProps> = ({ id, championship }) => {
             ) : (
               <AppButton
                 name={`${championship?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

@@ -73,6 +73,7 @@ const ComplaintResponseForm: FC<ComplaintResponseFormProps> = ({
             ) : (
               <AppButton
                 name={`${complaint?.response?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

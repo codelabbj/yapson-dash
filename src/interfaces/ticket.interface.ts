@@ -9,8 +9,8 @@ import { EventJson } from "./event.interface";
 export interface TicketJson {
   id?: string;
   code?: string;
-  betapp: string;
-  images: string[];
+  bet_app_id?: string;
+  bet_app?: any;
 }
 
 export interface BetApptJson {
@@ -27,15 +27,13 @@ export interface TicketFormData {
 }
 
 export interface TicketFormDataV2 {
-  image: string[] | File[];
   code: string;
-  betapp: string;
+  bet_app_id: string;
 }
 
 export interface TicketFormErrorsV2 {
-  image: string | null;
   code: string | null;
-  betapp: string | null;
+  bet_app_id: string | null;
 }
 
 export interface TicketFormErrors {

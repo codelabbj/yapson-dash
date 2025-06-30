@@ -62,20 +62,20 @@ const TicketForm: FC<TicketFormProps> = ({ id, ticket, apps }) => {
           
           <div className="mb-4">
             <AppSelect
-              id="betapp"
-              name="betapp"
+              id="bet_app_id"
+              name="bet_app_id"
               label="Application"
               items={apps.map(app => ({
                 name: app.name,
-                value: app.name
+                value: app.id ? app.id.toString() : ""
               }))}
               icon={<ChevronDown />}
-              value={formData.betapp || ""}
+              value={formData.bet_app_id || ""}
               onChange={onInputDataChange}
             />
-            {formErrors.betapp && (
+            {formErrors.bet_app_id && (
               <p className="erreur ml-1.5 text-[14px] font-medium text-red">
-                {formErrors.betapp}
+                {formErrors.bet_app_id}
               </p>
             )}
           </div>
@@ -97,31 +97,13 @@ const TicketForm: FC<TicketFormProps> = ({ id, ticket, apps }) => {
             )}
           </div>
 
-          {
-            <div className="mb-6">
-              <AppInput
-                label="Images"
-                id="image"
-                name="image"
-                type="files"
-                placeholder="Logo"
-                value={formData.image}
-                onChange={onInputDataChange}
-              />
-              {formErrors.image && (
-                <p className="erreur ml-1.5 text-[14px] font-medium text-red">
-                  {formErrors.image}
-                </p>
-              )}
-            </div>
-          }
-
           <div className="mb-5">
             {processing ? (
               <ProcessingLoader />
             ) : (
               <AppButton
                 name={`${ticket?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

@@ -239,6 +239,7 @@ const AppForm: FC<AppFormProps> = ({ id, app }) => {
             ) : (
               <AppButton
                 name={`${app?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

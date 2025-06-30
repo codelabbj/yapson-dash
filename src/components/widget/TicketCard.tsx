@@ -48,9 +48,8 @@ const TicketCard: FC<TicketCardProps> = ({
         </div>
       </div>
       <div className="my-10 flex items-center justify-center overflow-hidden">
-        <p className="">
-          <span className=" text-xl font-semibold">{ticket.images.length}</span>
-          <span className="ml-3"> combinés</span>
+        <p className="text-xl font-semibold">
+          {ticket.bet_app?.public_name || ticket.bet_app?.name || ticket.bet_app?.id || 'App inconnu'}
         </p>
       </div>
 

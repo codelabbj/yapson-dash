@@ -44,14 +44,12 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
   const { addTicket, updateTicket, fetchTickets } = useTicketStore();
 
   const [formData, setFormData] = useState<TicketFormDataV2>({
-    image: initialData?.images ?? [],
-    betapp: initialData?.betapp ?? "",
+    bet_app_id: initialData?.betapp ?? "",
     code: initialData?.code ?? "",
   });
 
   const [formErrors, setFormErrors] = useState<TicketFormErrorsV2>({
-    image: null,
-    betapp: null,
+    bet_app_id: null,
     code: null,
   });
 
@@ -59,16 +57,14 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
 
   const resetFormData = () => {
     setFormData({
-      image: initialData?.images ?? [],
-      betapp: initialData?.betapp ?? "",
+      bet_app_id: initialData?.betapp ?? "",
       code: initialData?.code ?? "",
     });
   };
 
   const resetFormErrors = () => {
     setFormErrors({
-      image: null,
-      betapp: null,
+      bet_app_id: null,
       code: null,
     });
   };
@@ -83,17 +79,10 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
     >,
   ) => {
     const { name, value } = e.target;
-
-    let files: File[] = [];
-
-    if ((e.target as any).files) files = (e.target as any).files;
-    console.log("Files ", files);
-
     setFormData({
       ...formData,
-      [name]: name === "image" ? files : value,
+      [name]: value,
     });
-    console.log("formData ", formData);
   };
 
   // const onEventChange = (name: string, event: Event) => {
@@ -110,17 +99,12 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
 
   const validateForm = () => {
     const errors: TicketFormErrorsV2 = {
-      image: null,
-      betapp: null,
+      bet_app_id: null,
       code: null,
     };
 
-    if (formData.image.length === 0) {
-      errors.image = "Veuillez choisir au mois une image";
-    }
-
-    if (!formData.betapp || formData.betapp.trim() === "") {
-      errors.betapp = "Veuillez sélectionner une application";
+    if (!formData.bet_app_id || formData.bet_app_id.trim() === "") {
+      errors.bet_app_id = "Veuillez sélectionner une application";
     }
 
     if (!formData.code || formData.code.trim() === "") {
@@ -134,30 +118,14 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
 
   const onFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("form submitted ", typeof formData.image);
 
     if (validateForm()) {
       setProcessing(true);
-
-      let images: (string | File)[] = [];
-
-      // [...formData.image].forEach(async (element) => {
-      //   if (element instanceof File) {
-      //     images.push(await uploadImage(element));
-      //   }
-      // });
-
-      for (const image of [...formData.image]) {
-        images.push(await uploadImage(image as File));
-      }
-      console.log("formData.image ", images);
-
       try {
         const ticket = new Ticket(
-          formData.betapp!,
-          images as string[],
-          initialData?.id,
+          formData.bet_app_id!,
           formData.code,
+          initialData?.id,
         );
 
         if (ticket?.id) {
@@ -194,7 +162,6 @@ const useTicketForm = (modalId: string, initialData?: Ticket) => {
       } catch (error) {
         console.error("Error handling form submission:", error);
       }
-
       setProcessing(false);
     }
   };

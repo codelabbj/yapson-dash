@@ -133,7 +133,7 @@ const TicketsPage: FC<TicketsPageProps> = () => {
 
                   {/* Deposit App */}
                   <div className="flex-1 overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    {ticket.betapp ?? "NAN"}
+                    {ticket.bet_app?.public_name || ticket.bet_app?.name || ticket.bet_app?.id || "NAN"}
                   </div>
 
                   {/* Deposit Image */}

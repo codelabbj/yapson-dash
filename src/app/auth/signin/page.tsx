@@ -61,7 +61,7 @@ const SignIn: React.FC = () => {
               {processing ? (
                 <ProcessingLoader />
               ) : (
-                <AppButton name="Connexion" onClick={() => {}} />
+                <AppButton name="Connexion" type="submit" onClick={() => {}} />
               )}
             </div>
           </form>

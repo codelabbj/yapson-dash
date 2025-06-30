@@ -102,6 +102,7 @@ const AdvertisementForm: FC<AdvertisementFormProps> = ({
             ) : (
               <AppButton
                 name={`${advertisement?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}
