@@ -142,6 +142,7 @@ const EventForm: FC<EventFormProps> = ({ id, event }) => {
             ) : (
               <AppButton
                 name={`${event?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

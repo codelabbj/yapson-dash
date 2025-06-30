@@ -170,6 +170,7 @@ const MatchForm: FC<MatchFormProps> = ({ id, match }) => {
             ) : (
               <AppButton
                 name={`${match?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

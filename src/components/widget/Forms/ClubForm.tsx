@@ -71,6 +71,7 @@ const ClubForm: FC<ClubFormProps> = ({ id, club }) => {
             ) : (
               <AppButton
                 name={`${club?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

@@ -133,6 +133,7 @@ const ServiceForm: FC<ServiceFormProps> = ({ id, service }) => {
           <div className="mb-5">
             <AppButton
               name={` ${service?.id ? "Mettre à jour" : "Ajouter"}`}
+              type="submit"
               onClick={() => {}}
             />
           </div>

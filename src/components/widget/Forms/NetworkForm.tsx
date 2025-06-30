@@ -262,6 +262,7 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
             ) : (
               <AppButton
                 name={`${network?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

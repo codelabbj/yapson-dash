@@ -119,6 +119,7 @@ const DepositForm: FC<DepositFormProps> = ({ id, deposit }) => {
             ) : (
               <AppButton
                 name={`${deposit?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

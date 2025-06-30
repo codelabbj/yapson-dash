@@ -55,6 +55,7 @@ const SportForm: FC<SportFormProps> = ({ id, sport }) => {
             ) : (
               <AppButton
                 name={`${sport?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}

@@ -201,6 +201,7 @@ const TransactionForm: FC<TransactionFormProps> = ({ id, transaction }) => {
             ) : (
               <AppButton
                 name={`${transaction?.id ? "Mettre à jour" : "Ajouter"}`}
+                type="submit"
                 onClick={() => {}}
               />
             )}
