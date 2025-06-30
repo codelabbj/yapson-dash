@@ -104,7 +104,7 @@ const TicketsPage: FC<TicketsPageProps> = () => {
         <div className="flex flex-col rounded-sm text-black dark:text-white">
           {/* Table Header */}
           <div className="grid grid-cols-3 bg-bodydark1 text-left font-bold text-boxdark dark:bg-meta-4 dark:text-white md:grid-cols-4 xl:grid-cols-7">
-            {["Code", "App", "Image", "Actions"].map((column, index) => (
+            {["Code", "App", "Actions"].map((column, index) => (
               <div
                 key={index}
                 className={` px-5 py-4 lg:px-7.5 2xl:px-11 ${index === 2 ? "hidden  text-center md:table-cell" : ""} ${index === 3 || index === 4 || index === 5 ? "hidden xl:table-cell " : ""}`}
@@ -137,32 +137,7 @@ const TicketsPage: FC<TicketsPageProps> = () => {
                   </div>
 
                   {/* Deposit Image */}
-                  <div className="hidden flex-1 justify-start overflow-hidden  px-5 py-4 md:table-cell lg:px-7.5 2xl:px-11 ">
-                    {Array.isArray(ticket.images) && (
-                      <>
-                        {ticket.images.map((e) => {
-                          return (
-                            <div
-                              key={"ticket" + e}
-                              className=" my-4 inline-block"
-                            >
-                              <Image
-                                src={ensureBaseUrl(e as string)}
-                                alt={e ?? "image"}
-                                width={50}
-                                height={50}
-                                onClick={() => toggleModal(`image-view-${e}`)}
-                                className="mx-auto"
-                                style={{ height: "auto" }}
-                              />
-
-                              <ImageViewCard id={`image-view-${e}`} image={e} />
-                            </div>
-                          );
-                        })}
-                      </>
-                    )}
-                  </div>
+                  {/* Removed image display as images are no longer part of Ticket */}
 
                   {/* Actions */}
                   <div
