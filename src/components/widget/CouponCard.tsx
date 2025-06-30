@@ -64,31 +64,7 @@ const CouponCard: FC<CouponCardProps> = ({ coupon, onEdit, onDelete }) => {
         </div>
       </div>
       <div className="my-10 flex items-center justify-center">
-        <ImageList rowHeight={160} className={classes.imageList} cols={3}>
-          {coupon.images?.map((item) => (
-            <ImageListItem
-              style={{
-                cursor: "pointer",
-              }}
-              key={item}
-              cols={1}
-            >
-              <PhotoProvider>
-                <PhotoView src={item}>
-                  <img src={item} alt={""} />
-                </PhotoView>
-              </PhotoProvider>
-            </ImageListItem>
-          ))}
-        </ImageList>
-        {/* <Image
-          src={ensureBaseUrl(coupon.image[0])}
-          height={100}
-          width={100}
-          alt={coupon.code ?? "Code"}
-          className="mx-auto"
-          style={{ height: "auto" }}
-        /> */}
+        {/* Removed image display as images are no longer part of Ticket */}
       </div>
 
       <div className="flex items-center justify-between text-sm">
