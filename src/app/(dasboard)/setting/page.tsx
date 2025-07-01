@@ -213,7 +213,7 @@ const Settings = () => {
                     {authSettingProcessing ? (
                       <ProcessingLoader />
                     ) : (
-                      <AppButton name="Mettre à jour" onClick={() => {}} />
+                      <AppButton name="Mettre à jour" type="submit" onClick={() => {}} />
                     )}
                   </div>
                 </form>
@@ -1032,6 +1032,7 @@ const Settings = () => {
                           {!processing ? (
                             <AppButton
                               name={` ${settings.length != 0 ? "Mettre à jour" : "Ajouter"}`}
+                              type="submit"
                               onClick={() => {}}
                             />
                           ) : (
