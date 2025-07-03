@@ -267,7 +267,7 @@ const AppForm: FC<AppFormProps> = ({ id, app }) => {
           </div>
           <div className="mb-4">
             <AppInput
-              label="Gain maximum"
+              label="Retrait maximum"
               id="max_win"
               name="max_win"
               type="number"
