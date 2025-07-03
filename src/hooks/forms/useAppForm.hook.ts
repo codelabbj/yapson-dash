@@ -38,7 +38,11 @@ const useAppForm = (modalId: string, initialData?: App) => {
     order : initialData?.order ?? "",
     city : initialData?.city ?? "",
     street : initialData?.city ?? "",
-    id : initialData?.id ?? "",
+    id : initialData?.id ?? undefined,
+    max_deposit: initialData?.max_deposit ?? "",
+    minimun_deposit: initialData?.minimun_deposit ?? "",
+    minimun_with: initialData?.minimun_with ?? "",
+    max_win: initialData?.max_win ?? "",
   });
 
   const [formErrors, setFormErrors] = useState<AppFormErrors>({
@@ -54,6 +58,10 @@ const useAppForm = (modalId: string, initialData?: App) => {
     order: null,
     city: null,
     street: null,
+    max_deposit: null,
+    minimun_deposit: null,
+    minimun_with: null,
+    max_win: null,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -71,7 +79,12 @@ const useAppForm = (modalId: string, initialData?: App) => {
         withdrawal_link : initialData?.withdrawal_link ?? "",
         order : initialData?.order ?? "",
         city : initialData?.city ?? "",
-        street : initialData?.city ?? ""
+        street : initialData?.city ?? "",
+        id : initialData?.id ?? undefined,
+        max_deposit: initialData?.max_deposit ?? "",
+        minimun_deposit: initialData?.minimun_deposit ?? "",
+        minimun_with: initialData?.minimun_with ?? "",
+        max_win: initialData?.max_win ?? "",
     });
   };
 
@@ -89,6 +102,10 @@ const useAppForm = (modalId: string, initialData?: App) => {
         order: null,
         city: null,
         street: null,
+        max_deposit: null,
+        minimun_deposit: null,
+        minimun_with: null,
+        max_win: null,
     });
   };
 
@@ -132,6 +149,10 @@ const useAppForm = (modalId: string, initialData?: App) => {
         order: null,
         city: null,
         street: null,
+        max_deposit: null,
+        minimun_deposit: null,
+        minimun_with: null,
+        max_win: null,
     };
 
     if (!formData.name.trim()) {
@@ -188,6 +209,19 @@ const useAppForm = (modalId: string, initialData?: App) => {
       errors.image = "L'image doit être de type (JPEG, PNG, GIF).";
     }
 
+    if (!formData.minimun_deposit.trim()) {
+      errors.minimun_deposit = "Le dépôt minimum est requis";
+    }
+    if (!formData.max_deposit.trim()) {
+      errors.max_deposit = "Le dépôt maximum est requis";
+    }
+    if (!formData.minimun_with.trim()) {
+      errors.minimun_with = "Le retrait minimum est requis";
+    }
+    if (!formData.max_win.trim()) {
+      errors.max_win = "Le gain maximum est requis";
+    }
+
     setFormErrors(errors);
 
     return Object.values(errors).every((error) => !error);
@@ -223,8 +257,11 @@ const useAppForm = (modalId: string, initialData?: App) => {
           "",
           formData.city,
           formData.street,
+          formData.max_deposit,
+          formData.minimun_deposit,
+          formData.minimun_with,
+          formData.max_win,
           formData.id
-
         );
 
         if (app?.id) {

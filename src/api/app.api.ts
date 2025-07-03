@@ -29,6 +29,9 @@ class AppApi {
   static async add(app: App): Promise<App> {
     try {
       const appJson = app.toJson();
+      if (appJson.id === undefined || appJson.id === null || appJson.id === "") {
+        delete appJson.id;
+      }
       const response = await api.post<AppJson>(`${this.route}`, {
         ...appJson,
         public_name: appJson.name,

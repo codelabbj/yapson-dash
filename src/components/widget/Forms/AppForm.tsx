@@ -217,6 +217,70 @@ const AppForm: FC<AppFormProps> = ({ id, app }) => {
               </p>
             )}
           </div>
+          <div className="mb-4">
+            <AppInput
+              label="Dépôt minimum"
+              id="minimun_deposit"
+              name="minimun_deposit"
+              type="number"
+              placeholder=""
+              value={formData.minimun_deposit}
+              onChange={onInputDataChange}
+            />
+            {formErrors.minimun_deposit && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.minimun_deposit}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <AppInput
+              label="Dépôt maximum"
+              id="max_deposit"
+              name="max_deposit"
+              type="number"
+              placeholder=""
+              value={formData.max_deposit}
+              onChange={onInputDataChange}
+            />
+            {formErrors.max_deposit && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.max_deposit}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <AppInput
+              label="Retrait minimum"
+              id="minimun_with"
+              name="minimun_with"
+              type="number"
+              placeholder=""
+              value={formData.minimun_with}
+              onChange={onInputDataChange}
+            />
+            {formErrors.minimun_with && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.minimun_with}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <AppInput
+              label="Gain maximum"
+              id="max_win"
+              name="max_win"
+              type="number"
+              placeholder=""
+              value={formData.max_win}
+              onChange={onInputDataChange}
+            />
+            {formErrors.max_win && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.max_win}
+              </p>
+            )}
+          </div>
           <div className="mb-6">
             <AppInput
               label="Image"

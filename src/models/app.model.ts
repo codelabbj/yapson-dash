@@ -14,8 +14,12 @@ class App {
   order: string;
   city: string;
   street: string;
+  max_deposit?: string;
+  minimun_deposit?: string;
+  minimun_with?: string;
+  max_win?: string;
 
-  constructor(name: string, image: string, hash: string, cashdeskid: string, cashierpass: string, deposit_tuto_content: string, deposit_link: string, withdrawal_tuto_content: string, withdrawal_link: string, order: string, city: string, street: string, id?: string) {
+  constructor(name: string, image: string, hash: string, cashdeskid: string, cashierpass: string, deposit_tuto_content: string, deposit_link: string, withdrawal_tuto_content: string, withdrawal_link: string, order: string, city: string, street: string, max_deposit?: string, minimun_deposit?: string, minimun_with?: string, max_win?: string, id?: string) {
     this.name = name;
     this.image = image;
     this.id = id;
@@ -29,11 +33,16 @@ class App {
     this.order = order;
     this.city = city;
     this.street = street;
-
+    this.max_deposit = max_deposit;
+    this.minimun_deposit = minimun_deposit;
+    this.minimun_with = minimun_with;
+    this.max_win = max_win;
   }
 
   static fromJson(json: AppJson): App {
-    return new App(json.name, json.image, json.hash, json.cashdeskid, json.cashierpass, json.deposit_tuto_content, json.deposit_link, json.withdrawal_tuto_content, json.withdrawal_link, json.order, json.city, json.street, json.id);
+    return new App(
+      json.name, json.image, json.hash, json.cashdeskid, json.cashierpass, json.deposit_tuto_content, json.deposit_link, json.withdrawal_tuto_content, json.withdrawal_link, json.order, json.city, json.street, json.max_deposit, json.minimun_deposit, json.minimun_with, json.max_win, json.id
+    );
   }
 
   toJson(): AppJson {
@@ -48,9 +57,13 @@ class App {
       deposit_link : this.deposit_link,
       withdrawal_tuto_content : this.withdrawal_tuto_content,
       withdrawal_link : this.withdrawal_link,
-      order : "",
+      order : this.order,
       city : this.city,
-      street : this.street
+      street : this.street,
+      max_deposit: this.max_deposit,
+      minimun_deposit: this.minimun_deposit,
+      minimun_with: this.minimun_with,
+      max_win: this.max_win
     };
   }
 }

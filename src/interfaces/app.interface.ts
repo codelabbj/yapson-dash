@@ -12,6 +12,10 @@ export interface AppJson {
   order: string;
   city: string;
   street: string;
+  max_deposit?: string;
+  minimun_deposit?: string;
+  minimun_with?: string;
+  max_win?: string;
 }
 
 export interface AppFormData {
@@ -28,6 +32,10 @@ export interface AppFormData {
   city: string;
   street: string;
   id? : string;
+  max_deposit?: string;
+  minimun_deposit?: string;
+  minimun_with?: string;
+  max_win?: string;
 }
 
 export interface AppFormErrors {
@@ -43,4 +51,8 @@ export interface AppFormErrors {
   order: string | null;
   city: string | null;
   street: string | null;
+  max_deposit?: string | null;
+  minimun_deposit?: string | null;
+  minimun_with?: string | null;
+  max_win?: string | null;
 }
