@@ -43,7 +43,7 @@ const networksList = [
 ];
 
 const API_CHOICES = [
-  // ["bpay", "BPAY"],
+  ["bpay", "BPAY"],
   // ["bizao", "Bizao"],
   // ["barkapay", "BarkaPay"],
     ["pal", "Pal API"]
