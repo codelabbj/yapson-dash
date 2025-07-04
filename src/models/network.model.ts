@@ -14,6 +14,7 @@ class Network {
   deposit_api?: string;
   withdrawal_api?: string;
   otp_required: boolean; // New field
+  enable: boolean; // New field
 
   constructor(
     name: string,
@@ -24,6 +25,7 @@ class Network {
     countryCode: string,
     indication: string,
     otp_required: boolean, // New field
+    enable: boolean, // New field
     id?: string,
     deposit_api?: string,
     withdrawal_api?: string,
@@ -41,6 +43,7 @@ class Network {
     this.deposit_api = deposit_api;
     this.withdrawal_api = withdrawal_api;
     this.otp_required = otp_required; // New field
+    this.enable = enable; // New field
   }
 
   static fromJson(json: NetworkJson): Network {
@@ -53,6 +56,7 @@ class Network {
       json.country_code,
       json.indication,
       json.otp_required ?? false, // New field
+      json.enable ?? false, // New field
       json.id,
       json.deposit_api,
       json.withdrawal_api,
@@ -74,6 +78,7 @@ class Network {
       deposit_api: this.deposit_api,
       withdrawal_api: this.withdrawal_api,
       otp_required: this.otp_required, // New field
+      enable: this.enable, // New field
     };
   }
 }

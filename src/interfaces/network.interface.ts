@@ -13,6 +13,7 @@ export interface NetworkJson {
   deposit_api?: string;
   withdrawal_api?: string;
   otp_required: boolean; // New field
+  enable: boolean; // New field
 }
 
 export interface NetworkFormData {
@@ -26,6 +27,7 @@ export interface NetworkFormData {
   deposit_api: string;
   withdrawal_api: string;
   otp_required: boolean; // New field
+  enable: boolean; // New field
   [key: string]: string | File | boolean | undefined;
 }
 
@@ -39,5 +41,6 @@ export interface NetworkFormErrors {
   deposit_api: string | null;
   withdrawal_api: string | null;
   otp_required: boolean; // New field
+  enable: boolean; // New field
   [key: string]: string | null | boolean | undefined;
 }

@@ -256,6 +256,17 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               </p>
             )}
           </div>
+          <div className="mb-4 flex items-center">
+            <label htmlFor="enable" className="mr-2 font-medium text-black dark:text-white">Activer le réseau</label>
+            <input
+              id="enable"
+              name="enable"
+              type="checkbox"
+              checked={!!formData.enable}
+              onChange={e => setFormData({ ...formData, enable: e.target.checked })}
+              className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
+            />
+          </div>
           <div className="mb-5">
             {processing ? (
               <ProcessingLoader />
