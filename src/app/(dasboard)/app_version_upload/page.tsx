@@ -123,7 +123,7 @@ export default function AppUploadPage() {
             type="file"
             accept=".apk"
             onChange={handleFileChange}
-            className="block w-full border border-gray-300 rounded px-3 py-2"
+            className="block w-full border bg-white dark:bg-form-input text-black dark:text-white border-gray-300 dark:border-form-strokedark rounded px-3 py-2"
           />
         </div>
         <div>
@@ -133,7 +133,7 @@ export default function AppUploadPage() {
             value={version}
             onChange={handleVersionChange}
             placeholder="ex: 12"
-            className="block w-full border border-gray-300 rounded px-3 py-2"
+            className="block w-full border bg-white dark:bg-form-input text-black dark:text-white border-gray-300 dark:border-form-strokedark rounded px-3 py-2"
           />
         </div>
         <div>
@@ -143,7 +143,7 @@ export default function AppUploadPage() {
             value={minimalVersion}
             onChange={handleMinimalVersionChange}
             placeholder="ex: 12"
-            className="block w-full border border-gray-300 rounded px-3 py-2"
+            className="block w-full border bg-white dark:bg-form-input text-black dark:text-white border-gray-300 dark:border-form-strokedark rounded px-3 py-2"
           />
         </div>
         {/* {error && <div className="text-red-500">{error}</div>} */}
