@@ -63,6 +63,11 @@ const menuGroups = [
         label: "Applications",
         route: "/apps",
       },
+      {
+        icon: <ChartArea />,
+        label: "Télécharger l'application et les versions",
+        route: "/app_version_upload",
+      },
       // {
       //   icon: <PersonStanding />,
       //   label: "Faq",
