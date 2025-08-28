@@ -46,7 +46,9 @@ const API_CHOICES = [
   ["bpay", "BPAY"],
   // ["bizao", "Bizao"],
   // ["barkapay", "BarkaPay"],
-    ["pal", "Pal API"]
+  ["pal", "Pal API"],
+  ["wave", "Wave"],
+  ["connect", "Connect Pro"]
 ];
 
 const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
@@ -63,6 +65,16 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
   } = useNetworkForm(id, network);
   
   const [isOpen, setIsOpen] = useState(false);
+
+  // Handle initialization: if network is "wave" and withdrawal API is "connect", clear withdrawal API
+  useEffect(() => {
+    if (formData.name === "wave" && formData.withdrawal_api === "connect") {
+      setFormData({
+        ...formData,
+        withdrawal_api: ""
+      });
+    }
+  }, [formData.name, formData.withdrawal_api, setFormData]);
 
   return (
     <Modal
@@ -117,7 +129,17 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               })}
               icon={<ChevronDown />}
               value={formData.name}
-              onChange={onInputDataSelectChange}
+              onChange={(e) => {
+                const newNetworkValue = e.target.value;
+                const newFormData = { ...formData, name: newNetworkValue };
+                
+                // If switching to "wave" and withdrawal API is "connect", clear the withdrawal API
+                if (newNetworkValue === "wave" && formData.withdrawal_api === "connect") {
+                  newFormData.withdrawal_api = "";
+                }
+                
+                setFormData(newFormData);
+              }}
             />
             {formErrors.name && (
               <p className="erreur ml-1.5 text-[14px] font-medium text-red">
@@ -216,12 +238,20 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               id="withdrawal_api"
               name="withdrawal_api"
               label="API de Retrait"
-              items={API_CHOICES.map((e) => {
-                return {
-                  name: e[1],
-                  value: e[0],
-                };
-              })}
+              items={API_CHOICES
+                .filter((e) => {
+                  // If network is "wave", exclude "connect" from withdrawal options
+                  if (formData.name === "wave" && e[0] === "connect") {
+                    return false;
+                  }
+                  return true;
+                })
+                .map((e) => {
+                  return {
+                    name: e[1],
+                    value: e[0],
+                  };
+                })}
               icon={<ChevronDown />}
               value={formData.withdrawal_api}
               onChange={onInputDataSelectChange}

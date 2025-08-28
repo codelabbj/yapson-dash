@@ -106,7 +106,7 @@ const NetworksPage: FC<NetworksPageProps> = () => {
 
                   {/* Network Pays */}
                   <div className="flex-1 overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    {COUNTRIES.filter((e) => e.value == network.countryCode.toUpperCase())[0]?.title}
+                    {network.countryCode ? COUNTRIES.filter((e) => e.value === network.countryCode.toUpperCase())[0]?.title : "N/A"}
                   </div>
 
                   {/* Actions */}
