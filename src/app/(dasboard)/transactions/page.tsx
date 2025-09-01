@@ -38,6 +38,7 @@ import Modal from "@/components/widget/Form/Modal";
 import createTransactionStore from "@/store/useTransaction.store";
 import api from "@/utils/api.util";
 import useInterfaceStore from "@/store/useInterface.store";
+import CreateTransactionDialog from "@/components/widget/Forms/CreateTransactionDialog";
 
 interface TransactionsPageProps {}
 
@@ -128,15 +129,25 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
           fetchServices();
         }}
       >
-        <AppButton
-          name="Ajouter"
-          width="w-[150px]"
-          onClick={() => {
-            resetFormErrors();
-            resetFormData();
-            toggleModal("transaction-form");
-          }}
-        />
+        <div className="flex gap-2">
+          <AppButton
+            name="Ajouter"
+            width="w-[150px]"
+            onClick={() => {
+              resetFormErrors();
+              resetFormData();
+              toggleModal("transaction-form");
+            }}
+          />
+          <AppButton
+            name="Créer Transaction"
+            width="w-[150px]"
+            color="bg-green-600 hover:bg-green-700"
+            onClick={() => {
+              toggleModal("create-transaction-dialog");
+            }}
+          />
+        </div>
       </Breadcrumb>
 
       <TransactionFilterForm<Transaction>
@@ -151,6 +162,13 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
       />
 
       <TransactionForm id="transaction-form" transaction={undefined} />
+      
+      <CreateTransactionDialog 
+        id="create-transaction-dialog" 
+        onSuccess={() => {
+          fetchTransactions(searchValue, filter, page);
+        }}
+      />
 
       {bizaotrans && (
         <Modal id={"transaction-details"} onClose={() => {}}>
