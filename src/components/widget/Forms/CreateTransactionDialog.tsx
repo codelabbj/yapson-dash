@@ -4,10 +4,12 @@ import AppInput from "../Form/Input";
 import AppButton from "../Form/Button";
 import AppSelect from "../Form/Select";
 import ProcessingLoader from "@/components/common/Loader/ProcessingLoader";
-import { ArrowRightLeft, Smartphone, Phone, Globe } from "lucide-react";
+import { ArrowRightLeft, Smartphone, Phone, Globe, AlertCircle } from "lucide-react";
+import { AxiosError } from "axios";
 
 import api from "@/utils/api.util";
 import useInterfaceStore from "@/store/useInterface.store";
+import { extractAxiosError, toggleModal } from "@/utils/functions.util";
 
 interface CreateTransactionDialogProps {
   id: string;
@@ -87,7 +89,9 @@ const CreateTransactionDialog: FC<CreateTransactionDialogProps> = ({
         setApps(appsResponse.filter(app => app.is_active));
       } catch (error) {
         console.error("Error fetching data:", error);
-        setActionResultMessage("Erreur lors du chargement des données");
+        const errorMessage = extractAxiosError(error as AxiosError);
+        setActionResultMessage(`Erreur lors du chargement des données: ${errorMessage}`);
+        toggleModal("action-result-message");
       } finally {
         setLoadingData(false);
       }
@@ -188,18 +192,19 @@ const CreateTransactionDialog: FC<CreateTransactionDialogProps> = ({
       setActionResultMessage(
         `Transaction ${formData.typeTrans === "deposit" ? "de dépôt" : "de retrait"} créée avec succès`
       );
+      toggleModal("action-result-message");
       
       resetForm();
       if (onSuccess) onSuccess();
       if (onClose) onClose();
       
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating transaction:", error);
+      const errorMessage = extractAxiosError(error as AxiosError);
       setActionResultMessage(
-        `Erreur lors de la création de la transaction: ${
-          error.response?.data?.message || error.message || "Erreur inconnue"
-        }`
+        `Erreur lors de la création de la transaction: ${errorMessage}`
       );
+      toggleModal("action-result-message");
     } finally {
       setProcessing(false);
     }
