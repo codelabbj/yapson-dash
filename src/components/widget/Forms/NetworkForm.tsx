@@ -191,6 +191,40 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
             />
           </div>
 
+          <div className="mb-4">
+            <AppInput
+              label="Message de dépôt"
+              id="deposit_message"
+              name="deposit_message"
+              type="text"
+              placeholder=""
+              value={formData.deposit_message}
+              onChange={onInputDataChange}
+            />
+            {formErrors.deposit_message && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.deposit_message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <AppInput
+              label="Message de retrait"
+              id="withdrawal_message"
+              name="withdrawal_message"
+              type="text"
+              placeholder=""
+              value={formData.withdrawal_message}
+              onChange={onInputDataChange}
+            />
+            {formErrors.withdrawal_message && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.withdrawal_message}
+              </p>
+            )}
+          </div>
+
          
 
           <div className="mb-4">

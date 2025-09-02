@@ -33,6 +33,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     message_init: initialData?.messageInit,
     deposit_api: initialData?.deposit_api ?? "pal",
     withdrawal_api: initialData?.withdrawal_api ?? "pal",
+    deposit_message: initialData?.deposit_message ?? "",
+    withdrawal_message: initialData?.withdrawal_message ?? "",
     otp_required: initialData?.otp_required ?? false,
     enable: initialData?.enable ?? false,
   });
@@ -46,6 +48,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     image: null,
     deposit_api: null,
     withdrawal_api: null,
+    deposit_message: null,
+    withdrawal_message: null,
     otp_required: false,
     enable: false,
   });
@@ -63,6 +67,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       message_init: initialData?.messageInit,
       deposit_api: initialData?.deposit_api ?? "pal",
       withdrawal_api: initialData?.withdrawal_api ?? "pal",
+      deposit_message: initialData?.deposit_message ?? "",
+      withdrawal_message: initialData?.withdrawal_message ?? "",
       otp_required: initialData?.otp_required ?? false,
       enable: initialData?.enable ?? false,
     });
@@ -78,6 +84,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       image: null,
       deposit_api: null,
       withdrawal_api: null,
+      deposit_message: null,
+      withdrawal_message: null,
       otp_required: false,
       enable: false,
     });
@@ -117,6 +125,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       image: null,
       deposit_api: null,
       withdrawal_api: null,
+      deposit_message: null,
+      withdrawal_message: null,
       otp_required: false,
       enable: false,
     };
@@ -186,6 +196,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           formData.deposit_api,
           formData.withdrawal_api,
           formData.message_init,
+          formData.deposit_message,
+          formData.withdrawal_message,
         );
 
         // If network has an ID, it's an update
@@ -206,6 +218,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
                 message_init: formData.message_init,
                 deposit_api: formData.deposit_api,
                 withdrawal_api: formData.withdrawal_api,
+                deposit_message: formData.deposit_message,
+                withdrawal_message: formData.withdrawal_message,
                 enable: formData.enable,
               };
               

@@ -13,6 +13,8 @@ class Network {
   createdAt: Date;
   deposit_api?: string;
   withdrawal_api?: string;
+  deposit_message?: string;
+  withdrawal_message?: string;
   otp_required: boolean; // New field
   enable: boolean; // New field
 
@@ -30,6 +32,8 @@ class Network {
     deposit_api?: string,
     withdrawal_api?: string,
     messageInit?: string,
+    deposit_message?: string,
+    withdrawal_message?: string,
   ) {
     this.name = name;
     this.id = id;
@@ -42,6 +46,8 @@ class Network {
     this.messageInit = messageInit;
     this.deposit_api = deposit_api;
     this.withdrawal_api = withdrawal_api;
+    this.deposit_message = deposit_message;
+    this.withdrawal_message = withdrawal_message;
     this.otp_required = otp_required; // New field
     this.enable = enable; // New field
   }
@@ -61,6 +67,8 @@ class Network {
       json.deposit_api,
       json.withdrawal_api,
       json.messageInit,
+      json.deposit_message,
+      json.withdrawal_message,
     );
   }
 
@@ -77,6 +85,8 @@ class Network {
       messageInit: this.messageInit,
       deposit_api: this.deposit_api,
       withdrawal_api: this.withdrawal_api,
+      deposit_message: this.deposit_message,
+      withdrawal_message: this.withdrawal_message,
       otp_required: this.otp_required, // New field
       enable: this.enable, // New field
     };
