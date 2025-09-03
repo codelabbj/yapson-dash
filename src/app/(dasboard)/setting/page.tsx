@@ -81,6 +81,9 @@ const Settings = () => {
       "", // dowload_apk_link
       "", // pal_secret_key
       "", // pal_public_key
+      "", // wave_default_link
+      "", // connect_pro_password
+      "", // connect_pro_email
     ),
   );
 
@@ -133,6 +136,9 @@ const Settings = () => {
         dowload_apk_link: settings[0]?.dowload_apk_link ?? "", // New field
         pal_secret_key: settings[0]?.pal_secret_key ?? "",
         pal_public_key: settings[0]?.pal_public_key ?? "",
+        wave_default_link: settings[0]?.wave_default_link ?? "",
+        connect_pro_password: settings[0]?.connect_pro_password ?? "",
+        connect_pro_email: settings[0]?.connect_pro_email ?? "",
       });
     }
   }, [settings, setFormData, loading]);
@@ -766,6 +772,60 @@ const Settings = () => {
                       {formErrors.pal_public_key && (
                         <p className="erreur ml-1.5 text-[14px] font-medium text-red">
                           {formErrors.pal_public_key}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Wave Default Link"
+                        id="wave_default_link"
+                        name="wave_default_link"
+                        type="url"
+                        disabled={!editMode}
+                        placeholder="Wave Default Link"
+                        value={formData.wave_default_link}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.wave_default_link && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.wave_default_link}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Connect Pro Password"
+                        id="connect_pro_password"
+                        name="connect_pro_password"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="Connect Pro Password"
+                        value={formData.connect_pro_password}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.connect_pro_password && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.connect_pro_password}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Connect Pro Email"
+                        id="connect_pro_email"
+                        name="connect_pro_email"
+                        type="email"
+                        disabled={!editMode}
+                        placeholder="Connect Pro Email"
+                        value={formData.connect_pro_email}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.connect_pro_email && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.connect_pro_email}
                         </p>
                       )}
                     </div>

@@ -40,6 +40,9 @@ export interface SettingJson {
   dowload_apk_link: string | null; // New field
   pal_secret_key: string | null;
   pal_public_key: string | null;
+  wave_default_link: string | null;
+  connect_pro_password: string | null;
+  connect_pro_email: string | null;
 }
 
 export interface SettingFormData {
@@ -78,6 +81,9 @@ export interface SettingFormData {
   dowload_apk_link: string | null; // New field
   pal_secret_key: string | null;
   pal_public_key: string | null;
+  wave_default_link: string | null;
+  connect_pro_password: string | null;
+  connect_pro_email: string | null;
 }
 
 export interface SettingFormErrors {
@@ -115,4 +121,7 @@ export interface SettingFormErrors {
   dowload_apk_link: string | null; // New field
   pal_secret_key: string | null;
   pal_public_key: string | null;
+  wave_default_link: string | null;
+  connect_pro_password: string | null;
+  connect_pro_email: string | null;
 }

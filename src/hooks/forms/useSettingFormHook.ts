@@ -54,6 +54,9 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     dowload_apk_link: initialData?.dowload_apk_link ?? "",
     pal_secret_key: initialData?.pal_secret_key ?? "",
     pal_public_key: initialData?.pal_public_key ?? "",
+    wave_default_link: initialData?.wave_default_link ?? "",
+    connect_pro_password: initialData?.connect_pro_password ?? "",
+    connect_pro_email: initialData?.connect_pro_email ?? "",
   });
 
   const [formErrors, setFormErrors] = useState<SettingFormErrors>({
@@ -91,6 +94,9 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     dowload_apk_link: null,
     pal_secret_key: null,
     pal_public_key: null,
+    wave_default_link: null,
+    connect_pro_password: null,
+    connect_pro_email: null,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -132,6 +138,9 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       dowload_apk_link: initialData?.dowload_apk_link ?? "",
       pal_secret_key: initialData?.pal_secret_key ?? "",
       pal_public_key: initialData?.pal_public_key ?? "",
+      wave_default_link: initialData?.wave_default_link ?? "",
+      connect_pro_password: initialData?.connect_pro_password ?? "",
+      connect_pro_email: initialData?.connect_pro_email ?? "",
     });
   };
 
@@ -171,6 +180,9 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       dowload_apk_link: null,
       pal_secret_key: null,
       pal_public_key: null,
+      wave_default_link: null,
+      connect_pro_password: null,
+      connect_pro_email: null,
     });
   };
 
@@ -225,6 +237,9 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       dowload_apk_link: null,
       pal_secret_key: null,
       pal_public_key: null,
+      wave_default_link: null,
+      connect_pro_password: null,
+      connect_pro_email: null,
     };
 
     setFormErrors(errors);
@@ -274,7 +289,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
           formData.last_version,
           formData.dowload_apk_link,
           formData.pal_secret_key,
-          formData.pal_public_key
+          formData.pal_public_key,
+          formData.wave_default_link,
+          formData.connect_pro_password,
+          formData.connect_pro_email
         );
 
         if (setting?.id) {

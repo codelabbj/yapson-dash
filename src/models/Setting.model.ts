@@ -36,6 +36,9 @@ class Setting {
   dowload_apk_link: string | null;
   pal_secret_key: string | null;
   pal_public_key: string | null;
+  wave_default_link: string | null;
+  connect_pro_password: string | null;
+  connect_pro_email: string | null;
 
   constructor(
     minimumDeposit: string | null,
@@ -73,6 +76,9 @@ class Setting {
     dowload_apk_link: string | null,
     pal_secret_key: string | null,
     pal_public_key: string | null,
+    wave_default_link: string | null,
+    connect_pro_password: string | null,
+    connect_pro_email: string | null,
   ) {
     this.minimumDeposit = minimumDeposit;
     this.minimumWithdrawal = minimumWithdrawal;
@@ -109,6 +115,9 @@ class Setting {
     this.dowload_apk_link = dowload_apk_link;
     this.pal_secret_key = pal_secret_key;
     this.pal_public_key = pal_public_key;
+    this.wave_default_link = wave_default_link;
+    this.connect_pro_password = connect_pro_password;
+    this.connect_pro_email = connect_pro_email;
   }
 
   static fromJson(json: SettingJson): Setting {
@@ -148,6 +157,9 @@ class Setting {
       json.dowload_apk_link,
       json.pal_secret_key,
       json.pal_public_key,
+      json.wave_default_link,
+      json.connect_pro_password,
+      json.connect_pro_email,
     );
   }
 
@@ -188,6 +200,9 @@ class Setting {
       dowload_apk_link: this.dowload_apk_link,
       pal_secret_key: this.pal_secret_key,
       pal_public_key: this.pal_public_key,
+      wave_default_link: this.wave_default_link,
+      connect_pro_password: this.connect_pro_password,
+      connect_pro_email: this.connect_pro_email,
     };
   }
 }
