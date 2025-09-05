@@ -41,7 +41,7 @@ export interface SettingJson {
   pal_secret_key: string | null;
   pal_public_key: string | null;
   wave_default_link: string | null;
-  connect_pro_password: string | null;
+  connect_pro_password?: string | null;
   connect_pro_email: string | null;
 }
 

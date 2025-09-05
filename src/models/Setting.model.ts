@@ -158,13 +158,13 @@ class Setting {
       json.pal_secret_key,
       json.pal_public_key,
       json.wave_default_link,
-      json.connect_pro_password,
+      json.connect_pro_password ?? null,
       json.connect_pro_email,
     );
   }
 
   toJson(): SettingJson {
-    return {
+    const json: SettingJson = {
       minimum_deposit: this.minimumDeposit,
       minimum_withdrawal: this.minimumWithdrawal,
       bonus_percent: this.bonusPercent,
@@ -201,9 +201,11 @@ class Setting {
       pal_secret_key: this.pal_secret_key,
       pal_public_key: this.pal_public_key,
       wave_default_link: this.wave_default_link,
-      connect_pro_password: this.connect_pro_password,
+      connect_pro_password: this.connect_pro_password && this.connect_pro_password.trim() !== "" ? this.connect_pro_password : undefined,
       connect_pro_email: this.connect_pro_email,
     };
+
+    return json;
   }
 }
 
