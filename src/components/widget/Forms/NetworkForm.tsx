@@ -48,7 +48,8 @@ const API_CHOICES = [
   // ["barkapay", "BarkaPay"],
   ["pal", "Pal API"],
   ["wave", "Wave"],
-  ["connect", "Connect Pro"]
+  ["connect", "Connect Pro"],
+  ["dgs_pay", "DGS Pay"]
 ];
 
 const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
