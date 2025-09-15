@@ -16,6 +16,7 @@ export interface NetworkJson {
   withdrawal_message?: string;
   otp_required: boolean; // New field
   enable: boolean; // New field
+  payment_by_link?: boolean; // New field for Connect Pro deposit API
 }
 
 export interface NetworkFormData {
@@ -32,6 +33,7 @@ export interface NetworkFormData {
   withdrawal_message?: string;
   otp_required: boolean; // New field
   enable: boolean; // New field
+  payment_by_link: boolean; // New field for Connect Pro deposit API
   [key: string]: string | File | boolean | undefined;
 }
 
@@ -48,5 +50,6 @@ export interface NetworkFormErrors {
   withdrawal_message: string | null;
   otp_required: boolean; // New field
   enable: boolean; // New field
+  payment_by_link: boolean; // New field for Connect Pro deposit API
   [key: string]: string | null | boolean | undefined;
 }

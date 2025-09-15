@@ -267,6 +267,33 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
             )}
           </div>
 
+          {/* Payment by Link Field - Only show when Connect Pro is selected for deposit API */}
+          {formData.deposit_api === "connect" && (
+            <div className="mb-4">
+              <label htmlFor="payment_by_link" className="block text-sm font-medium text-black dark:text-white">
+                Payment par momo
+              </label>
+              <input
+                id="payment_by_link"
+                name="payment_by_link"
+                type="checkbox"
+                checked={formData.payment_by_link}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    payment_by_link: e.target.checked,
+                  })
+                }
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              {formErrors.payment_by_link && (
+                <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                  {formErrors.payment_by_link}
+                </p>
+              )}
+            </div>
+          )}
+
           {/* New Withdrawal API Field */}
           <div className="mb-4">
             <AppSelect

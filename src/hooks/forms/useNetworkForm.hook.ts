@@ -37,6 +37,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     withdrawal_message: initialData?.withdrawal_message ?? "",
     otp_required: initialData?.otp_required ?? false,
     enable: initialData?.enable ?? false,
+    payment_by_link: initialData?.payment_by_link ?? false,
   });
 
   const [formErrors, setFormErrors] = useState<NetworkFormErrors>({
@@ -52,6 +53,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     withdrawal_message: null,
     otp_required: false,
     enable: false,
+    payment_by_link: false,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -71,6 +73,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       withdrawal_message: initialData?.withdrawal_message ?? "",
       otp_required: initialData?.otp_required ?? false,
       enable: initialData?.enable ?? false,
+      payment_by_link: initialData?.payment_by_link ?? false,
     });
   };
 
@@ -88,6 +91,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       withdrawal_message: null,
       otp_required: false,
       enable: false,
+      payment_by_link: false,
     });
   };
 
@@ -129,6 +133,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       withdrawal_message: null,
       otp_required: false,
       enable: false,
+      payment_by_link: false,
     };
 
     if (!formData.name.trim()) {
@@ -198,6 +203,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           formData.message_init,
           formData.deposit_message,
           formData.withdrawal_message,
+          formData.payment_by_link,
         );
 
         // If network has an ID, it's an update
@@ -221,6 +227,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
                 deposit_message: formData.deposit_message,
                 withdrawal_message: formData.withdrawal_message,
                 enable: formData.enable,
+                payment_by_link: formData.payment_by_link,
               };
               
               // Make PATCH request

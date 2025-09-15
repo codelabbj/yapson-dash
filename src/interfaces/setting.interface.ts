@@ -41,6 +41,10 @@ export interface SettingJson {
   pal_secret_key: string | null;
   pal_public_key: string | null;
   wave_default_link: string | null;
+  orange_default_link: string | null; // New field
+  mtn_default_link: string | null; // New field
+  dgs_secret_key: string | null; // New field
+  dgs_public_key: string | null; // New field
   connect_pro_password?: string | null;
   connect_pro_email: string | null;
 }
@@ -82,6 +86,10 @@ export interface SettingFormData {
   pal_secret_key: string | null;
   pal_public_key: string | null;
   wave_default_link: string | null;
+  orange_default_link: string | null; // New field
+  mtn_default_link: string | null; // New field
+  dgs_secret_key: string | null; // New field
+  dgs_public_key: string | null; // New field
   connect_pro_password: string | null;
   connect_pro_email: string | null;
 }
@@ -122,6 +130,10 @@ export interface SettingFormErrors {
   pal_secret_key: string | null;
   pal_public_key: string | null;
   wave_default_link: string | null;
+  orange_default_link: string | null; // New field
+  mtn_default_link: string | null; // New field
+  dgs_secret_key: string | null; // New field
+  dgs_public_key: string | null; // New field
   connect_pro_password: string | null;
   connect_pro_email: string | null;
 }

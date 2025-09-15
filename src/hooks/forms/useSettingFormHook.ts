@@ -55,6 +55,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     pal_secret_key: initialData?.pal_secret_key ?? "",
     pal_public_key: initialData?.pal_public_key ?? "",
     wave_default_link: initialData?.wave_default_link ?? "",
+    orange_default_link: initialData?.orange_default_link ?? "", // New field
+    mtn_default_link: initialData?.mtn_default_link ?? "", // New field
+    dgs_secret_key: initialData?.dgs_secret_key ?? "", // New field
+    dgs_public_key: initialData?.dgs_public_key ?? "", // New field
     connect_pro_password: initialData?.connect_pro_password ?? "",
     connect_pro_email: initialData?.connect_pro_email ?? "",
   });
@@ -95,6 +99,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     pal_secret_key: null,
     pal_public_key: null,
     wave_default_link: null,
+    orange_default_link: null, // New field
+    mtn_default_link: null, // New field
+    dgs_secret_key: null, // New field
+    dgs_public_key: null, // New field
     connect_pro_password: null,
     connect_pro_email: null,
   });
@@ -139,6 +147,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       pal_secret_key: initialData?.pal_secret_key ?? "",
       pal_public_key: initialData?.pal_public_key ?? "",
       wave_default_link: initialData?.wave_default_link ?? "",
+      orange_default_link: initialData?.orange_default_link ?? "", // New field
+      mtn_default_link: initialData?.mtn_default_link ?? "", // New field
+      dgs_secret_key: initialData?.dgs_secret_key ?? "", // New field
+      dgs_public_key: initialData?.dgs_public_key ?? "", // New field
       connect_pro_password: initialData?.connect_pro_password ?? "",
       connect_pro_email: initialData?.connect_pro_email ?? "",
     });
@@ -181,6 +193,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       pal_secret_key: null,
       pal_public_key: null,
       wave_default_link: null,
+      orange_default_link: null, // New field
+      mtn_default_link: null, // New field
+      dgs_secret_key: null, // New field
+      dgs_public_key: null, // New field
       connect_pro_password: null,
       connect_pro_email: null,
     });
@@ -238,6 +254,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       pal_secret_key: null,
       pal_public_key: null,
       wave_default_link: null,
+      orange_default_link: null, // New field
+      mtn_default_link: null, // New field
+      dgs_secret_key: null, // New field
+      dgs_public_key: null, // New field
       connect_pro_password: null,
       connect_pro_email: null,
     };
@@ -291,6 +311,10 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
           formData.pal_secret_key,
           formData.pal_public_key,
           formData.wave_default_link,
+          formData.orange_default_link, // New field
+          formData.mtn_default_link, // New field
+          formData.dgs_secret_key, // New field
+          formData.dgs_public_key, // New field
           formData.connect_pro_password,
           formData.connect_pro_email
         );

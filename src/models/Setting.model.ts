@@ -37,6 +37,10 @@ class Setting {
   pal_secret_key: string | null;
   pal_public_key: string | null;
   wave_default_link: string | null;
+  orange_default_link: string | null; // New field
+  mtn_default_link: string | null; // New field
+  dgs_secret_key: string | null; // New field
+  dgs_public_key: string | null; // New field
   connect_pro_password: string | null;
   connect_pro_email: string | null;
 
@@ -77,6 +81,10 @@ class Setting {
     pal_secret_key: string | null,
     pal_public_key: string | null,
     wave_default_link: string | null,
+    orange_default_link: string | null, // New field
+    mtn_default_link: string | null, // New field
+    dgs_secret_key: string | null, // New field
+    dgs_public_key: string | null, // New field
     connect_pro_password: string | null,
     connect_pro_email: string | null,
   ) {
@@ -116,6 +124,10 @@ class Setting {
     this.pal_secret_key = pal_secret_key;
     this.pal_public_key = pal_public_key;
     this.wave_default_link = wave_default_link;
+    this.orange_default_link = orange_default_link; // New field
+    this.mtn_default_link = mtn_default_link; // New field
+    this.dgs_secret_key = dgs_secret_key; // New field
+    this.dgs_public_key = dgs_public_key; // New field
     this.connect_pro_password = connect_pro_password;
     this.connect_pro_email = connect_pro_email;
   }
@@ -158,6 +170,10 @@ class Setting {
       json.pal_secret_key,
       json.pal_public_key,
       json.wave_default_link,
+      json.orange_default_link ?? null, // New field
+      json.mtn_default_link ?? null, // New field
+      json.dgs_secret_key ?? null, // New field
+      json.dgs_public_key ?? null, // New field
       json.connect_pro_password ?? null,
       json.connect_pro_email,
     );
@@ -201,6 +217,10 @@ class Setting {
       pal_secret_key: this.pal_secret_key,
       pal_public_key: this.pal_public_key,
       wave_default_link: this.wave_default_link,
+      orange_default_link: this.orange_default_link, // New field
+      mtn_default_link: this.mtn_default_link, // New field
+      dgs_secret_key: this.dgs_secret_key, // New field
+      dgs_public_key: this.dgs_public_key, // New field
       connect_pro_password: this.connect_pro_password && this.connect_pro_password.trim() !== "" ? this.connect_pro_password : undefined,
       connect_pro_email: this.connect_pro_email,
     };

@@ -82,6 +82,10 @@ const Settings = () => {
       "", // pal_secret_key
       "", // pal_public_key
       "", // wave_default_link
+      "", // orange_default_link
+      "", // mtn_default_link
+      "", // dgs_secret_key
+      "", // dgs_public_key
       "", // connect_pro_password
       "", // connect_pro_email
     ),
@@ -137,6 +141,10 @@ const Settings = () => {
         pal_secret_key: settings[0]?.pal_secret_key ?? "",
         pal_public_key: settings[0]?.pal_public_key ?? "",
         wave_default_link: settings[0]?.wave_default_link ?? "",
+        orange_default_link: settings[0]?.orange_default_link ?? "", // New field
+        mtn_default_link: settings[0]?.mtn_default_link ?? "", // New field
+        dgs_secret_key: settings[0]?.dgs_secret_key ?? "", // New field
+        dgs_public_key: settings[0]?.dgs_public_key ?? "", // New field
         connect_pro_password: settings[0]?.connect_pro_password ?? "",
         connect_pro_email: settings[0]?.connect_pro_email ?? "",
       });
@@ -790,6 +798,78 @@ const Settings = () => {
                       {formErrors.wave_default_link && (
                         <p className="erreur ml-1.5 text-[14px] font-medium text-red">
                           {formErrors.wave_default_link}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Orange Default Link"
+                        id="orange_default_link"
+                        name="orange_default_link"
+                        type="url"
+                        disabled={!editMode}
+                        placeholder="Orange Default Link"
+                        value={formData.orange_default_link}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.orange_default_link && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.orange_default_link}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="MTN Default Link"
+                        id="mtn_default_link"
+                        name="mtn_default_link"
+                        type="url"
+                        disabled={!editMode}
+                        placeholder="MTN Default Link"
+                        value={formData.mtn_default_link}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.mtn_default_link && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.mtn_default_link}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="DGS Secret Key"
+                        id="dgs_secret_key"
+                        name="dgs_secret_key"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="DGS Secret Key"
+                        value={formData.dgs_secret_key}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.dgs_secret_key && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.dgs_secret_key}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="DGS Public Key"
+                        id="dgs_public_key"
+                        name="dgs_public_key"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="DGS Public Key"
+                        value={formData.dgs_public_key}
+                        onChange={onInputDataChange}
+                      />
+                      {formErrors.dgs_public_key && (
+                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                          {formErrors.dgs_public_key}
                         </p>
                       )}
                     </div>
