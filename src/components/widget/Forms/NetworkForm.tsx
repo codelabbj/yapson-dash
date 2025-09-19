@@ -359,6 +359,30 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
             />
           </div>
+
+          <div className="mb-4 flex items-center">
+            <label htmlFor="active_for_deposit" className="mr-2 font-medium text-black dark:text-white">Actif pour dépôt</label>
+            <input
+              id="active_for_deposit"
+              name="active_for_deposit"
+              type="checkbox"
+              checked={!!formData.active_for_deposit}
+              onChange={e => setFormData({ ...formData, active_for_deposit: e.target.checked })}
+              className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
+            />
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <label htmlFor="active_for_withdrawal" className="mr-2 font-medium text-black dark:text-white">Actif pour retrait</label>
+            <input
+              id="active_for_withdrawal"
+              name="active_for_withdrawal"
+              type="checkbox"
+              checked={!!formData.active_for_withdrawal}
+              onChange={e => setFormData({ ...formData, active_for_withdrawal: e.target.checked })}
+              className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
+            />
+          </div>
           <div className="mb-5">
             {processing ? (
               <ProcessingLoader />

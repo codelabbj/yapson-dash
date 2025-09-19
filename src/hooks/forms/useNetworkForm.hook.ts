@@ -38,6 +38,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     otp_required: initialData?.otp_required ?? false,
     enable: initialData?.enable ?? false,
     payment_by_link: initialData?.payment_by_link ?? false,
+    active_for_deposit: initialData?.active_for_deposit ?? false,
+    active_for_withdrawal: initialData?.active_for_withdrawal ?? false,
   });
 
   const [formErrors, setFormErrors] = useState<NetworkFormErrors>({
@@ -54,6 +56,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     otp_required: false,
     enable: false,
     payment_by_link: false,
+    active_for_deposit: false,
+    active_for_withdrawal: false,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -74,6 +78,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       otp_required: initialData?.otp_required ?? false,
       enable: initialData?.enable ?? false,
       payment_by_link: initialData?.payment_by_link ?? false,
+      active_for_deposit: initialData?.active_for_deposit ?? false,
+      active_for_withdrawal: initialData?.active_for_withdrawal ?? false,
     });
   };
 
@@ -92,6 +98,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       otp_required: false,
       enable: false,
       payment_by_link: false,
+      active_for_deposit: false,
+      active_for_withdrawal: false,
     });
   };
 
@@ -134,6 +142,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       otp_required: false,
       enable: false,
       payment_by_link: false,
+      active_for_deposit: false,
+      active_for_withdrawal: false,
     };
 
     if (!formData.name.trim()) {
@@ -204,6 +214,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           formData.deposit_message,
           formData.withdrawal_message,
           formData.payment_by_link,
+          formData.active_for_deposit,
+          formData.active_for_withdrawal,
         );
 
         // If network has an ID, it's an update
@@ -228,6 +240,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
                 withdrawal_message: formData.withdrawal_message,
                 enable: formData.enable,
                 payment_by_link: formData.payment_by_link,
+                active_for_deposit: formData.active_for_deposit,
+                active_for_withdrawal: formData.active_for_withdrawal,
               };
               
               // Make PATCH request

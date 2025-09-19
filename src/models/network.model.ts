@@ -18,6 +18,8 @@ class Network {
   otp_required: boolean; // New field
   enable: boolean; // New field
   payment_by_link: boolean; // New field for Connect Pro deposit API
+  active_for_deposit: boolean;
+  active_for_withdrawal: boolean;
 
   constructor(
     name: string,
@@ -36,6 +38,8 @@ class Network {
     deposit_message?: string,
     withdrawal_message?: string,
     payment_by_link?: boolean, // New field for Connect Pro deposit API
+    active_for_deposit?: boolean,
+    active_for_withdrawal?: boolean,
   ) {
     this.name = name;
     this.id = id;
@@ -53,6 +57,8 @@ class Network {
     this.otp_required = otp_required; // New field
     this.enable = enable; // New field
     this.payment_by_link = payment_by_link ?? false; // New field for Connect Pro deposit API
+    this.active_for_deposit = active_for_deposit ?? false;
+    this.active_for_withdrawal = active_for_withdrawal ?? false;
   }
 
   static fromJson(json: NetworkJson): Network {
@@ -73,6 +79,8 @@ class Network {
       json.deposit_message,
       json.withdrawal_message,
       json.payment_by_link ?? false, // New field for Connect Pro deposit API
+      json.active_for_deposit ?? false,
+      json.active_for_withdrawal ?? false,
     );
   }
 
@@ -94,6 +102,8 @@ class Network {
       otp_required: this.otp_required, // New field
       enable: this.enable, // New field
       payment_by_link: this.payment_by_link, // New field for Connect Pro deposit API
+      active_for_deposit: this.active_for_deposit,
+      active_for_withdrawal: this.active_for_withdrawal,
     };
   }
 }
