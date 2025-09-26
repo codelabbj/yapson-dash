@@ -68,6 +68,8 @@ const createTransactionStore =
       userEmail: "",
       app: "",
       service: "",
+      start_date: "",
+      end_date: "",
     },
 
     

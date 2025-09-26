@@ -44,6 +44,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
     service:
       transactionsServices.find((service) => service.id === filter.service)
         ?.name ?? "",
+    start_date: filter.start_date ?? "",
+    end_date: filter.end_date ?? "",
   });
 
   const [formErrors, setFormErrors] = useState<TransactionFiterFormErrors>({
@@ -72,6 +74,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
       userEmail: "",
       app: "",
       service: "",
+      start_date: "",
+      end_date: "",
     });
 
     toggleModal(modalId);
@@ -169,6 +173,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
           transactionsServices.find(
             (service) => service.name === formData.service,
           )?.id ?? "",
+        start_date: formData.start_date ?? "",
+        end_date: formData.end_date ?? "",
       });
 
       toggleModal(modalId);

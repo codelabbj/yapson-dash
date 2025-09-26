@@ -325,6 +325,48 @@ const TransactionFilterForm = <T extends DefaultSerializable = Transaction>({
             )}
           </div>
 
+          {/* Date Range */}
+          <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+              <AppInput
+                label="Date de début"
+                id="start_date"
+                name="start_date"
+                type="date"
+                placeholder=""
+                value={formData.start_date}
+                onChange={(e) => {
+                  onInputDataChange(e);
+                  setFormDataActual({...formDataActual, start_date: e.target.value});
+                }}
+              />
+              {formErrors.start_date && (
+                <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                  {formErrors.start_date}
+                </p>
+              )}
+            </div>
+            <div>
+              <AppInput
+                label="Date de fin"
+                id="end_date"
+                name="end_date"
+                type="date"
+                placeholder=""
+                value={formData.end_date}
+                onChange={(e) => {
+                  onInputDataChange(e);
+                  setFormDataActual({...formDataActual, end_date: e.target.value});
+                }}
+              />
+              {formErrors.end_date && (
+                <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                  {formErrors.end_date}
+                </p>
+              )}
+            </div>
+          </div>
+
           {/* Filter Button */}
           <div className="mb-5">
             <AppButton name={`Filtrer`} onClick={() => onSubmit(formDataActual)} />

@@ -53,6 +53,8 @@ class TransactionApi {
       if (filter.userEmail) params.append('user__email', filter.userEmail);
       if (filter.app) params.append('app', filter.app);
       if (filter.service) params.append('service', filter.service);
+      if (filter.start_date) params.append('start_date', filter.start_date);
+      if (filter.end_date) params.append('end_date', filter.end_date);
     }
 
     // Add pagination
