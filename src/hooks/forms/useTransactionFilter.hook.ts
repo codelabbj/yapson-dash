@@ -59,6 +59,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
     userEmail: null,
     app: null,
     service: null,
+    start_date: null,
+    end_date: null,
   });
 
   const resetFormData = async () => {
@@ -95,6 +97,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
       userEmail: null,
       app: null,
       service: null,
+      start_date: null,
+      end_date: null,
     });
   };
 
@@ -137,6 +141,8 @@ const useTransactionFilterForm = <T extends DefaultSerializable = Transaction>(
       userEmail: null,
       app: null,
       service: null,
+      start_date: null,
+      end_date: null,
     };
 
     setFormErrors(errors);

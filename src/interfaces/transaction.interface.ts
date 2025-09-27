@@ -53,6 +53,8 @@ export interface TransactionFiterFormErrors {
   userEmail: string | null;
   app: string | null;
   service: string | null;
+  start_date: string | null;
+  end_date: string | null;
 }
 
 export interface TransactionJson {
