@@ -373,13 +373,13 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
           </div>
 
           <div className="mb-4 flex items-center">
-            <label htmlFor="active_for_withdrawal" className="mr-2 font-medium text-black dark:text-white">Actif pour retrait</label>
+            <label htmlFor="active_for_with" className="mr-2 font-medium text-black dark:text-white">Actif pour retrait</label>
             <input
-              id="active_for_withdrawal"
-              name="active_for_withdrawal"
+              id="active_for_with"
+              name="active_for_with"
               type="checkbox"
-              checked={!!formData.active_for_withdrawal}
-              onChange={e => setFormData({ ...formData, active_for_withdrawal: e.target.checked })}
+              checked={!!formData.active_for_with}
+              onChange={e => setFormData({ ...formData, active_for_with: e.target.checked })}
               className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
             />
           </div>

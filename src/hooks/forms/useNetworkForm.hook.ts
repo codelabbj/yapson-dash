@@ -39,7 +39,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     enable: initialData?.enable ?? false,
     payment_by_link: initialData?.payment_by_link ?? false,
     active_for_deposit: initialData?.active_for_deposit ?? false,
-    active_for_withdrawal: initialData?.active_for_withdrawal ?? false,
+    active_for_with: initialData?.active_for_with ?? false,
   });
 
   const [formErrors, setFormErrors] = useState<NetworkFormErrors>({
@@ -57,7 +57,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     enable: false,
     payment_by_link: false,
     active_for_deposit: false,
-    active_for_withdrawal: false,
+    active_for_with: false,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -79,7 +79,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       enable: initialData?.enable ?? false,
       payment_by_link: initialData?.payment_by_link ?? false,
       active_for_deposit: initialData?.active_for_deposit ?? false,
-      active_for_withdrawal: initialData?.active_for_withdrawal ?? false,
+      active_for_with: initialData?.active_for_with ?? false,
     });
   };
 
@@ -99,7 +99,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       enable: false,
       payment_by_link: false,
       active_for_deposit: false,
-      active_for_withdrawal: false,
+      active_for_with: false,
     });
   };
 
@@ -143,7 +143,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       enable: false,
       payment_by_link: false,
       active_for_deposit: false,
-      active_for_withdrawal: false,
+      active_for_with: false,
     };
 
     if (!formData.name.trim()) {
@@ -215,7 +215,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           formData.withdrawal_message,
           formData.payment_by_link,
           formData.active_for_deposit,
-          formData.active_for_withdrawal,
+          formData.active_for_with,
         );
 
         // If network has an ID, it's an update
@@ -241,7 +241,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
                 enable: formData.enable,
                 payment_by_link: formData.payment_by_link,
                 active_for_deposit: formData.active_for_deposit,
-                active_for_withdrawal: formData.active_for_withdrawal,
+                active_for_with: formData.active_for_with,
               };
               
               // Make PATCH request

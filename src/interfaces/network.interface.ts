@@ -18,7 +18,7 @@ export interface NetworkJson {
   enable: boolean; // New field
   payment_by_link?: boolean; // New field for Connect Pro deposit API
   active_for_deposit?: boolean;
-  active_for_withdrawal?: boolean;
+  active_for_with?: boolean;
 }
 
 export interface NetworkFormData {
@@ -37,7 +37,7 @@ export interface NetworkFormData {
   enable: boolean; // New field
   payment_by_link: boolean; // New field for Connect Pro deposit API
   active_for_deposit: boolean;
-  active_for_withdrawal: boolean;
+  active_for_with: boolean;
   [key: string]: string | File | boolean | undefined;
 }
 
@@ -56,6 +56,6 @@ export interface NetworkFormErrors {
   enable: boolean; // New field
   payment_by_link: boolean; // New field for Connect Pro deposit API
   active_for_deposit: boolean;
-  active_for_withdrawal: boolean;
+  active_for_with: boolean;
   [key: string]: string | null | boolean | undefined;
 }
