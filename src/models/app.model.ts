@@ -18,8 +18,9 @@ class App {
   minimun_deposit?: string;
   minimun_with?: string;
   max_win?: string;
+  enable?: boolean;
 
-  constructor(name: string, image: string, hash: string, cashdeskid: string, cashierpass: string, deposit_tuto_content: string, deposit_link: string, withdrawal_tuto_content: string, withdrawal_link: string, order: string, city: string, street: string, max_deposit?: string, minimun_deposit?: string, minimun_with?: string, max_win?: string, id?: string) {
+  constructor(name: string, image: string, hash: string, cashdeskid: string, cashierpass: string, deposit_tuto_content: string, deposit_link: string, withdrawal_tuto_content: string, withdrawal_link: string, order: string, city: string, street: string, max_deposit?: string, minimun_deposit?: string, minimun_with?: string, max_win?: string, enable?: boolean, id?: string) {
     this.name = name;
     this.image = image;
     this.id = id;
@@ -37,11 +38,12 @@ class App {
     this.minimun_deposit = minimun_deposit;
     this.minimun_with = minimun_with;
     this.max_win = max_win;
+    this.enable = enable;
   }
 
   static fromJson(json: AppJson): App {
     return new App(
-      json.name, json.image, json.hash, json.cashdeskid, json.cashierpass, json.deposit_tuto_content, json.deposit_link, json.withdrawal_tuto_content, json.withdrawal_link, json.order, json.city, json.street, json.max_deposit, json.minimun_deposit, json.minimun_with, json.max_win, json.id
+      json.name, json.image, json.hash, json.cashdeskid, json.cashierpass, json.deposit_tuto_content, json.deposit_link, json.withdrawal_tuto_content, json.withdrawal_link, json.order, json.city, json.street, json.max_deposit, json.minimun_deposit, json.minimun_with, json.max_win, json.enable, json.id
     );
   }
 
@@ -63,7 +65,8 @@ class App {
       max_deposit: this.max_deposit,
       minimun_deposit: this.minimun_deposit,
       minimun_with: this.minimun_with,
-      max_win: this.max_win
+      max_win: this.max_win,
+      enable: this.enable
     };
   }
 }

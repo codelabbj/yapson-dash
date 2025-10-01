@@ -18,6 +18,7 @@ import App from "@/models/app.model";
 import useAppForm from "@/hooks/forms/useAppForm.hook";
 import Editor from "react-simple-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import AppCheckbox from "../Form/Checkbox";
 
 interface AppFormProps {
   id: string;
@@ -294,6 +295,25 @@ const AppForm: FC<AppFormProps> = ({ id, app }) => {
             {formErrors.image && (
               <p className="erreur ml-1.5 text-[14px] font-medium text-red">
                 {formErrors.image}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <AppCheckbox
+              label="Activer"
+              id="enable"
+              name="enable"
+              value={formData.enable ?? false}
+              onChange={(value) => {
+                setFormData({
+                  ...formData,
+                  enable: value,
+                });
+              }}
+            />
+            {formErrors.enable && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.enable}
               </p>
             )}
           </div>
