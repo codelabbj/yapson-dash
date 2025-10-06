@@ -214,16 +214,16 @@ const useAppForm = (modalId: string, initialData?: App) => {
       errors.image = "L'image doit être de type (JPEG, PNG, GIF).";
     }
 
-    if (!(formData.minimun_deposit ?? '').trim()) {
+    if (!(formData.minimun_deposit ?? '').toString().trim()) {
       errors.minimun_deposit = "Le dépôt minimum est requis";
     }
-    if (!(formData.max_deposit ?? '').trim()) {
+    if (!(formData.max_deposit ?? '').toString().trim()) {
       errors.max_deposit = "Le dépôt maximum est requis";
     }
-    if (!(formData.minimun_with ?? '').trim()) {
+    if (!(formData.minimun_with ?? '').toString().trim()) {
       errors.minimun_with = "Le retrait minimum est requis";
     }
-    if (!(formData.max_win ?? '').trim()) {
+    if (!(formData.max_win ?? '').toString().trim()) {
       errors.max_win = "Le gain maximum est requis";
     }
 
