@@ -317,6 +317,44 @@ const AppForm: FC<AppFormProps> = ({ id, app }) => {
               </p>
             )}
           </div>
+          <div className="mb-4">
+            <AppCheckbox
+              label="Actif pour dépôt"
+              id="active_for_deposit"
+              name="active_for_deposit"
+              value={formData.active_for_deposit ?? false}
+              onChange={(value) => {
+                setFormData({
+                  ...formData,
+                  active_for_deposit: value,
+                });
+              }}
+            />
+            {formErrors.active_for_deposit && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.active_for_deposit}
+              </p>
+            )}
+          </div>
+          <div className="mb-4">
+            <AppCheckbox
+              label="Actif pour retrait"
+              id="active_for_with"
+              name="active_for_with"
+              value={formData.active_for_with ?? false}
+              onChange={(value) => {
+                setFormData({
+                  ...formData,
+                  active_for_with: value,
+                });
+              }}
+            />
+            {formErrors.active_for_with && (
+              <p className="erreur ml-1.5 text-[14px] font-medium text-red">
+                {formErrors.active_for_with}
+              </p>
+            )}
+          </div>
           <div className="mb-5">
             {processing ? (
               <ProcessingLoader />

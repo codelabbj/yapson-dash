@@ -17,6 +17,8 @@ export interface AppJson {
   minimun_with?: string;
   max_win?: string;
   enable?: boolean;
+  active_for_deposit?: boolean;
+  active_for_with?: boolean;
 }
 
 export interface AppFormData {
@@ -38,6 +40,8 @@ export interface AppFormData {
   minimun_with?: string;
   max_win?: string;
   enable?: boolean;
+  active_for_deposit?: boolean;
+  active_for_with?: boolean;
 }
 
 export interface AppFormErrors {
@@ -58,4 +62,6 @@ export interface AppFormErrors {
   minimun_with?: string | null;
   max_win?: string | null;
   enable?: string | null;
+  active_for_deposit?: string | null;
+  active_for_with?: string | null;
 }

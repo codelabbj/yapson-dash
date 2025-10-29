@@ -19,8 +19,10 @@ class App {
   minimun_with?: string;
   max_win?: string;
   enable?: boolean;
+  active_for_deposit?: boolean;
+  active_for_with?: boolean;
 
-  constructor(name: string, image: string, hash: string, cashdeskid: string, cashierpass: string, deposit_tuto_content: string, deposit_link: string, withdrawal_tuto_content: string, withdrawal_link: string, order: string, city: string, street: string, max_deposit?: string, minimun_deposit?: string, minimun_with?: string, max_win?: string, enable?: boolean, id?: string) {
+  constructor(name: string, image: string, hash: string, cashdeskid: string, cashierpass: string, deposit_tuto_content: string, deposit_link: string, withdrawal_tuto_content: string, withdrawal_link: string, order: string, city: string, street: string, max_deposit?: string, minimun_deposit?: string, minimun_with?: string, max_win?: string, enable?: boolean, active_for_deposit?: boolean, active_for_with?: boolean, id?: string) {
     this.name = name;
     this.image = image;
     this.id = id;
@@ -39,11 +41,13 @@ class App {
     this.minimun_with = minimun_with;
     this.max_win = max_win;
     this.enable = enable;
+    this.active_for_deposit = active_for_deposit;
+    this.active_for_with = active_for_with;
   }
 
   static fromJson(json: AppJson): App {
     return new App(
-      json.name, json.image, json.hash, json.cashdeskid, json.cashierpass, json.deposit_tuto_content, json.deposit_link, json.withdrawal_tuto_content, json.withdrawal_link, json.order, json.city, json.street, json.max_deposit, json.minimun_deposit, json.minimun_with, json.max_win, json.enable, json.id
+      json.name, json.image, json.hash, json.cashdeskid, json.cashierpass, json.deposit_tuto_content, json.deposit_link, json.withdrawal_tuto_content, json.withdrawal_link, json.order, json.city, json.street, json.max_deposit, json.minimun_deposit, json.minimun_with, json.max_win, json.enable, json.active_for_deposit, json.active_for_with, json.id
     );
   }
 
@@ -66,7 +70,9 @@ class App {
       minimun_deposit: this.minimun_deposit,
       minimun_with: this.minimun_with,
       max_win: this.max_win,
-      enable: this.enable
+      enable: this.enable,
+      active_for_deposit: this.active_for_deposit,
+      active_for_with: this.active_for_with
     };
   }
 }

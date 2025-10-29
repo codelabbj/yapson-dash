@@ -44,6 +44,8 @@ const useAppForm = (modalId: string, initialData?: App) => {
     minimun_with: initialData?.minimun_with ?? "",
     max_win: initialData?.max_win ?? "",
     enable: initialData?.enable ?? false,
+    active_for_deposit: initialData?.active_for_deposit ?? false,
+    active_for_with: initialData?.active_for_with ?? false,
   });
 
   const [formErrors, setFormErrors] = useState<AppFormErrors>({
@@ -64,6 +66,8 @@ const useAppForm = (modalId: string, initialData?: App) => {
     minimun_with: null,
     max_win: null,
     enable: null,
+    active_for_deposit: null,
+    active_for_with: null,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -88,6 +92,8 @@ const useAppForm = (modalId: string, initialData?: App) => {
         minimun_with: initialData?.minimun_with ?? "",
         max_win: initialData?.max_win ?? "",
         enable: initialData?.enable ?? false,
+        active_for_deposit: initialData?.active_for_deposit ?? false,
+        active_for_with: initialData?.active_for_with ?? false,
     });
   };
 
@@ -110,6 +116,8 @@ const useAppForm = (modalId: string, initialData?: App) => {
         minimun_with: null,
         max_win: null,
         enable: null,
+        active_for_deposit: null,
+        active_for_with: null,
     });
   };
 
@@ -158,6 +166,8 @@ const useAppForm = (modalId: string, initialData?: App) => {
         minimun_with: null,
         max_win: null,
         enable: null,
+        active_for_deposit: null,
+        active_for_with: null,
     };
 
     if (!formData.name.trim()) {
@@ -267,6 +277,8 @@ const useAppForm = (modalId: string, initialData?: App) => {
           formData.minimun_with,
           formData.max_win,
           formData.enable,
+          formData.active_for_deposit,
+          formData.active_for_with,
           formData.id
         );
 
