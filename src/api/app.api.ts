@@ -46,6 +46,10 @@ class AppApi {
   static async update(app: App): Promise<App> {
     try {
       const appJson = app.toJson();
+      // Do not send sensitive fields if user did not input them
+      if (!appJson.cashdeskid) delete (appJson as any).cashdeskid;
+      if (!appJson.hash) delete (appJson as any).hash;
+      if (!appJson.cashierpass) delete (appJson as any).cashierpass;
       const response = await api.patch<AppJson>(
         `${this.route}/${app.id}`,
         appJson,

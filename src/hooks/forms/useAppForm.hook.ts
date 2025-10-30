@@ -28,9 +28,10 @@ const useAppForm = (modalId: string, initialData?: App) => {
   const [formData, setFormData] = useState<AppFormData>({
     name : initialData?.name ?? "",
     image : initialData?.image ?? "",
-    hash : initialData?.hash ?? "",
-    cashdeskid : initialData?.cashdeskid ?? "",
-    cashierpass : initialData?.cashierpass ?? "",
+    // For edits, do not prefill sensitive fields; keep them empty unless user types
+    hash : "",
+    cashdeskid : "",
+    cashierpass : "",
     deposit_tuto_content : initialData?.deposit_tuto_content ?? "",
     deposit_link : initialData?.deposit_link ?? "",
     withdrawal_tuto_content : initialData?.withdrawal_tuto_content ?? "",
@@ -76,9 +77,10 @@ const useAppForm = (modalId: string, initialData?: App) => {
     setFormData({
         name : initialData?.name ?? "",
         image : initialData?.image ?? "",
-        hash : initialData?.hash ?? "",
-        cashdeskid : initialData?.cashdeskid ?? "",
-        cashierpass : initialData?.cashierpass ?? "",
+        // Keep sensitive fields empty on reset so they are only sent if user fills them
+        hash : "",
+        cashdeskid : "",
+        cashierpass : "",
         deposit_tuto_content : initialData?.deposit_tuto_content ?? "",
         deposit_link : initialData?.deposit_link ?? "",
         withdrawal_tuto_content : initialData?.withdrawal_tuto_content ?? "",
@@ -173,10 +175,10 @@ const useAppForm = (modalId: string, initialData?: App) => {
     if (!formData.name.trim()) {
       errors.name = "Veuillez choisir un réseau";
     }
-    if (!formData.cashdeskid.trim()) {
+    if (!formData.id && !formData.cashdeskid.trim()) {
       errors.cashdeskid = "Le Cashdeskid est requis";
     }
-    if (!formData.cashierpass.trim()) {
+    if (!formData.id && !formData.cashierpass.trim()) {
         errors.cashierpass = "Le Cashierpass est requis";
     }
     // if (!formData.deposit_tuto_content.trim()) {
