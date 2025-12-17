@@ -67,15 +67,6 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
   
   const [isOpen, setIsOpen] = useState(false);
 
-  // Handle initialization: if network is "wave" and withdrawal API is "connect", clear withdrawal API
-  useEffect(() => {
-    if (formData.name === "wave" && formData.withdrawal_api === "connect") {
-      setFormData({
-        ...formData,
-        withdrawal_api: ""
-      });
-    }
-  }, [formData.name, formData.withdrawal_api, setFormData]);
 
   return (
     <Modal
@@ -134,10 +125,6 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
                 const newNetworkValue = e.target.value;
                 const newFormData = { ...formData, name: newNetworkValue };
                 
-                // If switching to "wave" and withdrawal API is "connect", clear the withdrawal API
-                if (newNetworkValue === "wave" && formData.withdrawal_api === "connect") {
-                  newFormData.withdrawal_api = "";
-                }
                 
                 setFormData(newFormData);
               }}
@@ -301,13 +288,6 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               name="withdrawal_api"
               label="API de Retrait"
               items={API_CHOICES
-                .filter((e) => {
-                  // If network is "wave", exclude "connect" from withdrawal options
-                  if (formData.name === "wave" && e[0] === "connect") {
-                    return false;
-                  }
-                  return true;
-                })
                 .map((e) => {
                   return {
                     name: e[1],
