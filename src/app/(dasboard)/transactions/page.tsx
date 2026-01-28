@@ -219,265 +219,431 @@ const TransactionsPage: FC<TransactionsPageProps> = () => {
 
       <ActionResult />
 
-      <div className=" max-w-full overflow-x-auto ">
-        <div className="min-w-[500px] rounded-sm text-black dark:text-white">
-          {/* Table Header */}
-          <div className="grid grid-cols-6 bg-bodydark1 text-left  font-bold text-boxdark dark:bg-meta-4 dark:text-white lg:grid-cols-7 xl:grid-cols-9 ">
-            {[
-              "Référence",
-              "Type",
-              "Numéro",
-              "Réseau",
-              "Utilisateur",
-              "Montant",
-              "Date",
-              "Statut",
-              "Observation",
-            ].map((column, index) => (
-              <div
-                key={index}
-                className={`flex-1 px-5 py-4 lg:px-7.5 2xl:px-11 ${index === 2 || index === 5 ? "hidden xl:table-cell" : ""} ${index === 1 ? "hidden lg:table-cell" : ""} `}
-              >
-                {column}
-              </div>
-            ))}
-          </div>
-
-          {/* Table Body */}
+      <div className="mt-4 space-y-4">
+        {/* Mobile Cards */}
+        <div className="space-y-4 md:hidden">
           {loading ? (
             <div className="min-h-fit">
               <ProcessingLoader />
             </div>
           ) : (
-            <div className="w-full  bg-white dark:bg-boxdark">
-              {paginatedTransactions?.results?.map((transaction, index) => (
+            paginatedTransactions?.results?.map((transaction, index) => {
+              const statusLabel =
+                transaction.status === "accept"
+                  ? "Accepté"
+                  : transaction.status === "refuse" ||
+                      transaction.status === "error"
+                    ? "Refusé"
+                    : "En attente";
+              const statusClass =
+                transaction.status === "accept"
+                  ? "bg-green-100 text-green-700"
+                  : transaction.status === "refuse" ||
+                      transaction.status === "error"
+                    ? "bg-red-100 text-red-700"
+                    : "bg-amber-100 text-amber-700";
+
+              return (
                 <div
                   key={index}
-                  className={`  grid w-full grid-cols-6 items-center border-t border-[#EEEEEE] dark:border-strokedark lg:grid-cols-7 xl:grid-cols-9 `}
+                  className="rounded-xl border border-stroke bg-white p-4 shadow-sm dark:border-strokedark dark:bg-boxdark"
                 >
-                  {/* Transaction Reference */}
-                  <div className="flex overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    {transaction.reference}
-                  </div>
-
-                  {/* Transaction Type */}
-                  <div
-                    className="hidden overflow-hidden px-5 py-4 lg:px-7.5 xl:table-cell 2xl:px-11"
-                    title="Un texte pour voir"
-                  >
-                    {transactionType(transaction.typeTrans)}
-                  </div>
-
-                  {/* Transaction Phone */}
-                  <div className=" hidden overflow-hidden px-5 py-4 lg:table-cell lg:px-7.5 2xl:px-11">
-                    {transaction.phoneNumber}
-                  </div>
-
-                  {/* Transaction Mobile Reference */}
-                  <div className="hidden overflow-hidden px-5 py-4 lg:px-7.5 xl:table-cell 2xl:px-11">
-                    {transaction.mobileReference.toUpperCase()}
-                  </div>
-
-                  {/* Transaction BeiId */}
-                  <div className=" overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    <div>
-                      <span> {transaction.user?.lastname ?? "Lastname"} </span>
-                      <span>{transaction.user?.firstname ?? "Firstname"}</span>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-boxdark dark:text-white">
+                        {transaction.reference}
+                      </div>
+                      <div className="mt-1 text-xs text-bodydark2">
+                        {transactionType(transaction.typeTrans)}
+                      </div>
                     </div>
-                    <div>
-                      <span className={" font-bold"}>Bet Id: </span>{" "}
-                      <span>{transaction.userAppId}</span>
-                    </div>
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-medium ${statusClass}`}
+                    >
+                      {statusLabel}
+                    </span>
                   </div>
 
-                  {/* Transaction Name
-                  <div className=" overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    {transaction.user?.lastname ?? "Lastname"}{" "}
-                    {transaction.user?.firstname ?? "Firstname"}
-                  </div> */}
-
-                  {/* Transaction Amount */}
-                  <div className=" overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    {transaction.amount}
-                  </div>
-
-                  {/* Transaction Date */}
-                  <div className=" overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
-                    {transaction.createdAt == null
-                      ? "Inconnu"
-                      : formatReadableDate(transaction.createdAt!)}
-                  </div>
-
-                  {/* Transaction Status */}
-                  <div
-                    title={
-                      transaction.error_message ??
-                      transactionStatus(
-                        transaction.status,
-                        transaction.typeTrans.toLowerCase(),
-                      )
-                    }
-                    className={` relative overflow-hidden px-5 py-4 font-bold lg:px-7.5 2xl:px-11 ${transaction.status == "accept" ? "text-green-600" : transaction.status == "pending" ? "" : transaction.status == "bizao_validation" ? "text-green-500" : ""} `}
-                  >
-                    {/* Status display and refresh button */}
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={async () => {
-                            setSelectedTransaction(transaction);
-                            const new_transac =
-                              await TransactionApi.findBizaoUnique(
-                                transaction.reference!,
-                              );
-                            setBizaoTrans(new_transac);
-                            setSelectedTransaction(null);
-                          }}
-                          className=" flex h-8 w-8 flex-col items-center justify-center rounded-full bg-primary "
-                        >
-                          <RefreshCcwIcon
-                            className={"text-white"}
-                            color={"white"}
-                            size={"1rem"}
+                  <div className="mt-4 grid gap-2 text-sm text-boxdark dark:text-white">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Site</span>
+                      <div className="flex min-w-0 items-center gap-2">
+                        {transaction.app?.image ? (
+                          <img
+                            src={transaction.app.image}
+                            alt={transaction.app?.name ?? "App"}
+                            className="h-5 w-5 flex-shrink-0 rounded-sm object-contain"
                           />
-                        </button>
-                        <span>
-                          {transactionStatus(
+                        ) : null}
+                        <span className="min-w-0 truncate">
+                          {transaction.app?.name ?? "—"}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Utilisateur</span>
+                      <span className="text-right">
+                        {transaction.user?.lastname ?? "Lastname"}{" "}
+                        {transaction.user?.firstname ?? "Firstname"} •{" "}
+                        {transaction.userAppId ?? "—"}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Téléphone</span>
+                      <span>{transaction.phoneNumber}</span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Réseau</span>
+                      <span>{transaction.mobileReference.toUpperCase()}</span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Montant</span>
+                      <span className="font-semibold">{transaction.amount}</span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Date</span>
+                      <span>
+                        {transaction.createdAt == null
+                          ? "Inconnu"
+                          : formatReadableDate(transaction.createdAt!)}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs text-bodydark2">Observation</span>
+                      <span className="text-right">
+                        {transaction.error_message ??
+                          transactionStatus(
                             transaction.status,
                             transaction.typeTrans.toLowerCase(),
                           )}
-                        </span>
-                      </div>
-                      {/* Custom Status Change Modal/Dropdown */}
-                      <div className="mt-2">
-                        {statusLoadingId === transaction.id ? (
-                          <ProcessingLoader />
-                        ) : statusEditId === transaction.id ? (
-                          <div ref={statusDropdownRef} className="relative">
-                            <div className="flex flex-col gap-2">
-                              <div className="flex items-center gap-2">
-                                <select
-                                  id={`status-select-${transaction.id}`}
-                                  name="status"
-                                  value={transaction.status === "accept" || transaction.status === "refuse" || transaction.status === "error" ? (transaction.status === "error" ? "refuse" : transaction.status) : ""}
-                                  onChange={async (e) => {
-                                    let newStatus = e.target.value;
-                                    // If refuse is selected, send 'error' to backend
-                                    if (newStatus === "refuse") newStatus = "error";
-                                    setStatusLoadingId(transaction.id!);
-                                    try {
-                                      // Create a new Transaction object with updated status
-                                      const updatedTransaction = new Transaction(
-                                        transaction.amount,
-                                        transaction.user,
-                                        transaction.reference,
-                                        transaction.typeTrans,
-                                        newStatus,
-                                        transaction.phoneNumber,
-                                        transaction.country,
-                                        transaction.mobileReference,
-                                        transaction.createdAt!,
-                                        transaction.counntryCode,
-                                        transaction.app,
-                                        transaction.userAppId,
-                                        transaction.withdrawalCode,
-                                        transaction.id,
-                                        transaction.error_message,
-                                      );
-                                      const result = await updateTransaction(updatedTransaction);
-                                      if (typeof result === "string") {
-                                        setActionResultMessage(result);
-                                      } else {
-                                        setActionResultMessage("Statut de la transaction mis à jour avec succès.");
-                                        fetchTransactions(searchValue, filter, page);
-                                      }
-                                      toggleModal("action-result-message");
-                                    } catch (err) {
-                                      setActionResultMessage("Erreur lors de la mise à jour du statut.");
-                                      toggleModal("action-result-message");
-                                    } finally {
-                                      setStatusEditId(null);
-                                      setStatusLoadingId(null);
-                                    }
-                                  }}
-                                  className={`w-full rounded-md border border-stroke bg-transparent py-1 pl-2 pr-6 text-[11px] outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input 
-                                    ${transaction.status === 'accept' ? 'text-success font-medium' : 
-                                      transaction.status === 'refuse' || transaction.status === 'error' ? 'text-danger font-medium' : ''}`}
-                                >
-                                  <option value="" disabled>Sélectionner un statut</option>
-                                  {statusOptions.map((option) => (
-                                    <option 
-                                      key={option.value} 
-                                      value={option.value}
-                                      className={`${
-                                        option.value === 'accept' ? 'text-success' : 
-                                        option.value === 'refuse' ? 'text-danger' : ''
-                                      }`}
-                                    >
-                                      {option.name}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                              <div className="mt-1 flex items-center justify-between text-[10px]">
-                                <button
-                                  type="button"
-                                  onClick={() => setStatusEditId(null)}
-                                  className="text-danger hover:text-danger/80"
-                                >
-                                  Annuler
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="flex flex-col gap-2">
-                            <div className="flex items-center gap-2">
-                              <span className={`${
-                                transaction.status === 'accept' ? 'text-success font-medium' : 
-                                transaction.status === 'refuse' || transaction.status === 'error' ? 'text-danger font-medium' : ''
-                              }`}>
-                                {transaction.status === 'accept' ? 'Accepté' : 
-                                 transaction.status === 'refuse' || transaction.status === 'error' ? 'Refusé' : 'En attente'}
-                              </span>
-                            </div>
-                            <button
-                              className="mt-1 flex items-center gap-1 text-[10px] font-medium text-primary hover:text-primary/80"
-                              onClick={() => setStatusEditId(transaction.id!)}
-                              type="button"
-                            >
-                              <span>Modifier le statut</span>
-                              <svg 
-                                className="h-3 w-3" 
-                                fill="none" 
-                                viewBox="0 0 24 24" 
-                                stroke="currentColor"
-                              >
-                                <path 
-                                  strokeLinecap="round" 
-                                  strokeLinejoin="round" 
-                                  strokeWidth={2} 
-                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" 
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        )}
-                      </div>
+                      </span>
                     </div>
                   </div>
-
-                  {/* Transaction Observation */}
-                  <div className="hidden overflow-hidden px-5 py-4 lg:px-7.5 xl:table-cell 2xl:px-11">
-                    {transaction.error_message ??
-                      transactionStatus(
-                        transaction.status,
-                        transaction.typeTrans.toLowerCase(),
-                      )}
-                  </div>
                 </div>
-              ))}
-            </div>
+              );
+            })
           )}
+        </div>
+
+        {/* Desktop Table */}
+        <div className="hidden md:block">
+          <div className="overflow-x-auto rounded-xl border border-stroke bg-white shadow-sm dark:border-strokedark dark:bg-boxdark">
+            <div className="min-w-[1100px] text-black dark:text-white">
+              {/* Table Header */}
+              <div className="grid grid-cols-10 bg-bodydark1 text-left text-sm font-semibold text-boxdark dark:bg-meta-4 dark:text-white">
+                {[
+                  "Référence",
+                  "Type",
+                  "Numéro",
+                  "Réseau",
+                  "Site",
+                  "Utilisateur",
+                  "Montant",
+                  "Date",
+                  "Statut",
+                  "Observation",
+                ].map((column, index) => (
+                  <div key={index} className="px-6 py-4">
+                    {column}
+                  </div>
+                ))}
+              </div>
+
+              {/* Table Body */}
+              {loading ? (
+                <div className="min-h-fit">
+                  <ProcessingLoader />
+                </div>
+              ) : (
+                <div className="w-full">
+                  {paginatedTransactions?.results?.map((transaction, index) => (
+                    <div
+                      key={index}
+                      className="grid w-full grid-cols-10 items-center border-t border-[#EEEEEE] dark:border-strokedark"
+                    >
+                      {/* Transaction Reference */}
+                      <div className="px-6 py-5 text-sm font-medium">
+                        {transaction.reference}
+                      </div>
+
+                      {/* Transaction Type */}
+                      <div className="px-6 py-5 text-sm">
+                        {transactionType(transaction.typeTrans)}
+                      </div>
+
+                      {/* Transaction Phone */}
+                      <div className="px-6 py-5 text-sm">
+                        {transaction.phoneNumber}
+                      </div>
+
+                      {/* Transaction Mobile Reference */}
+                      <div className="px-6 py-5 text-sm">
+                        {transaction.mobileReference.toUpperCase()}
+                      </div>
+
+                      {/* Transaction App (Bet site) */}
+                      <div className="px-6 py-5 text-sm">
+                        <div className="flex min-w-0 items-center gap-2">
+                          {transaction.app?.image ? (
+                            <img
+                              src={transaction.app.image}
+                              alt={transaction.app?.name ?? "App"}
+                              className="h-5 w-5 flex-shrink-0 rounded-sm object-contain"
+                            />
+                          ) : null}
+                          <span className="min-w-0 truncate">
+                            {transaction.app?.name ?? "—"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Transaction User + Bet Id */}
+                      <div className="px-6 py-5 text-sm">
+                        <div>
+                          <span>{transaction.user?.lastname ?? "Lastname"} </span>
+                          <span>{transaction.user?.firstname ?? "Firstname"}</span>
+                        </div>
+                        <div className="text-xs text-bodydark2">
+                          Bet Id: {transaction.userAppId ?? "—"}
+                        </div>
+                      </div>
+
+                      {/* Transaction Amount */}
+                      <div className="px-6 py-5 text-sm font-semibold">
+                        {transaction.amount}
+                      </div>
+
+                      {/* Transaction Date */}
+                      <div className="px-6 py-5 text-sm">
+                        {transaction.createdAt == null
+                          ? "Inconnu"
+                          : formatReadableDate(transaction.createdAt!)}
+                      </div>
+
+                      {/* Transaction Status */}
+                      <div
+                        title={
+                          transaction.error_message ??
+                          transactionStatus(
+                            transaction.status,
+                            transaction.typeTrans.toLowerCase(),
+                          )
+                        }
+                        className={`relative px-6 py-5 text-sm font-bold ${
+                          transaction.status == "accept"
+                            ? "text-green-600"
+                            : transaction.status == "pending"
+                              ? ""
+                              : transaction.status == "bizao_validation"
+                                ? "text-green-500"
+                                : ""
+                        }`}
+                      >
+                        {/* Status display and refresh button */}
+                        <div className="flex flex-col gap-2">
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={async () => {
+                                setSelectedTransaction(transaction);
+                                const new_transac =
+                                  await TransactionApi.findBizaoUnique(
+                                    transaction.reference!,
+                                  );
+                                setBizaoTrans(new_transac);
+                                setSelectedTransaction(null);
+                              }}
+                              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary"
+                            >
+                              <RefreshCcwIcon
+                                className={"text-white"}
+                                color={"white"}
+                                size={"1rem"}
+                              />
+                            </button>
+                            <span>
+                              {transactionStatus(
+                                transaction.status,
+                                transaction.typeTrans.toLowerCase(),
+                              )}
+                            </span>
+                          </div>
+                          {/* Custom Status Change Modal/Dropdown */}
+                          <div className="mt-2">
+                            {statusLoadingId === transaction.id ? (
+                              <ProcessingLoader />
+                            ) : statusEditId === transaction.id ? (
+                              <div ref={statusDropdownRef} className="relative">
+                                <div className="flex flex-col gap-2">
+                                  <div className="flex items-center gap-2">
+                                    <select
+                                      id={`status-select-${transaction.id}`}
+                                      name="status"
+                                      value={
+                                        transaction.status === "accept" ||
+                                        transaction.status === "refuse" ||
+                                        transaction.status === "error"
+                                          ? transaction.status === "error"
+                                            ? "refuse"
+                                            : transaction.status
+                                          : ""
+                                      }
+                                      onChange={async (e) => {
+                                        let newStatus = e.target.value;
+                                        // If refuse is selected, send 'error' to backend
+                                        if (newStatus === "refuse")
+                                          newStatus = "error";
+                                        setStatusLoadingId(transaction.id!);
+                                        try {
+                                          // Create a new Transaction object with updated status
+                                          const updatedTransaction =
+                                            new Transaction(
+                                              transaction.amount,
+                                              transaction.user,
+                                              transaction.reference,
+                                              transaction.typeTrans,
+                                              newStatus,
+                                              transaction.phoneNumber,
+                                              transaction.country,
+                                              transaction.mobileReference,
+                                              transaction.createdAt!,
+                                              transaction.counntryCode,
+                                              transaction.app,
+                                              transaction.userAppId,
+                                              transaction.withdrawalCode,
+                                              transaction.id,
+                                              transaction.error_message,
+                                            );
+                                          const result =
+                                            await updateTransaction(
+                                              updatedTransaction,
+                                            );
+                                          if (typeof result === "string") {
+                                            setActionResultMessage(result);
+                                          } else {
+                                            setActionResultMessage(
+                                              "Statut de la transaction mis à jour avec succès.",
+                                            );
+                                            fetchTransactions(
+                                              searchValue,
+                                              filter,
+                                              page,
+                                            );
+                                          }
+                                          toggleModal("action-result-message");
+                                        } catch (err) {
+                                          setActionResultMessage(
+                                            "Erreur lors de la mise à jour du statut.",
+                                          );
+                                          toggleModal("action-result-message");
+                                        } finally {
+                                          setStatusEditId(null);
+                                          setStatusLoadingId(null);
+                                        }
+                                      }}
+                                      className={`w-full rounded-md border border-stroke bg-transparent py-1 pl-2 pr-6 text-[11px] outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input 
+                                    ${
+                                      transaction.status === "accept"
+                                        ? "text-success font-medium"
+                                        : transaction.status === "refuse" ||
+                                            transaction.status === "error"
+                                          ? "text-danger font-medium"
+                                          : ""
+                                    }`}
+                                    >
+                                      <option value="" disabled>
+                                        Sélectionner un statut
+                                      </option>
+                                      {statusOptions.map((option) => (
+                                        <option
+                                          key={option.value}
+                                          value={option.value}
+                                          className={`${
+                                            option.value === "accept"
+                                              ? "text-success"
+                                              : option.value === "refuse"
+                                                ? "text-danger"
+                                                : ""
+                                          }`}
+                                        >
+                                          {option.name}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                  <div className="mt-1 flex items-center justify-between text-[10px]">
+                                    <button
+                                      type="button"
+                                      onClick={() => setStatusEditId(null)}
+                                      className="text-danger hover:text-danger/80"
+                                    >
+                                      Annuler
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="flex flex-col gap-2">
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className={`${
+                                      transaction.status === "accept"
+                                        ? "text-success font-medium"
+                                        : transaction.status === "refuse" ||
+                                            transaction.status === "error"
+                                          ? "text-danger font-medium"
+                                          : ""
+                                    }`}
+                                  >
+                                    {transaction.status === "accept"
+                                      ? "Accepté"
+                                      : transaction.status === "refuse" ||
+                                          transaction.status === "error"
+                                        ? "Refusé"
+                                        : "En attente"}
+                                  </span>
+                                </div>
+                                <button
+                                  className="mt-1 flex items-center gap-1 text-[10px] font-medium text-primary hover:text-primary/80"
+                                  onClick={() =>
+                                    setStatusEditId(transaction.id!)
+                                  }
+                                  type="button"
+                                >
+                                  <span>Modifier le statut</span>
+                                  <svg
+                                    className="h-3 w-3"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Transaction Observation */}
+                      <div className="px-6 py-5 text-sm">
+                        {transaction.error_message ??
+                          transactionStatus(
+                            transaction.status,
+                            transaction.typeTrans.toLowerCase(),
+                          )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
