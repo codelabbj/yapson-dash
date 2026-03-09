@@ -19,6 +19,10 @@ export interface NetworkJson {
   payment_by_link?: boolean; // New field for Connect Pro deposit API
   active_for_deposit?: boolean;
   active_for_with?: boolean;
+  payment_by_ussd_code?: boolean;
+  ussd_code?: string;
+  reduce_fee?: boolean;
+  fee_payin?: number;
 }
 
 export interface NetworkFormData {
@@ -38,7 +42,11 @@ export interface NetworkFormData {
   payment_by_link: boolean; // New field for Connect Pro deposit API
   active_for_deposit: boolean;
   active_for_with: boolean;
-  [key: string]: string | File | boolean | undefined;
+  payment_by_ussd_code: boolean;
+  ussd_code: string;
+  reduce_fee: boolean;
+  fee_payin: number;
+  [key: string]: string | File | boolean | number | undefined;
 }
 
 export interface NetworkFormErrors {
@@ -57,5 +65,7 @@ export interface NetworkFormErrors {
   payment_by_link: boolean; // New field for Connect Pro deposit API
   active_for_deposit: boolean;
   active_for_with: boolean;
+  payment_by_ussd_code: boolean;
+  reduce_fee: boolean;
   [key: string]: string | null | boolean | undefined;
 }

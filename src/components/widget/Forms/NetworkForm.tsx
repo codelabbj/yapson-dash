@@ -64,7 +64,7 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
     onInputDataSelectChange,
     setFormData,
   } = useNetworkForm(id, network);
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -124,8 +124,8 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               onChange={(e) => {
                 const newNetworkValue = e.target.value;
                 const newFormData = { ...formData, name: newNetworkValue };
-                
-                
+
+
                 setFormData(newFormData);
               }}
             />
@@ -213,7 +213,7 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
             )}
           </div>
 
-         
+
 
           <div className="mb-4">
             <AppInput
@@ -231,8 +231,8 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               </p>
             )}
           </div>
-           {/* New Deposit API Field */}
-           <div className="mb-4">
+          {/* New Deposit API Field */}
+          <div className="mb-4">
             <AppSelect
               id="deposit_api"
               name="deposit_api"
@@ -363,6 +363,63 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
             />
           </div>
+
+          {/* Payment by USSD Code */}
+          <div className="mb-4 flex items-center">
+            <label htmlFor="payment_by_ussd_code" className="mr-2 font-medium text-black dark:text-white">Paiement par code USSD</label>
+            <input
+              id="payment_by_ussd_code"
+              name="payment_by_ussd_code"
+              type="checkbox"
+              checked={!!formData.payment_by_ussd_code}
+              onChange={e => setFormData({ ...formData, payment_by_ussd_code: e.target.checked })}
+              className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
+            />
+          </div>
+
+          {/* USSD fields — shown only when payment_by_ussd_code is true */}
+          {formData.payment_by_ussd_code && (
+            <div className="mb-4 rounded-lg border border-dashed border-stroke p-4 dark:border-strokedark space-y-4">
+              <div>
+                <AppInput
+                  label="Code USSD"
+                  id="ussd_code"
+                  name="ussd_code"
+                  type="text"
+                  placeholder="*XXX*X*{amount}#"
+                  value={formData.ussd_code as string}
+                  onChange={onInputDataChange}
+                />
+              </div>
+              <div>
+                <AppInput
+                  label="Frais de dépôt (fee_payin)"
+                  id="fee_payin"
+                  name="fee_payin"
+                  type="number"
+                  placeholder="0"
+                  value={String(formData.fee_payin ?? 0)}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      fee_payin: parseFloat(e.target.value) || 0,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center">
+                <label htmlFor="reduce_fee" className="mr-2 font-medium text-black dark:text-white">Réduire les frais</label>
+                <input
+                  id="reduce_fee"
+                  name="reduce_fee"
+                  type="checkbox"
+                  checked={!!formData.reduce_fee}
+                  onChange={e => setFormData({ ...formData, reduce_fee: e.target.checked })}
+                  className="form-checkbox h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded"
+                />
+              </div>
+            </div>
+          )}
           <div className="mb-5">
             {processing ? (
               <ProcessingLoader />
@@ -370,7 +427,7 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               <AppButton
                 name={`${network?.id ? "Mettre à jour" : "Ajouter"}`}
                 type="submit"
-                onClick={() => {}}
+                onClick={() => { }}
               />
             )}
           </div>

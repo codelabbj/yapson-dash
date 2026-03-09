@@ -40,6 +40,10 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     payment_by_link: initialData?.payment_by_link ?? false,
     active_for_deposit: initialData?.active_for_deposit ?? false,
     active_for_with: initialData?.active_for_with ?? false,
+    payment_by_ussd_code: initialData?.payment_by_ussd_code ?? false,
+    ussd_code: initialData?.ussd_code ?? "",
+    reduce_fee: initialData?.reduce_fee ?? false,
+    fee_payin: initialData?.fee_payin ?? 0,
   });
 
   const [formErrors, setFormErrors] = useState<NetworkFormErrors>({
@@ -58,6 +62,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     payment_by_link: false,
     active_for_deposit: false,
     active_for_with: false,
+    payment_by_ussd_code: false,
+    reduce_fee: false,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -80,6 +86,10 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       payment_by_link: initialData?.payment_by_link ?? false,
       active_for_deposit: initialData?.active_for_deposit ?? false,
       active_for_with: initialData?.active_for_with ?? false,
+      payment_by_ussd_code: initialData?.payment_by_ussd_code ?? false,
+      ussd_code: initialData?.ussd_code ?? "",
+      reduce_fee: initialData?.reduce_fee ?? false,
+      fee_payin: initialData?.fee_payin ?? 0,
     });
   };
 
@@ -100,6 +110,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       payment_by_link: false,
       active_for_deposit: false,
       active_for_with: false,
+      payment_by_ussd_code: false,
+      reduce_fee: false,
     });
   };
 
@@ -144,6 +156,8 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       payment_by_link: false,
       active_for_deposit: false,
       active_for_with: false,
+      payment_by_ussd_code: false,
+      reduce_fee: false,
     };
 
     if (!formData.name.trim()) {
@@ -216,6 +230,10 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           formData.payment_by_link,
           formData.active_for_deposit,
           formData.active_for_with,
+          formData.payment_by_ussd_code,
+          formData.ussd_code,
+          formData.reduce_fee,
+          formData.fee_payin,
         );
 
         // If network has an ID, it's an update
@@ -224,7 +242,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           if (network.id) {
             try {
               const endpoint = `https://api.yapson.net/yapson/network/${network.id}/`;
-              
+
               // Prepare payload
               const payload = {
                 name: formData.name,
@@ -242,8 +260,14 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
                 payment_by_link: formData.payment_by_link,
                 active_for_deposit: formData.active_for_deposit,
                 active_for_with: formData.active_for_with,
+                payment_by_ussd_code: formData.payment_by_ussd_code,
+                ...(formData.payment_by_ussd_code ? {
+                  ussd_code: formData.ussd_code,
+                  reduce_fee: formData.reduce_fee,
+                  fee_payin: formData.fee_payin,
+                } : {}),
               };
-              
+
               // Make PATCH request
               await api.patch(endpoint, payload);
             } catch (error) {

@@ -20,6 +20,10 @@ class Network {
   payment_by_link: boolean; // New field for Connect Pro deposit API
   active_for_deposit: boolean;
   active_for_with: boolean;
+  payment_by_ussd_code: boolean;
+  ussd_code?: string;
+  reduce_fee: boolean;
+  fee_payin: number;
 
   constructor(
     name: string,
@@ -40,6 +44,10 @@ class Network {
     payment_by_link?: boolean, // New field for Connect Pro deposit API
     active_for_deposit?: boolean,
     active_for_with?: boolean,
+    payment_by_ussd_code?: boolean,
+    ussd_code?: string,
+    reduce_fee?: boolean,
+    fee_payin?: number,
   ) {
     this.name = name;
     this.id = id;
@@ -59,6 +67,10 @@ class Network {
     this.payment_by_link = payment_by_link ?? false; // New field for Connect Pro deposit API
     this.active_for_deposit = active_for_deposit ?? false;
     this.active_for_with = active_for_with ?? false;
+    this.payment_by_ussd_code = payment_by_ussd_code ?? false;
+    this.ussd_code = ussd_code;
+    this.reduce_fee = reduce_fee ?? false;
+    this.fee_payin = fee_payin ?? 0;
   }
 
   static fromJson(json: NetworkJson): Network {
@@ -81,6 +93,10 @@ class Network {
       json.payment_by_link ?? false, // New field for Connect Pro deposit API
       json.active_for_deposit ?? false,
       json.active_for_with ?? false,
+      json.payment_by_ussd_code ?? false,
+      json.ussd_code,
+      json.reduce_fee ?? false,
+      json.fee_payin ?? 0,
     );
   }
 
@@ -104,6 +120,10 @@ class Network {
       payment_by_link: this.payment_by_link, // New field for Connect Pro deposit API
       active_for_deposit: this.active_for_deposit,
       active_for_with: this.active_for_with,
+      payment_by_ussd_code: this.payment_by_ussd_code,
+      ussd_code: this.ussd_code,
+      reduce_fee: this.reduce_fee,
+      fee_payin: this.fee_payin,
     };
   }
 }

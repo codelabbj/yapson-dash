@@ -24,7 +24,7 @@ import useNetworkStore from "@/store/useNetwork.store";
 import NetworkForm from "@/components/widget/Forms/NetworkForm";
 import { COUNTRIES } from "@/components/widget/Form/country/country";
 
-interface NetworksPageProps {}
+interface NetworksPageProps { }
 
 const NetworksPage: FC<NetworksPageProps> = () => {
   const { searchValue } = useSearchStore();
@@ -63,12 +63,11 @@ const NetworksPage: FC<NetworksPageProps> = () => {
         <div className="flex flex-col rounded-sm text-black dark:text-white">
           {/* Table Header */}
           <div className="grid grid-cols-4   bg-bodydark1 text-left font-bold text-boxdark dark:bg-meta-4 dark:text-white ">
-            {["Nom", "Logo", "Pays", ""].map((column, index) => (
+            {["Nom", "Logo", "Pays", /* "Code USSD", */ ""].map((column, index) => (
               <div
                 key={index}
-                className={`flex-1 px-5 py-4 lg:px-7.5 2xl:px-11 ${
-                  index === 1 ? "text-center" : ""
-                }`}
+                className={`flex-1 px-5 py-4 lg:px-7.5 2xl:px-11 ${index === 1 ? "text-center" : ""
+                  }`}
               >
                 {column}
               </div>
@@ -109,6 +108,17 @@ const NetworksPage: FC<NetworksPageProps> = () => {
                     {network.countryCode ? COUNTRIES.filter((e) => e.value === network.countryCode.toUpperCase())[0]?.title : "N/A"}
                   </div>
 
+                  {/* Code USSD */}
+                  {/* <div className="flex-1 overflow-hidden px-5 py-4 lg:px-7.5 2xl:px-11">
+                    {network.payment_by_ussd_code && network.ussd_code ? (
+                      <span className="inline-block rounded border border-stroke px-2 py-0.5 font-mono text-xs dark:border-strokedark">
+                        {network.ussd_code}
+                      </span>
+                    ) : (
+                      <span className="text-bodydark2">&#8212;</span>
+                    )}
+                  </div> */}
+
                   {/* Actions */}
                   <div
                     className={`flex-1 px-5 py-4 text-end lg:px-7.5 2xl:px-11`}
@@ -147,7 +157,7 @@ const NetworksPage: FC<NetworksPageProps> = () => {
         </div>
       </div>
 
-      
+
     </>
   );
 };
