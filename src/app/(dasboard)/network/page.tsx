@@ -157,7 +157,6 @@ const NetworksPage: FC<NetworksPageProps> = () => {
         </div>
       </div>
 
-
     </>
   );
 };
