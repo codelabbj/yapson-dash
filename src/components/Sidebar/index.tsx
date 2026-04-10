@@ -31,6 +31,7 @@ import {
   PersonStanding,
   ActivityIcon,
   AccessibilityIcon,
+  HandCoins,
 } from "lucide-react";
 import AppButton from "../widget/Form/Button";
 import DeletionConfirmation from "../widget/Form/DeletionConfirmation";
@@ -102,6 +103,11 @@ const menuGroups = [
         icon: <User />,
         label: "Utilisateurs",
         route: "/users",
+      },
+      {
+        icon: <HandCoins />,
+        label: "Crédits Utilisateurs",
+        route: "/user-credits",
       },
       {
         icon: <ArrowLeftRight />,

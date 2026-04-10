@@ -10,10 +10,9 @@ class Api {
   private api: AxiosInstance;
 
   constructor() {
-    const baseUrl = "https://api.yapson.net/yapson";
-
+    const baseUrl = "https://api.yapson.net";
     this.api = axios.create({
-      baseURL: `${baseUrl}`,
+      baseURL: baseUrl,
       timeout: 10000,
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +80,8 @@ class Api {
   // Generic GET method
   async get<T>(url: string, config: AxiosRequestConfig = {}): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.api.get<T, AxiosResponse<T>>(url, config);
+      const finalUrl = url.startsWith('/auth') || url.startsWith('/bot') ? url : `/yapson${url}`;
+      const response: AxiosResponse<T> = await this.api.get<T, AxiosResponse<T>>(finalUrl, config);
       return response.data;
     } catch (error) {
       throw error;
@@ -95,7 +95,8 @@ class Api {
     config: AxiosRequestConfig = {},
   ): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.api.post<T, AxiosResponse<T>>(url, data, config);
+      const finalUrl = url.startsWith('/auth') || url.startsWith('/bot') ? url : `/yapson${url}`;
+      const response: AxiosResponse<T> = await this.api.post<T, AxiosResponse<T>>(finalUrl, data, config);
       return response.data;
     } catch (error) {
       throw error;
@@ -109,7 +110,8 @@ class Api {
     config: AxiosRequestConfig = {},
   ): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.api.put<T, AxiosResponse<T>>(url, data, config);
+      const finalUrl = url.startsWith('/auth') || url.startsWith('/bot') ? url : `/yapson${url}`;
+      const response: AxiosResponse<T> = await this.api.put<T, AxiosResponse<T>>(finalUrl, data, config);
       return response.data;
     } catch (error) {
       throw error;
@@ -123,8 +125,9 @@ class Api {
     config: AxiosRequestConfig = {},
   ): Promise<T> {
     try {
+      const finalUrl = url.startsWith('/auth') || url.startsWith('/bot') ? url : `/yapson${url}`;
       const response: AxiosResponse<T> = await this.api.patch<T, AxiosResponse<T>>(
-        url,
+        finalUrl,
         data,
         config,
       );
@@ -137,7 +140,8 @@ class Api {
   // Generic DELETE method
   async delete<T>(url: string, config: AxiosRequestConfig = {}): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.api.delete<T, AxiosResponse<T>>(url, config);
+      const finalUrl = url.startsWith('/auth') || url.startsWith('/bot') ? url : `/yapson${url}`;
+      const response: AxiosResponse<T> = await this.api.delete<T, AxiosResponse<T>>(finalUrl, config);
       return response.data;
     } catch (error) {
       throw error;
