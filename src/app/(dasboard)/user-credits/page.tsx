@@ -7,6 +7,8 @@ import api from "@/utils/api.util";
 import ProcessingLoader from "@/components/common/Loader/ProcessingLoader";
 import { Edit, Trash, Plus } from "lucide-react";
 import useInterfaceStore from "@/store/useInterface.store";
+import { toggleModal } from "@/utils/functions.util";
+import ActionResult from "@/components/widget/Form/ActionResultMessage";
 
 interface Credit {
   id: string;
@@ -163,10 +165,12 @@ const UserCreditsPage: FC = () => {
       }
       setIsModalOpen(false);
       fetchCredits();
-      setActionResultMessage(modalMode === "create" ? "Crédit ajouté avec succès" : "Crédit modifié avec succès", "success");
+      setActionResultMessage(modalMode === "create" ? "Crédit ajouté avec succès" : "Crédit modifié avec succès");
+      toggleModal("action-result-message");
     } catch (error) {
       console.error(error);
-      setActionResultMessage("Erreur lors de l'enregistrement. Vérifiez que l'UUID utilisateur est valide.", "error");
+      setActionResultMessage("Erreur lors de l'enregistrement. Vérifiez que l'UUID utilisateur est valide.");
+      toggleModal("action-result-message");
     } finally {
       setFormLoading(false);
     }
@@ -177,10 +181,12 @@ const UserCreditsPage: FC = () => {
       try {
         await api.delete(`/user-credit/${id}`);
         fetchCredits();
-        setActionResultMessage("Crédit supprimé avec succès", "success");
+        setActionResultMessage("Crédit supprimé avec succès");
+        toggleModal("action-result-message");
       } catch (error) {
         console.error(error);
-        setActionResultMessage("Erreur lors de la suppression", "error");
+        setActionResultMessage("Erreur lors de la suppression");
+        toggleModal("action-result-message");
       }
     }
   };
@@ -188,6 +194,7 @@ const UserCreditsPage: FC = () => {
   return (
     <>
       <Breadcrumb pageName="Crédits Utilisateurs" onClick={fetchCredits} />
+      <ActionResult />
       
       <div className="mb-6 flex justify-end">
         <button
