@@ -16,6 +16,7 @@ interface AppInputProps {
   checked?: boolean;
   className?: string;
   disabled?: boolean;
+  required?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   // onKeyDown?: (e: React.KeyboardEventHandler<HTMLInputElement>) => void;
 }
@@ -32,6 +33,7 @@ const AppInput: FC<AppInputProps> = ({
   autoComplete,
   icon,
   disabled,
+  required,
   onChange,
   // onKeyDown,
 }) => {
@@ -143,6 +145,7 @@ const AppInput: FC<AppInputProps> = ({
             autoComplete={autoComplete}
             placeholder={placeholder}
             disabled={disabled}
+            required={required}
             onChange={onChange}
             className={`w-full rounded-sm border-[1.5px] border-stroke bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
           />

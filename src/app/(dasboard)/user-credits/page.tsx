@@ -12,11 +12,13 @@ import ActionResult from "@/components/widget/Form/ActionResultMessage";
 
 interface Credit {
   id: string;
-  user: string;
-  user_email: string;
-  user_fullname: string;
+  user: string | null;
+  user_email: string | null;
+  user_fullname: string | null;
+  phones: string[];
+  user_app_ids: string[];
   amount: number;
-  note: string;
+  note: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -111,6 +113,8 @@ const UserCreditsPage: FC = () => {
   const [formData, setFormData] = useState({
     id: "",
     user: "",
+    phones: "",
+    user_app_ids: "",
     amount: "" as number | string,
     note: ""
   });
@@ -121,7 +125,9 @@ const UserCreditsPage: FC = () => {
     try {
       setLoading(true);
       const res: any = await api.get("/user-credit");
-      if (res && res.results) {
+      if (res && Array.isArray(res)) {
+        setCredits(res);
+      } else if (res && res.results) {
         setCredits(res.results);
       } else {
         setCredits([]);
@@ -140,9 +146,16 @@ const UserCreditsPage: FC = () => {
   const handleOpenModal = (mode: "create" | "update", item?: Credit) => {
     setModalMode(mode);
     if (mode === "create") {
-      setFormData({ id: "", user: "", amount: "", note: "" });
+      setFormData({ id: "", user: "", phones: "", user_app_ids: "", amount: "", note: "" });
     } else if (item) {
-      setFormData({ id: item.id, user: item.user, amount: item.amount, note: item.note || "" });
+      setFormData({ 
+        id: item.id, 
+        user: item.user || "", 
+        phones: item.phones ? item.phones.join(", ") : "",
+        user_app_ids: item.user_app_ids ? item.user_app_ids.join(", ") : "",
+        amount: item.amount, 
+        note: item.note || "" 
+      });
     }
     setIsModalOpen(true);
   };
@@ -151,17 +164,18 @@ const UserCreditsPage: FC = () => {
     e.preventDefault();
     try {
       setFormLoading(true);
+      const payload = {
+        user: formData.user || null,
+        phones: formData.phones ? formData.phones.split(",").map(p => p.trim()).filter(p => p !== "") : [],
+        user_app_ids: formData.user_app_ids ? formData.user_app_ids.split(",").map(id => id.trim()).filter(id => id !== "") : [],
+        amount: Number(formData.amount),
+        note: formData.note
+      };
+
       if (modalMode === "create") {
-        await api.post("/user-credit", {
-          user: formData.user,
-          amount: Number(formData.amount),
-          note: formData.note
-        });
+        await api.post("/user-credit", payload);
       } else {
-        await api.patch(`/user-credit/${formData.id}`, {
-          amount: Number(formData.amount),
-          note: formData.note
-        });
+        await api.patch(`/user-credit/${formData.id}`, payload);
       }
       setIsModalOpen(false);
       fetchCredits();
@@ -213,7 +227,7 @@ const UserCreditsPage: FC = () => {
               <tr className="bg-gray-2 text-left dark:bg-meta-4">
                 <th className="py-4 px-4 font-medium text-black dark:text-white">Date</th>
                 <th className="py-4 px-4 font-medium text-black dark:text-white">Utilisateur</th>
-                <th className="py-4 px-4 font-medium text-black dark:text-white">Email</th>
+                <th className="py-4 px-4 font-medium text-black dark:text-white">Téléphones / App IDs</th>
                 <th className="py-4 px-4 font-medium text-black dark:text-white text-right">Montant</th>
                 <th className="py-4 px-4 font-medium text-black dark:text-white">Note</th>
                 <th className="py-4 px-4 font-medium text-black dark:text-white text-center">Actions</th>
@@ -239,10 +253,29 @@ const UserCreditsPage: FC = () => {
                       {new Date(item.created_at).toLocaleDateString()}
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark font-medium text-black dark:text-white">
-                      {item.user_fullname}
+                      <div>{item.user_fullname || <span className="text-gray-400 italic">Non spécifié</span>}</div>
+                      <div className="text-xs font-normal text-gray-500">{item.user_email}</div>
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark text-sm">
-                      {item.user_email}
+                      <div className="flex flex-col gap-1">
+                        {item.phones && item.phones.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {item.phones.map((p, i) => (
+                              <span key={i} className="bg-primary/10 text-primary px-1.5 py-0.5 rounded text-[10px]">{p}</span>
+                            ))}
+                          </div>
+                        )}
+                        {item.user_app_ids && item.user_app_ids.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {item.user_app_ids.map((id, i) => (
+                              <span key={i} className="bg-success/10 text-success px-1.5 py-0.5 rounded text-[10px]">{id}</span>
+                            ))}
+                          </div>
+                        )}
+                        {(!item.phones || item.phones.length === 0) && (!item.user_app_ids || item.user_app_ids.length === 0) && (
+                          <span className="text-gray-400 italic">N/A</span>
+                        )}
+                      </div>
                     </td>
                     <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark font-medium text-success text-right">
                       {item.amount.toLocaleString()} XOF
@@ -293,6 +326,28 @@ const UserCreditsPage: FC = () => {
               )}
               <div className="mb-4">
                 <AppInput
+                  id="phones"
+                  name="phones"
+                  type="text"
+                  label="Téléphones"
+                  placeholder="Ex: 0700000000, 0600000000"
+                  value={formData.phones}
+                  onChange={(e) => setFormData({ ...formData, phones: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <AppInput
+                  id="user_app_ids"
+                  name="user_app_ids"
+                  type="text"
+                  label="User App IDs"
+                  placeholder="Ex: 12345678, 87654321"
+                  value={formData.user_app_ids}
+                  onChange={(e) => setFormData({ ...formData, user_app_ids: e.target.value })}
+                />
+              </div>
+              <div className="mb-4">
+                <AppInput
                   id="amount"
                   name="amount"
                   type="number"
@@ -300,6 +355,7 @@ const UserCreditsPage: FC = () => {
                   placeholder="Ex: 5000"
                   value={formData.amount}
                   onChange={(e) => setFormData({ ...formData, amount: e.target.value === "" ? "" : Number(e.target.value) })}
+                  required
                 />
               </div>
               <div className="mb-6">
