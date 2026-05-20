@@ -87,7 +87,7 @@ export const uploadImage = async (file: File): Promise<string> => {
     formData.append("image", file);
 
     const response = await api.post<{ id: number; file: any; image: string }>(
-      "upload/file",
+      "/upload/file",
       formData,
       {
         headers: {
