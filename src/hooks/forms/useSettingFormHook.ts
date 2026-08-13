@@ -61,6 +61,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     dgs_public_key: initialData?.dgs_public_key ?? "", // New field
     connect_pro_password: initialData?.connect_pro_password ?? "",
     connect_pro_email: initialData?.connect_pro_email ?? "",
+    use_whatsapp: initialData?.use_whatsapp ?? false,
+    use_chatbot: initialData?.use_chatbot ?? false,
+    openwa_session_id: initialData?.openwa_session_id ?? "",
+    openwa_token: initialData?.openwa_token ?? "",
+    use_telegram: initialData?.use_telegram ?? false,
+    telegram_bot_username: initialData?.telegram_bot_username ?? "",
+    telegram_bot_token: initialData?.telegram_bot_token ?? "",
+    use_sms: initialData?.use_sms ?? false,
   });
 
   const [formErrors, setFormErrors] = useState<SettingFormErrors>({
@@ -105,6 +113,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     dgs_public_key: null, // New field
     connect_pro_password: null,
     connect_pro_email: null,
+    use_whatsapp: null,
+    use_chatbot: null,
+    openwa_session_id: null,
+    openwa_token: null,
+    use_telegram: null,
+    telegram_bot_username: null,
+    telegram_bot_token: null,
+    use_sms: null,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -153,6 +169,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       dgs_public_key: initialData?.dgs_public_key ?? "", // New field
       connect_pro_password: initialData?.connect_pro_password ?? "",
       connect_pro_email: initialData?.connect_pro_email ?? "",
+      use_whatsapp: initialData?.use_whatsapp ?? false,
+      use_chatbot: initialData?.use_chatbot ?? false,
+      openwa_session_id: initialData?.openwa_session_id ?? "",
+      openwa_token: initialData?.openwa_token ?? "",
+      use_telegram: initialData?.use_telegram ?? false,
+      telegram_bot_username: initialData?.telegram_bot_username ?? "",
+      telegram_bot_token: initialData?.telegram_bot_token ?? "",
+      use_sms: initialData?.use_sms ?? false,
     });
   };
 
@@ -199,6 +223,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       dgs_public_key: null, // New field
       connect_pro_password: null,
       connect_pro_email: null,
+      use_whatsapp: null,
+      use_chatbot: null,
+      openwa_session_id: null,
+      openwa_token: null,
+      use_telegram: null,
+      telegram_bot_username: null,
+      telegram_bot_token: null,
+      use_sms: null,
     });
   };
 
@@ -260,6 +292,14 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       dgs_public_key: null, // New field
       connect_pro_password: null,
       connect_pro_email: null,
+      use_whatsapp: null,
+      use_chatbot: null,
+      openwa_session_id: null,
+      openwa_token: null,
+      use_telegram: null,
+      telegram_bot_username: null,
+      telegram_bot_token: null,
+      use_sms: null,
     };
 
     setFormErrors(errors);
@@ -316,7 +356,15 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
           formData.dgs_secret_key, // New field
           formData.dgs_public_key, // New field
           formData.connect_pro_password,
-          formData.connect_pro_email
+          formData.connect_pro_email,
+          formData.use_whatsapp,
+          formData.use_chatbot,
+          formData.openwa_session_id,
+          formData.openwa_token,
+          formData.use_telegram,
+          formData.telegram_bot_username,
+          formData.telegram_bot_token,
+          formData.use_sms,
         );
 
         if (setting?.id) {

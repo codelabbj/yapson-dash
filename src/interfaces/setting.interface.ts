@@ -47,6 +47,14 @@ export interface SettingJson {
   dgs_public_key: string | null; // New field
   connect_pro_password?: string | null;
   connect_pro_email: string | null;
+  use_whatsapp?: boolean | null;
+  use_chatbot?: boolean | null;
+  openwa_session_id?: string | null;
+  openwa_token?: string | null;
+  use_telegram?: boolean | null;
+  telegram_bot_username?: string | null;
+  telegram_bot_token?: string | null;
+  use_sms?: boolean | null;
 }
 
 export interface SettingFormData {
@@ -92,6 +100,14 @@ export interface SettingFormData {
   dgs_public_key: string | null; // New field
   connect_pro_password: string | null;
   connect_pro_email: string | null;
+  use_whatsapp: boolean | null;
+  use_chatbot: boolean | null;
+  openwa_session_id: string | null;
+  openwa_token: string | null;
+  use_telegram: boolean | null;
+  telegram_bot_username: string | null;
+  telegram_bot_token: string | null;
+  use_sms: boolean | null;
 }
 
 export interface SettingFormErrors {
@@ -136,4 +152,12 @@ export interface SettingFormErrors {
   dgs_public_key: string | null; // New field
   connect_pro_password: string | null;
   connect_pro_email: string | null;
+  use_whatsapp: boolean | null;
+  use_chatbot: boolean | null;
+  openwa_session_id: string | null;
+  openwa_token: string | null;
+  use_telegram: boolean | null;
+  telegram_bot_username: string | null;
+  telegram_bot_token: string | null;
+  use_sms: boolean | null;
 }

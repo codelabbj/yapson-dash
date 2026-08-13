@@ -43,7 +43,8 @@ const useNotificationSenderStore = create<NotificationSenderState>()((set, get) 
         field === 'user_id' ? value : currentNotification.user_id,
         currentNotification.id,
         currentNotification.created_at,
-        currentNotification.updated_at
+        currentNotification.updated_at,
+        field === 'notification' ? value : currentNotification.notification
       );
       return { notification: updatedNotification };
     });
@@ -54,9 +55,17 @@ const useNotificationSenderStore = create<NotificationSenderState>()((set, get) 
   },
 
   sendNotification: async () => {
+    const { notification, isBroadcast } = get();
     set({ sending: true, error: null });
     try {
-      await NotificationApi.send(get().notification);
+      const payload = isBroadcast
+        ? { title: notification.title, content: notification.content }
+        : {
+            title: notification.title,
+            content: notification.content,
+            user_id: notification.user_id,
+          };
+      await NotificationApi.send(payload, notification.notification);
       set({ success: true });
     } catch (error) {
       set({ error: error instanceof Error ? error.message : 'Une erreur est survenue' });

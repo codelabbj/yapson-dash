@@ -43,6 +43,14 @@ class Setting {
   dgs_public_key: string | null; // New field
   connect_pro_password: string | null;
   connect_pro_email: string | null;
+  use_whatsapp: boolean | null;
+  use_chatbot: boolean | null;
+  openwa_session_id: string | null;
+  openwa_token: string | null;
+  use_telegram: boolean | null;
+  telegram_bot_username: string | null;
+  telegram_bot_token: string | null;
+  use_sms: boolean | null;
 
   constructor(
     minimumDeposit: string | null,
@@ -87,6 +95,14 @@ class Setting {
     dgs_public_key: string | null, // New field
     connect_pro_password: string | null,
     connect_pro_email: string | null,
+    use_whatsapp: boolean | null,
+    use_chatbot: boolean | null,
+    openwa_session_id: string | null,
+    openwa_token: string | null,
+    use_telegram: boolean | null,
+    telegram_bot_username: string | null,
+    telegram_bot_token: string | null,
+    use_sms: boolean | null,
   ) {
     this.minimumDeposit = minimumDeposit;
     this.minimumWithdrawal = minimumWithdrawal;
@@ -130,6 +146,14 @@ class Setting {
     this.dgs_public_key = dgs_public_key; // New field
     this.connect_pro_password = connect_pro_password;
     this.connect_pro_email = connect_pro_email;
+    this.use_whatsapp = use_whatsapp;
+    this.use_chatbot = use_chatbot;
+    this.openwa_session_id = openwa_session_id;
+    this.openwa_token = openwa_token;
+    this.use_telegram = use_telegram;
+    this.telegram_bot_username = telegram_bot_username;
+    this.telegram_bot_token = telegram_bot_token;
+    this.use_sms = use_sms;
   }
 
   static fromJson(json: SettingJson): Setting {
@@ -176,6 +200,14 @@ class Setting {
       json.dgs_public_key ?? null, // New field
       json.connect_pro_password ?? null,
       json.connect_pro_email,
+      json.use_whatsapp ?? false,
+      json.use_chatbot ?? false,
+      json.openwa_session_id ?? null,
+      json.openwa_token ?? null,
+      json.use_telegram ?? false,
+      json.telegram_bot_username ?? null,
+      json.telegram_bot_token ?? null,
+      json.use_sms ?? false,
     );
   }
 
@@ -223,7 +255,20 @@ class Setting {
       dgs_public_key: this.dgs_public_key, // New field
       connect_pro_password: this.connect_pro_password && this.connect_pro_password.trim() !== "" ? this.connect_pro_password : undefined,
       connect_pro_email: this.connect_pro_email,
+      use_whatsapp: this.use_whatsapp,
+      use_chatbot: this.use_chatbot,
+      openwa_session_id: this.openwa_session_id,
+      use_telegram: this.use_telegram,
+      telegram_bot_username: this.telegram_bot_username,
+      use_sms: this.use_sms,
     };
+
+    if (this.openwa_token && this.openwa_token.trim() !== "") {
+      json.openwa_token = this.openwa_token;
+    }
+    if (this.telegram_bot_token && this.telegram_bot_token.trim() !== "") {
+      json.telegram_bot_token = this.telegram_bot_token;
+    }
 
     return json;
   }

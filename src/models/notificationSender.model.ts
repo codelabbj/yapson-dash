@@ -3,6 +3,7 @@ export interface NotificationJson {
   title: string;
   content: string;
   user_id: string | null;
+  notification?: "push" | "email" | "whatsapp" | "telegram";
   created_at?: string;
   updated_at?: string;
 }
@@ -12,6 +13,7 @@ class Notification {
   title: string;
   content: string;
   user_id: string | null;
+  notification: "push" | "email" | "whatsapp" | "telegram";
   created_at?: Date;
   updated_at?: Date;
 
@@ -21,7 +23,8 @@ class Notification {
     user_id: string | null = null,
     id?: string,
     created_at?: Date,
-    updated_at?: Date
+    updated_at?: Date,
+    notification: "push" | "email" | "whatsapp" | "telegram" = "push"
   ) {
     this.title = title;
     this.content = content;
@@ -29,6 +32,7 @@ class Notification {
     this.id = id;
     this.created_at = created_at;
     this.updated_at = updated_at;
+    this.notification = notification;
   }
 
   static fromJson(json: NotificationJson): Notification {
@@ -38,7 +42,8 @@ class Notification {
       json.user_id,
       json.id,
       json.created_at ? new Date(json.created_at) : undefined,
-      json.updated_at ? new Date(json.updated_at) : undefined
+      json.updated_at ? new Date(json.updated_at) : undefined,
+      json.notification ?? "push"
     );
   }
 
@@ -48,8 +53,9 @@ class Notification {
       title: this.title,
       content: this.content,
       user_id: this.user_id,
+      notification: this.notification,
       created_at: this.created_at?.toISOString(),
-      updated_at: this.updated_at?.toISOString()
+      updated_at: this.updated_at?.toISOString(),
     };
   }
 }

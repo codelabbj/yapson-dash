@@ -127,6 +127,32 @@ const NotificationSenderPage: FC<NotificationSenderPageProps> = () => {
           </div>
         </div>
 
+        <div className="mb-5.5">
+          <label className="mb-2.5 block font-medium text-black dark:text-white">
+            Type de notification <span className="text-meta-1">*</span>
+          </label>
+          <div className="flex flex-wrap gap-4">
+            {(["push", "email", "whatsapp", "telegram"] as const).map((channel) => (
+              <label key={channel} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="notificationType"
+                  value={channel}
+                  checked={notification.notification === channel}
+                  onChange={() => setNotification("notification", channel)}
+                />
+                {channel === "push"
+                  ? "Push"
+                  : channel === "email"
+                    ? "Email"
+                    : channel === "whatsapp"
+                      ? "WhatsApp"
+                      : "Telegram"}
+              </label>
+            ))}
+          </div>
+        </div>
+
         {/* Content field */}
         <div className="mb-5.5">
           <label className="mb-2.5 block font-medium text-black dark:text-white">

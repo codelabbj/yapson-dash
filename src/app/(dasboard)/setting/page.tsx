@@ -88,6 +88,14 @@ const Settings = () => {
       "", // dgs_public_key
       "", // connect_pro_password
       "", // connect_pro_email
+      false, // use_whatsapp
+      false, // use_chatbot
+      "", // openwa_session_id
+      "", // openwa_token
+      false, // use_telegram
+      "", // telegram_bot_username
+      "", // telegram_bot_token
+      false, // use_sms
     ),
   );
 
@@ -147,6 +155,14 @@ const Settings = () => {
         dgs_public_key: settings[0]?.dgs_public_key ?? "", // New field
         connect_pro_password: settings[0]?.connect_pro_password ?? "",
         connect_pro_email: settings[0]?.connect_pro_email ?? "",
+        use_whatsapp: settings[0]?.use_whatsapp ?? false,
+        use_chatbot: settings[0]?.use_chatbot ?? false,
+        openwa_session_id: settings[0]?.openwa_session_id ?? "",
+        openwa_token: settings[0]?.openwa_token ?? "",
+        use_telegram: settings[0]?.use_telegram ?? false,
+        telegram_bot_username: settings[0]?.telegram_bot_username ?? "",
+        telegram_bot_token: settings[0]?.telegram_bot_token ?? "",
+        use_sms: settings[0]?.use_sms ?? false,
       });
     }
   }, [settings, setFormData, loading]);
@@ -692,6 +708,157 @@ const Settings = () => {
                       )}
                     </div>
 
+                    <div className="mb-2 text-xl font-bold">
+                      Canaux de notification (alertes)
+                    </div>
+                    <p className="mb-4 text-sm text-gray-500">
+                      WhatsApp via My Customer (
+                      <code>https://api.mycustomer.manoschange.com/api/v1</code>
+                      ). Une ligne WhatsApp doit être connectée (ready) dans le
+                      dashboard My Customer. Numéros sans « + ».
+                    </p>
+
+                    <div className="mb-4">
+                      <AppSelect
+                        label="Activer WhatsApp"
+                        icon={<CircleChevronDownIcon />}
+                        id="use_whatsapp"
+                        name="use_whatsapp"
+                        items={[
+                          { value: "true", name: "Oui" },
+                          { value: "false", name: "Non" },
+                        ]}
+                        disabled={!editMode}
+                        value={formData.use_whatsapp ? "true" : "false"}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            use_whatsapp: e.target.value === "true",
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <AppSelect
+                        label="Activer le chatbot (app mobile)"
+                        icon={<CircleChevronDownIcon />}
+                        id="use_chatbot"
+                        name="use_chatbot"
+                        items={[
+                          { value: "true", name: "Oui" },
+                          { value: "false", name: "Non" },
+                        ]}
+                        disabled={!editMode}
+                        value={formData.use_chatbot ? "true" : "false"}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            use_chatbot: e.target.value === "true",
+                          });
+                        }}
+                      />
+                      <p className="mt-1 text-xs text-gray-500">
+                        Utilise la même My Customer API Key (openwa_token) que WhatsApp.
+                      </p>
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="My Customer API Key"
+                        id="openwa_token"
+                        name="openwa_token"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="Clé développeur X-API-Key (laisser vide pour conserver)"
+                        value={formData.openwa_token ?? ""}
+                        onChange={onInputDataChange}
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Session ID (obsolète — optionnel)"
+                        id="openwa_session_id"
+                        name="openwa_session_id"
+                        type="text"
+                        disabled={!editMode}
+                        placeholder="Plus utilisé — ligne gérée dans My Customer"
+                        value={formData.openwa_session_id ?? ""}
+                        onChange={onInputDataChange}
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <AppSelect
+                        label="Activer Telegram"
+                        icon={<CircleChevronDownIcon />}
+                        id="use_telegram"
+                        name="use_telegram"
+                        items={[
+                          { value: "true", name: "Oui" },
+                          { value: "false", name: "Non" },
+                        ]}
+                        disabled={!editMode}
+                        value={formData.use_telegram ? "true" : "false"}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            use_telegram: e.target.value === "true",
+                          });
+                        }}
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Bot Telegram (@username)"
+                        id="telegram_bot_username"
+                        name="telegram_bot_username"
+                        type="text"
+                        disabled={!editMode}
+                        placeholder="ex: yapson_bot"
+                        value={formData.telegram_bot_username ?? ""}
+                        onChange={onInputDataChange}
+                      />
+                    </div>
+
+                    <div className="mb-4">
+                      <AppInput
+                        label="Token bot Telegram (alertes YAPSON)"
+                        id="telegram_bot_token"
+                        name="telegram_bot_token"
+                        type="password"
+                        disabled={!editMode}
+                        placeholder="Laisser vide pour conserver l'existant"
+                        value={formData.telegram_bot_token ?? ""}
+                        onChange={onInputDataChange}
+                      />
+                      <p className="mt-1 text-xs text-gray-500">
+                        Token du bot pour les alertes utilisateurs Yapson (lien / webhook). Distinct du bot paris existant.
+                      </p>
+                    </div>
+
+                    <div className="mb-4">
+                      <AppSelect
+                        label="Activer SMS"
+                        icon={<CircleChevronDownIcon />}
+                        id="use_sms"
+                        name="use_sms"
+                        items={[
+                          { value: "true", name: "Oui" },
+                          { value: "false", name: "Non" },
+                        ]}
+                        disabled={!editMode}
+                        value={formData.use_sms ? "true" : "false"}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            use_sms: e.target.value === "true",
+                          });
+                        }}
+                      />
+                    </div>
 
                     <div className="mb-4">
                       <AppInput

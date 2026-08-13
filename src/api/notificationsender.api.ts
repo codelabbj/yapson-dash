@@ -13,14 +13,16 @@ class NotificationApi {
    * @param notification The notification to send
    * @returns The created notification
    */
-  static async send(notification: Notification): Promise<Notification> {
+  static async send(
+    notification: { title: string; content: string; user_id?: string | null },
+    notificationType: "push" | "email" | "whatsapp" | "telegram" = "push"
+  ): Promise<Notification> {
     try {
-      const notificationJson = notification.toJson();
       const token = localStorage.getItem("access");
       
       const response = await axios.post<NotificationJson>(
-        `https://api.yapson.net/yapson/public-notif?type=yapson_user`,
-        notificationJson,
+        `https://api.yapson.net/yapson/public-notif?type=yapson_user&notification=${notificationType}`,
+        notification,
         {
           headers: {
             "Content-Type": "application/json",
