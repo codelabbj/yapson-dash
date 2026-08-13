@@ -44,6 +44,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
     ussd_code: initialData?.ussd_code ?? "",
     reduce_fee: initialData?.reduce_fee ?? false,
     fee_payin: initialData?.fee_payin ?? 0,
+    screenshot_example: initialData?.screenshot_example ?? "",
   });
 
   const [formErrors, setFormErrors] = useState<NetworkFormErrors>({
@@ -90,6 +91,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
       ussd_code: initialData?.ussd_code ?? "",
       reduce_fee: initialData?.reduce_fee ?? false,
       fee_payin: initialData?.fee_payin ?? 0,
+      screenshot_example: initialData?.screenshot_example ?? "",
     });
   };
 
@@ -209,6 +211,12 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
         if (formData.image instanceof File) {
           logoUrl = await uploadImage(formData.image!);
         }
+        let screenshotUrl = "";
+        if (formData.screenshot_example instanceof File) {
+          screenshotUrl = await uploadImage(formData.screenshot_example);
+        } else if (typeof formData.screenshot_example === "string") {
+          screenshotUrl = formData.screenshot_example;
+        }
 
         const network = new Network(
           formData.name,
@@ -234,6 +242,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
           formData.ussd_code,
           formData.reduce_fee,
           formData.fee_payin,
+          screenshotUrl,
         );
 
         // If network has an ID, it's an update
@@ -247,6 +256,7 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
               const payload = {
                 name: formData.name,
                 image: logoUrl.length != 0 ? logoUrl : (formData.image as string),
+                screenshot_example: screenshotUrl,
                 placeholder: formData.placeholder,
                 public_name: formData.public_name,
                 country_code: formData.country_code.toLowerCase(),

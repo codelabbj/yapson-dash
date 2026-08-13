@@ -24,6 +24,7 @@ class Network {
   ussd_code?: string;
   reduce_fee: boolean;
   fee_payin: number;
+  screenshot_example?: string;
 
   constructor(
     name: string,
@@ -48,6 +49,7 @@ class Network {
     ussd_code?: string,
     reduce_fee?: boolean,
     fee_payin?: number,
+    screenshot_example?: string,
   ) {
     this.name = name;
     this.id = id;
@@ -71,6 +73,7 @@ class Network {
     this.ussd_code = ussd_code;
     this.reduce_fee = reduce_fee ?? false;
     this.fee_payin = fee_payin ?? 0;
+    this.screenshot_example = screenshot_example ?? "";
   }
 
   static fromJson(json: NetworkJson): Network {
@@ -97,6 +100,7 @@ class Network {
       json.ussd_code,
       json.reduce_fee ?? false,
       json.fee_payin ?? 0,
+      json.screenshot_example ?? "",
     );
   }
 
@@ -124,6 +128,7 @@ class Network {
       ussd_code: this.ussd_code,
       reduce_fee: this.reduce_fee,
       fee_payin: this.fee_payin,
+      screenshot_example: this.screenshot_example || "",
     };
   }
 }

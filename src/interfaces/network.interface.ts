@@ -23,6 +23,7 @@ export interface NetworkJson {
   ussd_code?: string;
   reduce_fee?: boolean;
   fee_payin?: number;
+  screenshot_example?: string | null;
 }
 
 export interface NetworkFormData {
@@ -46,6 +47,7 @@ export interface NetworkFormData {
   ussd_code: string;
   reduce_fee: boolean;
   fee_payin: number;
+  screenshot_example?: string | File;
   [key: string]: string | File | boolean | number | undefined;
 }
 

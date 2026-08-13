@@ -231,6 +231,21 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               </p>
             )}
           </div>
+
+          <div className="mb-4">
+            <AppInput
+              label="Exemple de capture (support)"
+              id="screenshot_example"
+              name="screenshot_example"
+              type="file"
+              placeholder="Exemple capture"
+              value={formData.screenshot_example}
+              onChange={onInputDataChange}
+            />
+            <p className="ml-1.5 mt-1 text-[12px] text-bodydark2">
+              Image montrée au client lors d&apos;une demande de capture pour ce réseau.
+            </p>
+          </div>
           {/* New Deposit API Field */}
           <div className="mb-4">
             <AppSelect
