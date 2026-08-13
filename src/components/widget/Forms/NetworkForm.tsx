@@ -27,6 +27,7 @@ import { COUNTRIES } from "../Form/country/country";
 import { getCountryCode } from "../Form/country/utils";
 import { SelectMenuOption } from "../Form/country/types";
 import axios from "axios";
+import { uploadImage } from "@/utils/functions.util";
 
 interface NetworkFormProps {
   id: string;
@@ -66,6 +67,26 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
   } = useNetworkForm(id, network);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [screenshotUploading, setScreenshotUploading] = useState(false);
+
+  const handleScreenshotChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setScreenshotUploading(true);
+    try {
+      // Même API que le logo : POST /upload/file
+      const url = await uploadImage(file);
+      setFormData({ ...formData, screenshot_example: url });
+    } catch (err) {
+      console.error(err);
+      // Fallback : garder le File pour upload au submit
+      setFormData({ ...formData, screenshot_example: file });
+    } finally {
+      setScreenshotUploading(false);
+    }
+  };
 
 
   return (
@@ -240,11 +261,21 @@ const NetworkForm: FC<NetworkFormProps> = ({ id, network }) => {
               type="file"
               placeholder="Exemple capture"
               value={formData.screenshot_example}
-              onChange={onInputDataChange}
+              onChange={handleScreenshotChange}
             />
             <p className="ml-1.5 mt-1 text-[12px] text-bodydark2">
               Image montrée au client lors d&apos;une demande de capture pour ce réseau.
+              {screenshotUploading ? " Upload en cours…" : ""}
             </p>
+            {typeof formData.screenshot_example === "string" &&
+              formData.screenshot_example.startsWith("http") && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={formData.screenshot_example}
+                  alt="Exemple capture"
+                  className="mt-2 h-28 w-auto rounded border object-contain"
+                />
+              )}
           </div>
           {/* New Deposit API Field */}
           <div className="mb-4">

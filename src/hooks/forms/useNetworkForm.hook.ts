@@ -128,7 +128,10 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
 
     setFormData({
       ...formData,
-      [name]: name === "image" ? files?.[0] : value,
+      [name]:
+        name === "image" || name === "screenshot_example"
+          ? files?.[0]
+          : value,
     });
   };
 
@@ -211,11 +214,17 @@ const useNetworkForm = (modalId: string, initialData?: Network) => {
         if (formData.image instanceof File) {
           logoUrl = await uploadImage(formData.image!);
         }
-        let screenshotUrl = "";
+        // Exemple capture : même API /upload/file que le logo réseau.
+        let screenshotUrl =
+          typeof formData.screenshot_example === "string"
+            ? formData.screenshot_example
+            : "";
         if (formData.screenshot_example instanceof File) {
           screenshotUrl = await uploadImage(formData.screenshot_example);
-        } else if (typeof formData.screenshot_example === "string") {
-          screenshotUrl = formData.screenshot_example;
+        }
+        // Ne jamais envoyer un data-URL base64 au backend.
+        if (screenshotUrl.startsWith("data:")) {
+          screenshotUrl = "";
         }
 
         const network = new Network(
