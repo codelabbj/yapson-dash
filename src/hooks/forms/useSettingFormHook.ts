@@ -69,6 +69,7 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     telegram_bot_username: initialData?.telegram_bot_username ?? "",
     telegram_bot_token: initialData?.telegram_bot_token ?? "",
     use_sms: initialData?.use_sms ?? false,
+    whatsapp_link: initialData?.whatsapp_link ?? "https://wa.me/message/25W53A4ZCBAGC1",
   });
 
   const [formErrors, setFormErrors] = useState<SettingFormErrors>({
@@ -121,6 +122,7 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
     telegram_bot_username: null,
     telegram_bot_token: null,
     use_sms: null,
+    whatsapp_link: null,
   });
 
   const [processing, setProcessing] = useState<boolean>(false);
@@ -177,6 +179,7 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       telegram_bot_username: initialData?.telegram_bot_username ?? "",
       telegram_bot_token: initialData?.telegram_bot_token ?? "",
       use_sms: initialData?.use_sms ?? false,
+      whatsapp_link: initialData?.whatsapp_link ?? "https://wa.me/message/25W53A4ZCBAGC1",
     });
   };
 
@@ -231,6 +234,7 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       telegram_bot_username: null,
       telegram_bot_token: null,
       use_sms: null,
+      whatsapp_link: null,
     });
   };
 
@@ -300,6 +304,7 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
       telegram_bot_username: null,
       telegram_bot_token: null,
       use_sms: null,
+      whatsapp_link: null,
     };
 
     setFormErrors(errors);
@@ -365,6 +370,7 @@ const useSettingForm = (modalId: string, initialData?: Setting) => {
           formData.telegram_bot_username,
           formData.telegram_bot_token,
           formData.use_sms,
+          formData.whatsapp_link,
         );
 
         if (setting?.id) {

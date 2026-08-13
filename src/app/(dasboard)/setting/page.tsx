@@ -96,6 +96,7 @@ const Settings = () => {
       "", // telegram_bot_username
       "", // telegram_bot_token
       false, // use_sms
+      "https://wa.me/message/25W53A4ZCBAGC1", // whatsapp_link
     ),
   );
 
@@ -163,6 +164,7 @@ const Settings = () => {
         telegram_bot_username: settings[0]?.telegram_bot_username ?? "",
         telegram_bot_token: settings[0]?.telegram_bot_token ?? "",
         use_sms: settings[0]?.use_sms ?? false,
+        whatsapp_link: settings[0]?.whatsapp_link ?? "https://wa.me/message/25W53A4ZCBAGC1",
       });
     }
   }, [settings, setFormData, loading]);
@@ -672,38 +674,21 @@ const Settings = () => {
 
                     <div className="mb-4">
                       <AppInput
-                        label="Indicatif Numéro Whatsapp"
-                        id="whatsappPhoneIndi"
-                        name="whatsappPhoneIndi"
-                        type="password"
+                        label="Lien WhatsApp support"
+                        id="whatsapp_link"
+                        name="whatsapp_link"
+                        type="text"
                         disabled={!editMode}
-                        placeholder="Indicatif Numéro Whatsapp"
-                        value={formData.whatsappPhoneIndi}
+                        placeholder="https://wa.me/message/..."
+                        value={formData.whatsapp_link ?? ""}
                         onChange={onInputDataChange}
                       />
-                      {formErrors.whatsappPhoneIndi && (
+                      <p className="mt-1 text-xs text-gray-500">
+                        Lien click-to-chat Yapson (pas un numéro). Défaut : wa.me/message/25W53A4ZCBAGC1
+                      </p>
+                      {formErrors.whatsapp_link && (
                         <p className="erreur ml-1.5 text-[14px] font-medium text-red">
-                          {formErrors.whatsappPhoneIndi}
-                        </p>
-                      )}
-                    </div>
-
-                    
-
-                    <div className="mb-4">
-                      <AppInput
-                        label="Numéro Whatsapp"
-                        id="whatsappPhone"
-                        name="whatsappPhone"
-                        type="password"
-                        disabled={!editMode}
-                        placeholder="Numéro Whatsapp"
-                        value={formData.whatsappPhone}
-                        onChange={onInputDataChange}
-                      />
-                      {formErrors.whatsappPhone && (
-                        <p className="erreur ml-1.5 text-[14px] font-medium text-red">
-                          {formErrors.whatsappPhone}
+                          {formErrors.whatsapp_link}
                         </p>
                       )}
                     </div>

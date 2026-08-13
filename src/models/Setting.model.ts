@@ -51,6 +51,7 @@ class Setting {
   telegram_bot_username: string | null;
   telegram_bot_token: string | null;
   use_sms: boolean | null;
+  whatsapp_link: string | null;
 
   constructor(
     minimumDeposit: string | null,
@@ -103,6 +104,7 @@ class Setting {
     telegram_bot_username: string | null,
     telegram_bot_token: string | null,
     use_sms: boolean | null,
+    whatsapp_link: string | null,
   ) {
     this.minimumDeposit = minimumDeposit;
     this.minimumWithdrawal = minimumWithdrawal;
@@ -154,6 +156,7 @@ class Setting {
     this.telegram_bot_username = telegram_bot_username;
     this.telegram_bot_token = telegram_bot_token;
     this.use_sms = use_sms;
+    this.whatsapp_link = whatsapp_link;
   }
 
   static fromJson(json: SettingJson): Setting {
@@ -208,6 +211,7 @@ class Setting {
       json.telegram_bot_username ?? null,
       json.telegram_bot_token ?? null,
       json.use_sms ?? false,
+      json.whatsapp_link ?? "https://wa.me/message/25W53A4ZCBAGC1",
     );
   }
 
@@ -261,6 +265,7 @@ class Setting {
       use_telegram: this.use_telegram,
       telegram_bot_username: this.telegram_bot_username,
       use_sms: this.use_sms,
+      whatsapp_link: this.whatsapp_link,
     };
 
     if (this.openwa_token && this.openwa_token.trim() !== "") {

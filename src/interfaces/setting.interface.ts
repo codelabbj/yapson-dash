@@ -55,6 +55,7 @@ export interface SettingJson {
   telegram_bot_username?: string | null;
   telegram_bot_token?: string | null;
   use_sms?: boolean | null;
+  whatsapp_link?: string | null;
 }
 
 export interface SettingFormData {
@@ -108,6 +109,7 @@ export interface SettingFormData {
   telegram_bot_username: string | null;
   telegram_bot_token: string | null;
   use_sms: boolean | null;
+  whatsapp_link: string | null;
 }
 
 export interface SettingFormErrors {
@@ -160,4 +162,5 @@ export interface SettingFormErrors {
   telegram_bot_username: string | null;
   telegram_bot_token: string | null;
   use_sms: boolean | null;
+  whatsapp_link: string | null;
 }
