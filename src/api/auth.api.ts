@@ -44,7 +44,7 @@ class AuthAPI {
         promiseResponse = response?.data;
       })
       .catch((error) => {
-        promiseResponse = error.response.data;
+        promiseResponse = error?.response?.data;
         console.error(error);
       });
 
@@ -58,7 +58,7 @@ class AuthAPI {
 
     try {
       await api.post<AuthPromiseResponse>(
-        `https://api.yapson.net/auth/change_password`,
+        `/auth/change_password`,
         data.toJson(),
       );
 
@@ -66,6 +66,46 @@ class AuthAPI {
     } catch (error: any) {
       console.log(`Error when updating password`);
 
+      return extractAxiosError(error);
+    }
+
+    return promiseResponse;
+  }
+
+  static async sendOtp(email: string): Promise<AuthPromiseResponse | string | undefined> {
+    let promiseResponse: AuthPromiseResponse | string | undefined = undefined;
+
+    try {
+      const response = await api.post<AuthPromiseResponse>(
+        `/auth/send_otp`,
+        { email },
+      );
+
+      promiseResponse = { success: true, ...(response as object) };
+    } catch (error: any) {
+      console.log(`Error when sending OTP`);
+      return extractAxiosError(error);
+    }
+
+    return promiseResponse;
+  }
+
+  static async resetPassword(
+    otp: string,
+    new_password: string,
+    confirm_new_password: string,
+  ): Promise<AuthPromiseResponse | string | undefined> {
+    let promiseResponse: AuthPromiseResponse | string | undefined = undefined;
+
+    try {
+      await api.post<AuthPromiseResponse>(
+        `/auth/reset_password`,
+        { otp, new_password, confirm_new_password },
+      );
+
+      promiseResponse = { success: true };
+    } catch (error: any) {
+      console.log(`Error when resetting password`);
       return extractAxiosError(error);
     }
 

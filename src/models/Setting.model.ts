@@ -45,6 +45,7 @@ class Setting {
   connect_pro_email: string | null;
   use_whatsapp: boolean | null;
   use_chatbot: boolean | null;
+  open_whatsapp_for_support: boolean | null;
   openwa_session_id: string | null;
   openwa_token: string | null;
   use_telegram: boolean | null;
@@ -98,6 +99,7 @@ class Setting {
     connect_pro_email: string | null,
     use_whatsapp: boolean | null,
     use_chatbot: boolean | null,
+    open_whatsapp_for_support: boolean | null,
     openwa_session_id: string | null,
     openwa_token: string | null,
     use_telegram: boolean | null,
@@ -150,6 +152,7 @@ class Setting {
     this.connect_pro_email = connect_pro_email;
     this.use_whatsapp = use_whatsapp;
     this.use_chatbot = use_chatbot;
+    this.open_whatsapp_for_support = open_whatsapp_for_support;
     this.openwa_session_id = openwa_session_id;
     this.openwa_token = openwa_token;
     this.use_telegram = use_telegram;
@@ -205,6 +208,7 @@ class Setting {
       json.connect_pro_email,
       json.use_whatsapp ?? false,
       json.use_chatbot ?? false,
+      json.open_whatsapp_for_support ?? false,
       json.openwa_session_id ?? null,
       json.openwa_token ?? null,
       json.use_telegram ?? false,
@@ -261,6 +265,7 @@ class Setting {
       connect_pro_email: this.connect_pro_email,
       use_whatsapp: this.use_whatsapp,
       use_chatbot: this.use_chatbot,
+      open_whatsapp_for_support: this.open_whatsapp_for_support,
       openwa_session_id: this.openwa_session_id,
       use_telegram: this.use_telegram,
       telegram_bot_username: this.telegram_bot_username,

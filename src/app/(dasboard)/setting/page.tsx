@@ -90,6 +90,7 @@ const Settings = () => {
       "", // connect_pro_email
       false, // use_whatsapp
       false, // use_chatbot
+      false, // open_whatsapp_for_support
       "", // openwa_session_id
       "", // openwa_token
       false, // use_telegram
@@ -158,6 +159,7 @@ const Settings = () => {
         connect_pro_email: settings[0]?.connect_pro_email ?? "",
         use_whatsapp: settings[0]?.use_whatsapp ?? false,
         use_chatbot: settings[0]?.use_chatbot ?? false,
+        open_whatsapp_for_support: settings[0]?.open_whatsapp_for_support ?? false,
         openwa_session_id: settings[0]?.openwa_session_id ?? "",
         openwa_token: settings[0]?.openwa_token ?? "",
         use_telegram: settings[0]?.use_telegram ?? false,
@@ -745,6 +747,30 @@ const Settings = () => {
                       />
                       <p className="mt-1 text-xs text-gray-500">
                         Utilise la même My Customer API Key (openwa_token) que WhatsApp.
+                      </p>
+                    </div>
+
+                    <div className="mb-4">
+                      <AppSelect
+                        label="Support contact via WhatsApp"
+                        icon={<CircleChevronDownIcon />}
+                        id="open_whatsapp_for_support"
+                        name="open_whatsapp_for_support"
+                        items={[
+                          { value: "true", name: "Oui" },
+                          { value: "false", name: "Non" },
+                        ]}
+                        disabled={!editMode}
+                        value={formData.open_whatsapp_for_support ? "true" : "false"}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            open_whatsapp_for_support: e.target.value === "true",
+                          });
+                        }}
+                      />
+                      <p className="mt-1 text-xs text-gray-500">
+                        Si activé, cliquer sur Contacter support ouvre WhatsApp au lieu du chatbot.
                       </p>
                     </div>
 

@@ -49,6 +49,7 @@ export interface SettingJson {
   connect_pro_email: string | null;
   use_whatsapp?: boolean | null;
   use_chatbot?: boolean | null;
+  open_whatsapp_for_support?: boolean | null;
   openwa_session_id?: string | null;
   openwa_token?: string | null;
   use_telegram?: boolean | null;
@@ -103,6 +104,7 @@ export interface SettingFormData {
   connect_pro_email: string | null;
   use_whatsapp: boolean | null;
   use_chatbot: boolean | null;
+  open_whatsapp_for_support: boolean | null;
   openwa_session_id: string | null;
   openwa_token: string | null;
   use_telegram: boolean | null;
@@ -156,6 +158,7 @@ export interface SettingFormErrors {
   connect_pro_email: string | null;
   use_whatsapp: boolean | null;
   use_chatbot: boolean | null;
+  open_whatsapp_for_support: boolean | null;
   openwa_session_id: string | null;
   openwa_token: string | null;
   use_telegram: boolean | null;
